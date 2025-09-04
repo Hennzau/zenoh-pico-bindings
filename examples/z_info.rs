@@ -1,34 +1,11 @@
-// use std::time::Duration;
-
-// use zenoh_pico_bindings::{Config, Z_CONFIG_CONNECT_KEY, Z_CONFIG_MODE_KEY, ZResult};
-
-// fn main() -> ZResult<()> {
-//     let config = Config::default()?
-//         .with_config(Z_CONFIG_MODE_KEY, "client")?
-//         .with_config(Z_CONFIG_CONNECT_KEY, "tcp/127.0.0.1:7447")?;
-
-//     println!("Opening session...");
-//     let session = zenoh_pico_bindings::open(config)?;
-
-//     let info = session.info();
-//     println!("{:?}", info.zid()?);
-
-//     std::thread::sleep(Duration::from_secs(1));
-
-//     drop(session);
-
-//     Ok(())
-// }
-
 use std::{ffi::CString, ptr::null_mut};
 
-use zenoh_pico_bindings::bindings::{
-    Z_CONFIG_CONNECT_KEY, Z_CONFIG_MODE_KEY, z_config_default, z_config_loan_mut, z_config_move,
-    z_id_t, z_info_zid, z_open, z_owned_config_t, z_owned_session_t, z_session_drop,
-    z_session_loan, z_session_loan_mut, z_session_move, zp_config_insert, zp_start_lease_task,
-    zp_start_read_task, zp_stop_lease_task, zp_stop_read_task,
+use zenoh_pico_bindings::{
+    ToZResult, Z_CONFIG_CONNECT_KEY, Z_CONFIG_MODE_KEY, ZResult, z_config_default,
+    z_config_loan_mut, z_config_move, z_id_t, z_info_zid, z_open, z_owned_config_t,
+    z_owned_session_t, z_session_drop, z_session_loan, z_session_loan_mut, z_session_move,
+    zp_config_insert, zp_start_lease_task, zp_start_read_task,
 };
-use zenoh_pico_bindings::{ToZResult, ZResult};
 
 fn create_config() -> ZResult<z_owned_config_t> {
     unsafe {

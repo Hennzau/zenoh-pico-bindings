@@ -1,6 +1,6 @@
 use std::{ffi::CString, ptr::null_mut};
 
-use zenoh_pico_bindings::bindings::{
+use zenoh_pico_bindings::{
     Z_CONFIG_CONNECT_KEY, Z_CONFIG_MODE_KEY, z_config_default, z_config_loan_mut, z_config_move,
     z_info_zid, z_open, z_owned_config_t, z_owned_session_t, z_session_drop, z_session_loan,
     z_session_loan_mut, z_session_move, zp_config_insert, zp_start_lease_task, zp_start_read_task,
