@@ -3,12 +3,12 @@ clean:
     rm -f src/bindings.rs
     cargo clean
 
-clone_pico:
+clone-pico:
     mkdir -p pico
     git clone https://github.com/eclipse-zenoh/zenoh-pico.git pico/
     cd pico && git switch release/1.5.0
 
-make_pico:
+make-pico:
     cd pico && BUILD_TYPE=Debug ZENOH_LOG=trace make
 
 bindgen:
@@ -30,3 +30,7 @@ t:
 
 w:
     cargo run --example z_info_working
+
+lldb:
+    cargo build --example z_info
+    lldb -- ./target/debug/examples/z_info

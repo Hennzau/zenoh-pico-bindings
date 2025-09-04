@@ -1,36 +1,41 @@
-use std::{ffi::CString, ptr::null_mut};
+use std::{error::Error, ffi::CString, ptr::null_mut};
 
 use zenoh_pico_bindings::{
-    ToZResult, Z_CONFIG_CONNECT_KEY, Z_CONFIG_MODE_KEY, ZResult, z_config_default,
-    z_config_loan_mut, z_config_move, z_id_t, z_info_zid, z_open, z_owned_config_t,
-    z_owned_session_t, z_session_drop, z_session_loan, z_session_loan_mut, z_session_move,
-    zp_config_insert, zp_start_lease_task, zp_start_read_task,
+    ToZResult, Z_CONFIG_CONNECT_KEY, ZResult, z_config_default, z_config_drop, z_config_loan_mut,
+    z_config_move, z_id_t, z_info_zid, z_open, z_owned_config_t, z_owned_session_t, z_session_drop,
+    z_session_loan, z_session_loan_mut, z_session_move, zp_config_insert, zp_start_lease_task,
+    zp_start_read_task,
 };
+
+fn config_drop(e: Box<dyn Error + Send + Sync>, config: &mut z_owned_config_t) -> ZResult<()> {
+    unsafe { z_config_drop(z_config_move(config)) };
+
+    Err(e)
+}
+
+fn session_drop(e: Box<dyn Error + Send + Sync>, session: &mut z_owned_session_t) -> ZResult<()> {
+    unsafe { z_session_drop(z_session_move(session)) };
+
+    Err(e)
+}
 
 fn create_config() -> ZResult<z_owned_config_t> {
     unsafe {
         let mut config = std::mem::MaybeUninit::<z_owned_config_t>::uninit();
         z_config_default(config.as_mut_ptr()).to_zerror()?;
-
-        let str = CString::new("client").unwrap();
-        let mode = str.as_ptr();
-        zp_config_insert(
-            z_config_loan_mut(config.as_mut_ptr()),
-            Z_CONFIG_MODE_KEY as u8,
-            mode,
-        )
-        .to_zerror()?;
+        let mut config = config.assume_init();
 
         let str = CString::new("tcp/127.0.0.1:7447").unwrap();
         let endpoint = str.as_ptr();
         zp_config_insert(
-            z_config_loan_mut(config.as_mut_ptr()),
+            z_config_loan_mut(&mut config),
             Z_CONFIG_CONNECT_KEY as u8,
             endpoint,
         )
-        .to_zerror()?;
+        .to_zerror()
+        .or_else(|e| config_drop(e, &mut config))?;
 
-        Ok(config.assume_init())
+        Ok(config)
     }
 }
 
@@ -72,11 +77,7 @@ fn main() -> ZResult<()> {
     let config = create_config()?;
     let mut session = create_session(config)?;
 
-    start_tasks(&mut session).or_else(|e| {
-        drop_session(session);
-
-        Err(e)
-    })?;
+    start_tasks(&mut session).or_else(|e| session_drop(e, &mut session))?;
 
     let id = zid(&session);
     println!("zid: {:?}", id.id);
