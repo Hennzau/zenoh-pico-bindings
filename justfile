@@ -1,12 +1,21 @@
-z_info:
-    cargo build --example z_info
-    leaks --atExit -- ./target/debug/examples/z_info
+clean:
+    rm -rf pico/
+    rm -f src/bindings.rs
+    cargo clean
+
+clone_pico:
+    mkdir -p pico
+    git clone https://github.com/eclipse-zenoh/zenoh-pico.git pico/
+    cd pico && git switch release/1.5.0
+
+make_pico:
+    cd pico && BUILD_TYPE=Debug ZENOH_LOG=trace make
 
 bindgen:
-    bindgen ~/Documents/zenoh-pico/include/zenoh-pico.h \
-        -o ~/Documents/zenoh-pico-bindings/src/bindings.rs \
+    bindgen pico/include/zenoh-pico.h \
+        -o src/bindings.rs \
         --use-core -- \
-        -I/Users/enzolevan/Documents/zenoh-pico/include \
+        -I$(pwd)/pico/include \
         -DZENOH_MACOS \
         -DZ_FEATURE_MULTI_THREAD=1 -DZ_FEATURE_INTEREST=1 -DZ_FEATURE_UNSTABLE_API=0 \
         -DZ_FEATURE_PUBLICATION=1 -DZ_FEATURE_SUBSCRIPTION=1 -DZ_FEATURE_QUERY=1 -DZ_FEATURE_QUERYABLE=1 \
@@ -15,3 +24,9 @@ bindgen:
         -DZ_FEATURE_UNICAST_TRANSPORT=1 -DZ_FEATURE_MULTICAST_TRANSPORT=1 \
         -DZ_FEATURE_RAWETH_TRANSPORT=0 -DZ_FEATURE_LOCAL_SUBSCRIBER=0 -DFRAG_MAX_SIZE=300000 -DBATCH_UNICAST_SIZE=65535 \
         -DBATCH_MULTICAST_SIZE=8192 -DZ_FEATURE_UNICAST_PEER=1
+
+t:
+    cargo run --example z_info
+
+w:
+    cargo run --example z_info_working

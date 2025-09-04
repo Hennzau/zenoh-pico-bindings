@@ -49,7 +49,11 @@ where
             index % 8
         };
         let mask = 1 << bit_index;
-        if val { byte | mask } else { byte & !mask }
+        if val {
+            byte | mask
+        } else {
+            byte & !mask
+        }
     }
     #[inline]
     pub fn set_bit(&mut self, index: usize, val: bool) {
@@ -140,6 +144,8 @@ pub const ZENOH_PICO: &[u8; 6] = b"1.5.0\0";
 pub const ZENOH_PICO_MAJOR: u32 = 1;
 pub const ZENOH_PICO_MINOR: u32 = 5;
 pub const ZENOH_PICO_PATCH: u32 = 0;
+pub const Z_SELECTOR_TIME: &[u8; 7] = b"_time=\0";
+pub const Z_SELECTOR_QUERY_MATCH: &[u8; 7] = b"_anyke\0";
 pub const __bool_true_false_are_defined: u32 = 1;
 pub const true_: u32 = 1;
 pub const false_: u32 = 0;
@@ -608,12 +614,9 @@ pub const Z_BATCH_UNICAST_SIZE: u32 = 65535;
 pub const Z_BATCH_MULTICAST_SIZE: u32 = 8192;
 pub const Z_CONFIG_SOCKET_TIMEOUT: u32 = 100;
 pub const Z_TRANSPORT_LEASE: u32 = 10000;
-pub const ZP_PERIODIC_SCHEDULER_MAX_TASKS: u32 = 64;
 pub const Z_FEATURE_MULTI_THREAD: u32 = 1;
 pub const Z_FEATURE_PUBLICATION: u32 = 1;
-pub const Z_FEATURE_ADVANCED_PUBLICATION: u32 = 0;
 pub const Z_FEATURE_SUBSCRIPTION: u32 = 1;
-pub const Z_FEATURE_ADVANCED_SUBSCRIPTION: u32 = 0;
 pub const Z_FEATURE_QUERY: u32 = 1;
 pub const Z_FEATURE_QUERYABLE: u32 = 1;
 pub const Z_FEATURE_LIVELINESS: u32 = 1;
@@ -642,7 +645,6 @@ pub const Z_FEATURE_RX_CACHE: u32 = 0;
 pub const Z_FEATURE_UNICAST_PEER: u32 = 1;
 pub const Z_FEATURE_AUTO_RECONNECT: u32 = 1;
 pub const Z_FEATURE_MULTICAST_DECLARATIONS: u32 = 0;
-pub const Z_FEATURE_PERIODIC_TASKS: u32 = 0;
 pub const Z_CONFIG_MODE_KEY: u32 = 64;
 pub const Z_CONFIG_MODE_CLIENT: &[u8; 7] = b"client\0";
 pub const Z_CONFIG_MODE_PEER: &[u8; 5] = b"peer\0";
@@ -671,44 +673,6 @@ pub const Z_REQ_RESOLUTION: u32 = 2;
 pub const Z_RX_CACHE_SIZE: u32 = 10;
 pub const Z_GET_TIMEOUT_DEFAULT: u32 = 10000;
 pub const Z_LISTEN_MAX_CONNECTION_NB: u32 = 10;
-pub const USE_CLANG_STDARG: u32 = 0;
-pub const RENAME_SECLUDE: u32 = 1;
-pub const RENAME_SWAP: u32 = 2;
-pub const RENAME_EXCL: u32 = 4;
-pub const RENAME_RESERVED1: u32 = 8;
-pub const RENAME_NOFOLLOW_ANY: u32 = 16;
-pub const SEEK_SET: u32 = 0;
-pub const SEEK_CUR: u32 = 1;
-pub const SEEK_END: u32 = 2;
-pub const SEEK_HOLE: u32 = 3;
-pub const SEEK_DATA: u32 = 4;
-pub const __SLBF: u32 = 1;
-pub const __SNBF: u32 = 2;
-pub const __SRD: u32 = 4;
-pub const __SWR: u32 = 8;
-pub const __SRW: u32 = 16;
-pub const __SEOF: u32 = 32;
-pub const __SERR: u32 = 64;
-pub const __SMBF: u32 = 128;
-pub const __SAPP: u32 = 256;
-pub const __SSTR: u32 = 512;
-pub const __SOPT: u32 = 1024;
-pub const __SNPT: u32 = 2048;
-pub const __SOFF: u32 = 4096;
-pub const __SMOD: u32 = 8192;
-pub const __SALC: u32 = 16384;
-pub const __SIGN: u32 = 32768;
-pub const _IOFBF: u32 = 0;
-pub const _IOLBF: u32 = 1;
-pub const _IONBF: u32 = 2;
-pub const BUFSIZ: u32 = 1024;
-pub const EOF: i32 = -1;
-pub const FOPEN_MAX: u32 = 20;
-pub const FILENAME_MAX: u32 = 1024;
-pub const P_tmpdir: &[u8; 10] = b"/var/tmp/\0";
-pub const L_tmpnam: u32 = 1024;
-pub const TMP_MAX: u32 = 308915776;
-pub const L_ctermid: u32 = 1024;
 pub const __DARWIN_FD_SETSIZE: u32 = 1024;
 pub const __DARWIN_NBBY: u32 = 8;
 pub const ITIMER_REAL: u32 = 0;
@@ -756,19 +720,9 @@ pub const PTHREAD_MUTEX_RECURSIVE: u32 = 2;
 pub const PTHREAD_MUTEX_DEFAULT: u32 = 0;
 pub const PTHREAD_MUTEX_POLICY_FAIRSHARE_NP: u32 = 1;
 pub const PTHREAD_MUTEX_POLICY_FIRSTFIT_NP: u32 = 3;
-pub const _Z_DEFAULT_HASHMAP_CAPACITY: u32 = 16;
 pub const _Z_DEFAULT_INT_MAP_CAPACITY: u32 = 16;
 pub const INT_STR_MAP_KEYVALUE_SEPARATOR: u8 = 61u8;
 pub const INT_STR_MAP_LIST_SEPARATOR: u8 = 59u8;
-pub const Z_SELECTOR_TIME: &[u8; 7] = b"_time=\0";
-pub const Z_SELECTOR_QUERY_MATCH: &[u8; 7] = b"_anyke\0";
-pub const _Z_KEYEXPR_ADV_PREFIX: &[u8; 5] = b"@adv\0";
-pub const _Z_KEYEXPR_PUB: &[u8; 4] = b"pub\0";
-pub const _Z_KEYEXPR_SUB: &[u8; 4] = b"sub\0";
-pub const _Z_KEYEXPR_UHLC: &[u8; 5] = b"uhlc\0";
-pub const _Z_KEYEXPR_EMPTY: &[u8; 2] = b"_\0";
-pub const _Z_KEYEXPR_STAR: &[u8; 2] = b"*\0";
-pub const _Z_KEYEXPR_STARSTAR: &[u8; 3] = b"**\0";
 pub const _Z_ENCODING_ID_DEFAULT: u32 = 0;
 pub const Z_RESOURCE_ID_NONE: u32 = 0;
 pub const Z_PRIORITIES_NUM: u32 = 8;
@@ -840,6 +794,44 @@ pub const UDP_SCHEMA: &[u8; 4] = b"udp\0";
 pub const LOCATOR_PROTOCOL_SEPARATOR: u8 = 47u8;
 pub const LOCATOR_METADATA_SEPARATOR: u8 = 63u8;
 pub const ENDPOINT_CONFIG_SEPARATOR: u8 = 35u8;
+pub const USE_CLANG_STDARG: u32 = 0;
+pub const RENAME_SECLUDE: u32 = 1;
+pub const RENAME_SWAP: u32 = 2;
+pub const RENAME_EXCL: u32 = 4;
+pub const RENAME_RESERVED1: u32 = 8;
+pub const RENAME_NOFOLLOW_ANY: u32 = 16;
+pub const SEEK_SET: u32 = 0;
+pub const SEEK_CUR: u32 = 1;
+pub const SEEK_END: u32 = 2;
+pub const SEEK_HOLE: u32 = 3;
+pub const SEEK_DATA: u32 = 4;
+pub const __SLBF: u32 = 1;
+pub const __SNBF: u32 = 2;
+pub const __SRD: u32 = 4;
+pub const __SWR: u32 = 8;
+pub const __SRW: u32 = 16;
+pub const __SEOF: u32 = 32;
+pub const __SERR: u32 = 64;
+pub const __SMBF: u32 = 128;
+pub const __SAPP: u32 = 256;
+pub const __SSTR: u32 = 512;
+pub const __SOPT: u32 = 1024;
+pub const __SNPT: u32 = 2048;
+pub const __SOFF: u32 = 4096;
+pub const __SMOD: u32 = 8192;
+pub const __SALC: u32 = 16384;
+pub const __SIGN: u32 = 32768;
+pub const _IOFBF: u32 = 0;
+pub const _IOLBF: u32 = 1;
+pub const _IONBF: u32 = 2;
+pub const BUFSIZ: u32 = 1024;
+pub const EOF: i32 = -1;
+pub const FOPEN_MAX: u32 = 20;
+pub const FILENAME_MAX: u32 = 1024;
+pub const P_tmpdir: &[u8; 10] = b"/var/tmp/\0";
+pub const L_tmpnam: u32 = 1024;
+pub const TMP_MAX: u32 = 308915776;
+pub const L_ctermid: u32 = 1024;
 pub const _Z_MID_SCOUT: u32 = 1;
 pub const _Z_MID_HELLO: u32 = 2;
 pub const _Z_MID_T_OAM: u32 = 0;
@@ -1093,6 +1085,82 @@ pub const BYTE_ORDER: u32 = 1234;
 pub const EXIT_FAILURE: u32 = 1;
 pub const EXIT_SUCCESS: u32 = 0;
 pub const RAND_MAX: u32 = 2147483647;
+pub const z_what_t_Z_WHAT_ROUTER: z_what_t = 1;
+pub const z_what_t_Z_WHAT_PEER: z_what_t = 2;
+pub const z_what_t_Z_WHAT_CLIENT: z_what_t = 4;
+pub const z_what_t_Z_WHAT_ROUTER_PEER: z_what_t = 3;
+pub const z_what_t_Z_WHAT_ROUTER_CLIENT: z_what_t = 5;
+pub const z_what_t_Z_WHAT_PEER_CLIENT: z_what_t = 6;
+pub const z_what_t_Z_WHAT_ROUTER_PEER_CLIENT: z_what_t = 7;
+#[doc = " What bitmask for scouting.\n\n Enumerators:\n   Z_WHAT_ROUTER: Router.\n   Z_WHAT_PEER: Peer.\n   Z_WHAT_CLIENT: Client."]
+pub type z_what_t = ::core::ffi::c_uint;
+pub const z_whatami_t_Z_WHATAMI_ROUTER: z_whatami_t = 1;
+pub const z_whatami_t_Z_WHATAMI_PEER: z_whatami_t = 2;
+pub const z_whatami_t_Z_WHATAMI_CLIENT: z_whatami_t = 4;
+#[doc = " Whatami values, defined as a bitmask.\n\n Enumerators:\n   Z_WHATAMI_ROUTER: Bitmask to filter Zenoh routers.\n   Z_WHATAMI_PEER: Bitmask to filter for Zenoh peers.\n   Z_WHATAMI_CLIENT: Bitmask to filter for Zenoh clients."]
+pub type z_whatami_t = ::core::ffi::c_uint;
+pub const zp_keyexpr_canon_status_t_Z_KEYEXPR_CANON_SUCCESS: zp_keyexpr_canon_status_t = 0;
+pub const zp_keyexpr_canon_status_t_Z_KEYEXPR_CANON_LONE_DOLLAR_STAR: zp_keyexpr_canon_status_t =
+    -1;
+pub const zp_keyexpr_canon_status_t_Z_KEYEXPR_CANON_SINGLE_STAR_AFTER_DOUBLE_STAR:
+    zp_keyexpr_canon_status_t = -2;
+pub const zp_keyexpr_canon_status_t_Z_KEYEXPR_CANON_DOUBLE_STAR_AFTER_DOUBLE_STAR:
+    zp_keyexpr_canon_status_t = -3;
+pub const zp_keyexpr_canon_status_t_Z_KEYEXPR_CANON_EMPTY_CHUNK: zp_keyexpr_canon_status_t = -4;
+pub const zp_keyexpr_canon_status_t_Z_KEYEXPR_CANON_STARS_IN_CHUNK: zp_keyexpr_canon_status_t = -5;
+pub const zp_keyexpr_canon_status_t_Z_KEYEXPR_CANON_DOLLAR_AFTER_DOLLAR_OR_STAR:
+    zp_keyexpr_canon_status_t = -6;
+pub const zp_keyexpr_canon_status_t_Z_KEYEXPR_CANON_CONTAINS_SHARP_OR_QMARK:
+    zp_keyexpr_canon_status_t = -7;
+pub const zp_keyexpr_canon_status_t_Z_KEYEXPR_CANON_CONTAINS_UNBOUND_DOLLAR:
+    zp_keyexpr_canon_status_t = -8;
+#[doc = " Status values for keyexpr canonization operation.\n Used as return value of canonization-related functions,\n like :c:func:`z_keyexpr_is_canon` or :c:func:`z_keyexpr_canonize`.\n\n Enumerators:\n   Z_KEYEXPR_CANON_SUCCESS: The key expression is canon.\n   Z_KEYEXPR_CANON_LONE_DOLLAR_STAR: The key contains a ``$*`` chunk, which must be replaced by ``*``.\n   Z_KEYEXPR_CANON_SINGLE_STAR_AFTER_DOUBLE_STAR: The key contains ``** / *``, which must be replaced by ``* / **``.\n   Z_KEYEXPR_CANON_DOUBLE_STAR_AFTER_DOUBLE_STAR: The key contains ``** / **``, which must be replaced by ``**``.\n   Z_KEYEXPR_CANON_EMPTY_CHUNK: The key contains empty chunks.\n   Z_KEYEXPR_CANON_STARS_IN_CHUNK: The key contains a ``*`` in a chunk without being escaped by a DSL, which is\n     forbidden.\n   Z_KEYEXPR_CANON_DOLLAR_AFTER_DOLLAR_OR_STAR: The key contains ``$*$`` or ``$$``, which is forbidden.\n   Z_KEYEXPR_CANON_CONTAINS_SHARP_OR_QMARK: The key contains ``#`` or ``?``, which is forbidden.\n   Z_KEYEXPR_CANON_CONTAINS_UNBOUND_DOLLAR: The key contains a ``$`` which is not bound to a DSL."]
+pub type zp_keyexpr_canon_status_t = ::core::ffi::c_int;
+pub const z_keyexpr_intersection_level_t_Z_KEYEXPR_INTERSECTION_LEVEL_DISJOINT:
+    z_keyexpr_intersection_level_t = 0;
+pub const z_keyexpr_intersection_level_t_Z_KEYEXPR_INTERSECTION_LEVEL_INTERSECTS:
+    z_keyexpr_intersection_level_t = 1;
+pub const z_keyexpr_intersection_level_t_Z_KEYEXPR_INTERSECTION_LEVEL_INCLUDES:
+    z_keyexpr_intersection_level_t = 2;
+pub const z_keyexpr_intersection_level_t_Z_KEYEXPR_INTERSECTION_LEVEL_EQUALS:
+    z_keyexpr_intersection_level_t = 3;
+#[doc = " Intersection level of two key expressions.\n\n Enumerators:\n   Z_KEYEXPR_INTERSECTION_LEVEL_DISJOINT: The two key expressions do not intersect.\n   Z_KEYEXPR_INTERSECTION_LEVEL_INTERSECTS: The two key expressions intersect, i.e. there exists at least one key\n     expression that is included by both.\n   Z_KEYEXPR_INTERSECTION_LEVEL_INCLUDES: The first key expression is the superset of the second one.\n   Z_KEYEXPR_INTERSECTION_LEVEL_EQUALS: The two key expressions are equal."]
+pub type z_keyexpr_intersection_level_t = ::core::ffi::c_uint;
+pub const z_sample_kind_t_Z_SAMPLE_KIND_PUT: z_sample_kind_t = 0;
+pub const z_sample_kind_t_Z_SAMPLE_KIND_DELETE: z_sample_kind_t = 1;
+#[doc = " Sample kind values.\n\n Enumerators:\n   Z_SAMPLE_KIND_PUT: The Sample was issued by a ``put`` operation.\n   Z_SAMPLE_KIND_DELETE: The Sample was issued by a ``delete`` operation."]
+pub type z_sample_kind_t = ::core::ffi::c_uint;
+pub const z_consolidation_mode_t_Z_CONSOLIDATION_MODE_AUTO: z_consolidation_mode_t = -1;
+pub const z_consolidation_mode_t_Z_CONSOLIDATION_MODE_NONE: z_consolidation_mode_t = 0;
+pub const z_consolidation_mode_t_Z_CONSOLIDATION_MODE_MONOTONIC: z_consolidation_mode_t = 1;
+pub const z_consolidation_mode_t_Z_CONSOLIDATION_MODE_LATEST: z_consolidation_mode_t = 2;
+#[doc = " Consolidation mode values.\n\n Enumerators:\n   Z_CONSOLIDATION_MODE_AUTO: Let Zenoh decide the best consolidation mode depending on the query selector.\n   Z_CONSOLIDATION_MODE_NONE: No consolidation is applied. Replies may come in any order and any number.\n   Z_CONSOLIDATION_MODE_MONOTONIC: It guarantees that any reply for a given key expression will be monotonic in time\n     w.r.t. the previous received replies for the same key expression. I.e., for the same key expression multiple\n     replies may be received. It is guaranteed that two replies received at t1 and t2 will have timestamp\n     ts2 > ts1. It optimizes latency.\n   Z_CONSOLIDATION_MODE_LATEST: It guarantees unicity of replies for the same key expression.\n     It optimizes bandwidth."]
+pub type z_consolidation_mode_t = ::core::ffi::c_int;
+pub const z_reliability_t_Z_RELIABILITY_BEST_EFFORT: z_reliability_t = 1;
+pub const z_reliability_t_Z_RELIABILITY_RELIABLE: z_reliability_t = 0;
+#[doc = " Reliability values.\n\n Enumerators:\n   Z_RELIABILITY_BEST_EFFORT: Defines reliability as ``BEST_EFFORT``\n   Z_RELIABILITY_RELIABLE: Defines reliability as ``RELIABLE``\n\n .. warning:: This API has been marked as unstable: it works as advertised, but it may be changed in a future release."]
+pub type z_reliability_t = ::core::ffi::c_uint;
+pub const z_congestion_control_t_Z_CONGESTION_CONTROL_BLOCK: z_congestion_control_t = 1;
+pub const z_congestion_control_t_Z_CONGESTION_CONTROL_DROP: z_congestion_control_t = 0;
+#[doc = " Congestion control values.\n\n Enumerators:\n   Z_CONGESTION_CONTROL_BLOCK: Defines congestion control as ``BLOCK``. Messages are not dropped in case of\n     congestion control.\n   Z_CONGESTION_CONTROL_DROP: Defines congestion control as ``DROP``. Messages are dropped in case\n     of congestion control."]
+pub type z_congestion_control_t = ::core::ffi::c_uint;
+pub const z_priority_t__Z_PRIORITY_CONTROL: z_priority_t = 0;
+pub const z_priority_t_Z_PRIORITY_REAL_TIME: z_priority_t = 1;
+pub const z_priority_t_Z_PRIORITY_INTERACTIVE_HIGH: z_priority_t = 2;
+pub const z_priority_t_Z_PRIORITY_INTERACTIVE_LOW: z_priority_t = 3;
+pub const z_priority_t_Z_PRIORITY_DATA_HIGH: z_priority_t = 4;
+pub const z_priority_t_Z_PRIORITY_DATA: z_priority_t = 5;
+pub const z_priority_t_Z_PRIORITY_DATA_LOW: z_priority_t = 6;
+pub const z_priority_t_Z_PRIORITY_BACKGROUND: z_priority_t = 7;
+#[doc = " Priority of Zenoh messages values.\n\n Enumerators:\n   _Z_PRIORITY_CONTROL: Priority for ``Control`` messages.\n   Z_PRIORITY_REAL_TIME: Priority for ``RealTime`` messages.\n   Z_PRIORITY_INTERACTIVE_HIGH: Highest priority for ``Interactive`` messages.\n   Z_PRIORITY_INTERACTIVE_LOW: Lowest priority for ``Interactive`` messages.\n   Z_PRIORITY_DATA_HIGH: Highest priority for ``Data`` messages.\n   Z_PRIORITY_DATA: Default priority for ``Data`` messages.\n   Z_PRIORITY_DATA_LOW: Lowest priority for ``Data`` messages.\n   Z_PRIORITY_BACKGROUND: Priority for ``Background traffic`` messages."]
+pub type z_priority_t = ::core::ffi::c_uint;
+pub const z_query_target_t_Z_QUERY_TARGET_BEST_MATCHING: z_query_target_t = 0;
+pub const z_query_target_t_Z_QUERY_TARGET_ALL: z_query_target_t = 1;
+pub const z_query_target_t_Z_QUERY_TARGET_ALL_COMPLETE: z_query_target_t = 2;
+#[doc = " Query target values.\n\n Enumerators:\n   Z_QUERY_TARGET_BEST_MATCHING: The nearest complete queryable if any else all matching queryables.\n   Z_QUERY_TARGET_ALL: All matching queryables.\n   Z_QUERY_TARGET_ALL_COMPLETE: A set of complete queryables."]
+pub type z_query_target_t = ::core::ffi::c_uint;
+pub type wchar_t = ::core::ffi::c_int;
+pub type max_align_t = f64;
 pub type int_least8_t = i8;
 pub type int_least16_t = i16;
 pub type int_least32_t = i32;
@@ -1349,9 +1417,6 @@ pub type __darwin_pthread_rwlockattr_t = _opaque_pthread_rwlockattr_t;
 pub type __darwin_pthread_t = *mut _opaque_pthread_t;
 pub type intmax_t = ::core::ffi::c_long;
 pub type uintmax_t = ::core::ffi::c_ulong;
-pub type rsize_t = ::core::ffi::c_ulong;
-pub type wchar_t = ::core::ffi::c_int;
-pub type max_align_t = f64;
 unsafe extern "C" {
     pub fn __assert_rtn(
         arg1: *const ::core::ffi::c_char,
@@ -1360,6 +1425,7 @@ unsafe extern "C" {
         arg4: *const ::core::ffi::c_char,
     ) -> !;
 }
+pub type rsize_t = ::core::ffi::c_ulong;
 pub type __darwin_nl_item = ::core::ffi::c_int;
 pub type __darwin_wctrans_t = ::core::ffi::c_int;
 pub type __darwin_wctype_t = __uint32_t;
@@ -1715,8 +1781,6 @@ pub const _z_res_t__Z_RES_CHANNEL_CLOSED: _z_res_t = 1;
 pub const _z_res_t_Z_CHANNEL_DISCONNECTED: _z_res_t = 1;
 pub const _z_res_t__Z_RES_CHANNEL_NODATA: _z_res_t = 2;
 pub const _z_res_t_Z_CHANNEL_NODATA: _z_res_t = 2;
-pub const _z_res_t__Z_NO_DATA_PROCESSED: _z_res_t = 3;
-pub const _z_res_t_Z_NO_DATA_PROCESSED: _z_res_t = 3;
 pub const _z_res_t__Z_ERR_MESSAGE_DESERIALIZATION_FAILED: _z_res_t = -119;
 pub const _z_res_t__Z_ERR_MESSAGE_SERIALIZATION_FAILED: _z_res_t = -118;
 pub const _z_res_t__Z_ERR_MESSAGE_UNEXPECTED: _z_res_t = -117;
@@ -1877,557 +1941,6 @@ unsafe extern "C" {
 }
 unsafe extern "C" {
     pub fn _z_slice_is_alloced(s: *const _z_slice_t) -> bool;
-}
-pub type va_list = __darwin_va_list;
-unsafe extern "C" {
-    pub fn renameat(
-        arg1: ::core::ffi::c_int,
-        arg2: *const ::core::ffi::c_char,
-        arg3: ::core::ffi::c_int,
-        arg4: *const ::core::ffi::c_char,
-    ) -> ::core::ffi::c_int;
-}
-unsafe extern "C" {
-    pub fn renamex_np(
-        arg1: *const ::core::ffi::c_char,
-        arg2: *const ::core::ffi::c_char,
-        arg3: ::core::ffi::c_uint,
-    ) -> ::core::ffi::c_int;
-}
-unsafe extern "C" {
-    pub fn renameatx_np(
-        arg1: ::core::ffi::c_int,
-        arg2: *const ::core::ffi::c_char,
-        arg3: ::core::ffi::c_int,
-        arg4: *const ::core::ffi::c_char,
-        arg5: ::core::ffi::c_uint,
-    ) -> ::core::ffi::c_int;
-}
-unsafe extern "C" {
-    pub fn printf(arg1: *const ::core::ffi::c_char, ...) -> ::core::ffi::c_int;
-}
-pub type fpos_t = __darwin_off_t;
-#[repr(C)]
-#[derive(Debug, Copy, Clone)]
-pub struct __sbuf {
-    pub _base: *mut ::core::ffi::c_uchar,
-    pub _size: ::core::ffi::c_int,
-}
-#[allow(clippy::unnecessary_operation, clippy::identity_op)]
-const _: () = {
-    ["Size of __sbuf"][::core::mem::size_of::<__sbuf>() - 16usize];
-    ["Alignment of __sbuf"][::core::mem::align_of::<__sbuf>() - 8usize];
-    ["Offset of field: __sbuf::_base"][::core::mem::offset_of!(__sbuf, _base) - 0usize];
-    ["Offset of field: __sbuf::_size"][::core::mem::offset_of!(__sbuf, _size) - 8usize];
-};
-#[repr(C)]
-#[derive(Debug, Copy, Clone)]
-pub struct __sFILEX {
-    _unused: [u8; 0],
-}
-#[repr(C)]
-#[derive(Debug, Copy, Clone)]
-pub struct __sFILE {
-    pub _p: *mut ::core::ffi::c_uchar,
-    pub _r: ::core::ffi::c_int,
-    pub _w: ::core::ffi::c_int,
-    pub _flags: ::core::ffi::c_short,
-    pub _file: ::core::ffi::c_short,
-    pub _bf: __sbuf,
-    pub _lbfsize: ::core::ffi::c_int,
-    pub _cookie: *mut ::core::ffi::c_void,
-    pub _close: ::core::option::Option<
-        unsafe extern "C" fn(arg1: *mut ::core::ffi::c_void) -> ::core::ffi::c_int,
-    >,
-    pub _read: ::core::option::Option<
-        unsafe extern "C" fn(
-            arg1: *mut ::core::ffi::c_void,
-            arg2: *mut ::core::ffi::c_char,
-            arg3: ::core::ffi::c_int,
-        ) -> ::core::ffi::c_int,
-    >,
-    pub _seek: ::core::option::Option<
-        unsafe extern "C" fn(
-            arg1: *mut ::core::ffi::c_void,
-            arg2: fpos_t,
-            arg3: ::core::ffi::c_int,
-        ) -> fpos_t,
-    >,
-    pub _write: ::core::option::Option<
-        unsafe extern "C" fn(
-            arg1: *mut ::core::ffi::c_void,
-            arg2: *const ::core::ffi::c_char,
-            arg3: ::core::ffi::c_int,
-        ) -> ::core::ffi::c_int,
-    >,
-    pub _ub: __sbuf,
-    pub _extra: *mut __sFILEX,
-    pub _ur: ::core::ffi::c_int,
-    pub _ubuf: [::core::ffi::c_uchar; 3usize],
-    pub _nbuf: [::core::ffi::c_uchar; 1usize],
-    pub _lb: __sbuf,
-    pub _blksize: ::core::ffi::c_int,
-    pub _offset: fpos_t,
-}
-#[allow(clippy::unnecessary_operation, clippy::identity_op)]
-const _: () = {
-    ["Size of __sFILE"][::core::mem::size_of::<__sFILE>() - 152usize];
-    ["Alignment of __sFILE"][::core::mem::align_of::<__sFILE>() - 8usize];
-    ["Offset of field: __sFILE::_p"][::core::mem::offset_of!(__sFILE, _p) - 0usize];
-    ["Offset of field: __sFILE::_r"][::core::mem::offset_of!(__sFILE, _r) - 8usize];
-    ["Offset of field: __sFILE::_w"][::core::mem::offset_of!(__sFILE, _w) - 12usize];
-    ["Offset of field: __sFILE::_flags"][::core::mem::offset_of!(__sFILE, _flags) - 16usize];
-    ["Offset of field: __sFILE::_file"][::core::mem::offset_of!(__sFILE, _file) - 18usize];
-    ["Offset of field: __sFILE::_bf"][::core::mem::offset_of!(__sFILE, _bf) - 24usize];
-    ["Offset of field: __sFILE::_lbfsize"][::core::mem::offset_of!(__sFILE, _lbfsize) - 40usize];
-    ["Offset of field: __sFILE::_cookie"][::core::mem::offset_of!(__sFILE, _cookie) - 48usize];
-    ["Offset of field: __sFILE::_close"][::core::mem::offset_of!(__sFILE, _close) - 56usize];
-    ["Offset of field: __sFILE::_read"][::core::mem::offset_of!(__sFILE, _read) - 64usize];
-    ["Offset of field: __sFILE::_seek"][::core::mem::offset_of!(__sFILE, _seek) - 72usize];
-    ["Offset of field: __sFILE::_write"][::core::mem::offset_of!(__sFILE, _write) - 80usize];
-    ["Offset of field: __sFILE::_ub"][::core::mem::offset_of!(__sFILE, _ub) - 88usize];
-    ["Offset of field: __sFILE::_extra"][::core::mem::offset_of!(__sFILE, _extra) - 104usize];
-    ["Offset of field: __sFILE::_ur"][::core::mem::offset_of!(__sFILE, _ur) - 112usize];
-    ["Offset of field: __sFILE::_ubuf"][::core::mem::offset_of!(__sFILE, _ubuf) - 116usize];
-    ["Offset of field: __sFILE::_nbuf"][::core::mem::offset_of!(__sFILE, _nbuf) - 119usize];
-    ["Offset of field: __sFILE::_lb"][::core::mem::offset_of!(__sFILE, _lb) - 120usize];
-    ["Offset of field: __sFILE::_blksize"][::core::mem::offset_of!(__sFILE, _blksize) - 136usize];
-    ["Offset of field: __sFILE::_offset"][::core::mem::offset_of!(__sFILE, _offset) - 144usize];
-};
-pub type FILE = __sFILE;
-unsafe extern "C" {
-    pub static mut __stdinp: *mut FILE;
-}
-unsafe extern "C" {
-    pub static mut __stdoutp: *mut FILE;
-}
-unsafe extern "C" {
-    pub static mut __stderrp: *mut FILE;
-}
-unsafe extern "C" {
-    pub fn clearerr(arg1: *mut FILE);
-}
-unsafe extern "C" {
-    pub fn fclose(arg1: *mut FILE) -> ::core::ffi::c_int;
-}
-unsafe extern "C" {
-    pub fn feof(arg1: *mut FILE) -> ::core::ffi::c_int;
-}
-unsafe extern "C" {
-    pub fn ferror(arg1: *mut FILE) -> ::core::ffi::c_int;
-}
-unsafe extern "C" {
-    pub fn fflush(arg1: *mut FILE) -> ::core::ffi::c_int;
-}
-unsafe extern "C" {
-    pub fn fgetc(arg1: *mut FILE) -> ::core::ffi::c_int;
-}
-unsafe extern "C" {
-    pub fn fgetpos(arg1: *mut FILE, arg2: *mut fpos_t) -> ::core::ffi::c_int;
-}
-unsafe extern "C" {
-    pub fn fgets(
-        arg1: *mut ::core::ffi::c_char,
-        arg2: ::core::ffi::c_int,
-        arg3: *mut FILE,
-    ) -> *mut ::core::ffi::c_char;
-}
-unsafe extern "C" {
-    pub fn fopen(
-        __filename: *const ::core::ffi::c_char,
-        __mode: *const ::core::ffi::c_char,
-    ) -> *mut FILE;
-}
-unsafe extern "C" {
-    pub fn fprintf(arg1: *mut FILE, arg2: *const ::core::ffi::c_char, ...) -> ::core::ffi::c_int;
-}
-unsafe extern "C" {
-    pub fn fputc(arg1: ::core::ffi::c_int, arg2: *mut FILE) -> ::core::ffi::c_int;
-}
-unsafe extern "C" {
-    pub fn fputs(arg1: *const ::core::ffi::c_char, arg2: *mut FILE) -> ::core::ffi::c_int;
-}
-unsafe extern "C" {
-    pub fn fread(
-        __ptr: *mut ::core::ffi::c_void,
-        __size: ::core::ffi::c_ulong,
-        __nitems: ::core::ffi::c_ulong,
-        __stream: *mut FILE,
-    ) -> ::core::ffi::c_ulong;
-}
-unsafe extern "C" {
-    pub fn freopen(
-        arg1: *const ::core::ffi::c_char,
-        arg2: *const ::core::ffi::c_char,
-        arg3: *mut FILE,
-    ) -> *mut FILE;
-}
-unsafe extern "C" {
-    pub fn fscanf(arg1: *mut FILE, arg2: *const ::core::ffi::c_char, ...) -> ::core::ffi::c_int;
-}
-unsafe extern "C" {
-    pub fn fseek(
-        arg1: *mut FILE,
-        arg2: ::core::ffi::c_long,
-        arg3: ::core::ffi::c_int,
-    ) -> ::core::ffi::c_int;
-}
-unsafe extern "C" {
-    pub fn fsetpos(arg1: *mut FILE, arg2: *const fpos_t) -> ::core::ffi::c_int;
-}
-unsafe extern "C" {
-    pub fn ftell(arg1: *mut FILE) -> ::core::ffi::c_long;
-}
-unsafe extern "C" {
-    pub fn fwrite(
-        __ptr: *const ::core::ffi::c_void,
-        __size: ::core::ffi::c_ulong,
-        __nitems: ::core::ffi::c_ulong,
-        __stream: *mut FILE,
-    ) -> ::core::ffi::c_ulong;
-}
-unsafe extern "C" {
-    pub fn getc(arg1: *mut FILE) -> ::core::ffi::c_int;
-}
-unsafe extern "C" {
-    pub fn getchar() -> ::core::ffi::c_int;
-}
-unsafe extern "C" {
-    pub fn gets(arg1: *mut ::core::ffi::c_char) -> *mut ::core::ffi::c_char;
-}
-unsafe extern "C" {
-    pub fn perror(arg1: *const ::core::ffi::c_char);
-}
-unsafe extern "C" {
-    pub fn putc(arg1: ::core::ffi::c_int, arg2: *mut FILE) -> ::core::ffi::c_int;
-}
-unsafe extern "C" {
-    pub fn putchar(arg1: ::core::ffi::c_int) -> ::core::ffi::c_int;
-}
-unsafe extern "C" {
-    pub fn puts(arg1: *const ::core::ffi::c_char) -> ::core::ffi::c_int;
-}
-unsafe extern "C" {
-    pub fn remove(arg1: *const ::core::ffi::c_char) -> ::core::ffi::c_int;
-}
-unsafe extern "C" {
-    pub fn rename(
-        __old: *const ::core::ffi::c_char,
-        __new: *const ::core::ffi::c_char,
-    ) -> ::core::ffi::c_int;
-}
-unsafe extern "C" {
-    pub fn rewind(arg1: *mut FILE);
-}
-unsafe extern "C" {
-    pub fn scanf(arg1: *const ::core::ffi::c_char, ...) -> ::core::ffi::c_int;
-}
-unsafe extern "C" {
-    pub fn setbuf(arg1: *mut FILE, arg2: *mut ::core::ffi::c_char);
-}
-unsafe extern "C" {
-    pub fn setvbuf(
-        arg1: *mut FILE,
-        arg2: *mut ::core::ffi::c_char,
-        arg3: ::core::ffi::c_int,
-        arg4: usize,
-    ) -> ::core::ffi::c_int;
-}
-unsafe extern "C" {
-    pub fn sprintf(
-        arg1: *mut ::core::ffi::c_char,
-        arg2: *const ::core::ffi::c_char,
-        ...
-    ) -> ::core::ffi::c_int;
-}
-unsafe extern "C" {
-    pub fn sscanf(
-        arg1: *const ::core::ffi::c_char,
-        arg2: *const ::core::ffi::c_char,
-        ...
-    ) -> ::core::ffi::c_int;
-}
-unsafe extern "C" {
-    pub fn tmpfile() -> *mut FILE;
-}
-unsafe extern "C" {
-    pub fn tmpnam(arg1: *mut ::core::ffi::c_char) -> *mut ::core::ffi::c_char;
-}
-unsafe extern "C" {
-    pub fn ungetc(arg1: ::core::ffi::c_int, arg2: *mut FILE) -> ::core::ffi::c_int;
-}
-unsafe extern "C" {
-    pub fn vfprintf(
-        arg1: *mut FILE,
-        arg2: *const ::core::ffi::c_char,
-        arg3: __builtin_va_list,
-    ) -> ::core::ffi::c_int;
-}
-unsafe extern "C" {
-    pub fn vprintf(arg1: *const ::core::ffi::c_char, arg2: __builtin_va_list)
-    -> ::core::ffi::c_int;
-}
-unsafe extern "C" {
-    pub fn vsprintf(
-        arg1: *mut ::core::ffi::c_char,
-        arg2: *const ::core::ffi::c_char,
-        arg3: __builtin_va_list,
-    ) -> ::core::ffi::c_int;
-}
-unsafe extern "C" {
-    pub fn ctermid(arg1: *mut ::core::ffi::c_char) -> *mut ::core::ffi::c_char;
-}
-unsafe extern "C" {
-    pub fn fdopen(arg1: ::core::ffi::c_int, arg2: *const ::core::ffi::c_char) -> *mut FILE;
-}
-unsafe extern "C" {
-    pub fn fileno(arg1: *mut FILE) -> ::core::ffi::c_int;
-}
-unsafe extern "C" {
-    pub fn pclose(arg1: *mut FILE) -> ::core::ffi::c_int;
-}
-unsafe extern "C" {
-    pub fn popen(arg1: *const ::core::ffi::c_char, arg2: *const ::core::ffi::c_char) -> *mut FILE;
-}
-unsafe extern "C" {
-    pub fn __srget(arg1: *mut FILE) -> ::core::ffi::c_int;
-}
-unsafe extern "C" {
-    pub fn __svfscanf(
-        arg1: *mut FILE,
-        arg2: *const ::core::ffi::c_char,
-        arg3: va_list,
-    ) -> ::core::ffi::c_int;
-}
-unsafe extern "C" {
-    pub fn __swbuf(arg1: ::core::ffi::c_int, arg2: *mut FILE) -> ::core::ffi::c_int;
-}
-unsafe extern "C" {
-    pub fn flockfile(arg1: *mut FILE);
-}
-unsafe extern "C" {
-    pub fn ftrylockfile(arg1: *mut FILE) -> ::core::ffi::c_int;
-}
-unsafe extern "C" {
-    pub fn funlockfile(arg1: *mut FILE);
-}
-unsafe extern "C" {
-    pub fn getc_unlocked(arg1: *mut FILE) -> ::core::ffi::c_int;
-}
-unsafe extern "C" {
-    pub fn getchar_unlocked() -> ::core::ffi::c_int;
-}
-unsafe extern "C" {
-    pub fn putc_unlocked(arg1: ::core::ffi::c_int, arg2: *mut FILE) -> ::core::ffi::c_int;
-}
-unsafe extern "C" {
-    pub fn putchar_unlocked(arg1: ::core::ffi::c_int) -> ::core::ffi::c_int;
-}
-unsafe extern "C" {
-    pub fn getw(arg1: *mut FILE) -> ::core::ffi::c_int;
-}
-unsafe extern "C" {
-    pub fn putw(arg1: ::core::ffi::c_int, arg2: *mut FILE) -> ::core::ffi::c_int;
-}
-unsafe extern "C" {
-    pub fn tempnam(
-        __dir: *const ::core::ffi::c_char,
-        __prefix: *const ::core::ffi::c_char,
-    ) -> *mut ::core::ffi::c_char;
-}
-pub type off_t = __darwin_off_t;
-unsafe extern "C" {
-    pub fn fseeko(
-        __stream: *mut FILE,
-        __offset: off_t,
-        __whence: ::core::ffi::c_int,
-    ) -> ::core::ffi::c_int;
-}
-unsafe extern "C" {
-    pub fn ftello(__stream: *mut FILE) -> off_t;
-}
-unsafe extern "C" {
-    pub fn snprintf(
-        __str: *mut ::core::ffi::c_char,
-        __size: ::core::ffi::c_ulong,
-        __format: *const ::core::ffi::c_char,
-        ...
-    ) -> ::core::ffi::c_int;
-}
-unsafe extern "C" {
-    pub fn vfscanf(
-        __stream: *mut FILE,
-        __format: *const ::core::ffi::c_char,
-        arg1: __builtin_va_list,
-    ) -> ::core::ffi::c_int;
-}
-unsafe extern "C" {
-    pub fn vscanf(
-        __format: *const ::core::ffi::c_char,
-        arg1: __builtin_va_list,
-    ) -> ::core::ffi::c_int;
-}
-unsafe extern "C" {
-    pub fn vsnprintf(
-        __str: *mut ::core::ffi::c_char,
-        __size: ::core::ffi::c_ulong,
-        __format: *const ::core::ffi::c_char,
-        arg1: __builtin_va_list,
-    ) -> ::core::ffi::c_int;
-}
-unsafe extern "C" {
-    pub fn vsscanf(
-        __str: *const ::core::ffi::c_char,
-        __format: *const ::core::ffi::c_char,
-        arg1: __builtin_va_list,
-    ) -> ::core::ffi::c_int;
-}
-unsafe extern "C" {
-    pub fn dprintf(
-        arg1: ::core::ffi::c_int,
-        arg2: *const ::core::ffi::c_char,
-        ...
-    ) -> ::core::ffi::c_int;
-}
-unsafe extern "C" {
-    pub fn vdprintf(
-        arg1: ::core::ffi::c_int,
-        arg2: *const ::core::ffi::c_char,
-        arg3: va_list,
-    ) -> ::core::ffi::c_int;
-}
-unsafe extern "C" {
-    pub fn getdelim(
-        __linep: *mut *mut ::core::ffi::c_char,
-        __linecapp: *mut usize,
-        __delimiter: ::core::ffi::c_int,
-        __stream: *mut FILE,
-    ) -> isize;
-}
-unsafe extern "C" {
-    pub fn getline(
-        __linep: *mut *mut ::core::ffi::c_char,
-        __linecapp: *mut usize,
-        __stream: *mut FILE,
-    ) -> isize;
-}
-unsafe extern "C" {
-    pub fn fmemopen(
-        __buf: *mut ::core::ffi::c_void,
-        __size: usize,
-        __mode: *const ::core::ffi::c_char,
-    ) -> *mut FILE;
-}
-unsafe extern "C" {
-    pub fn open_memstream(__bufp: *mut *mut ::core::ffi::c_char, __sizep: *mut usize) -> *mut FILE;
-}
-unsafe extern "C" {
-    pub static sys_nerr: ::core::ffi::c_int;
-}
-unsafe extern "C" {
-    pub static sys_errlist: [*const ::core::ffi::c_char; 0usize];
-}
-unsafe extern "C" {
-    pub fn asprintf(
-        arg1: *mut *mut ::core::ffi::c_char,
-        arg2: *const ::core::ffi::c_char,
-        ...
-    ) -> ::core::ffi::c_int;
-}
-unsafe extern "C" {
-    pub fn ctermid_r(arg1: *mut ::core::ffi::c_char) -> *mut ::core::ffi::c_char;
-}
-unsafe extern "C" {
-    pub fn fgetln(arg1: *mut FILE, arg2: *mut usize) -> *mut ::core::ffi::c_char;
-}
-unsafe extern "C" {
-    pub fn fmtcheck(
-        arg1: *const ::core::ffi::c_char,
-        arg2: *const ::core::ffi::c_char,
-    ) -> *const ::core::ffi::c_char;
-}
-unsafe extern "C" {
-    pub fn fpurge(arg1: *mut FILE) -> ::core::ffi::c_int;
-}
-unsafe extern "C" {
-    pub fn setbuffer(arg1: *mut FILE, arg2: *mut ::core::ffi::c_char, arg3: ::core::ffi::c_int);
-}
-unsafe extern "C" {
-    pub fn setlinebuf(arg1: *mut FILE) -> ::core::ffi::c_int;
-}
-unsafe extern "C" {
-    pub fn vasprintf(
-        arg1: *mut *mut ::core::ffi::c_char,
-        arg2: *const ::core::ffi::c_char,
-        arg3: va_list,
-    ) -> ::core::ffi::c_int;
-}
-unsafe extern "C" {
-    pub fn funopen(
-        arg1: *const ::core::ffi::c_void,
-        arg2: ::core::option::Option<
-            unsafe extern "C" fn(
-                arg1: *mut ::core::ffi::c_void,
-                arg2: *mut ::core::ffi::c_char,
-                arg3: ::core::ffi::c_int,
-            ) -> ::core::ffi::c_int,
-        >,
-        arg3: ::core::option::Option<
-            unsafe extern "C" fn(
-                arg1: *mut ::core::ffi::c_void,
-                arg2: *const ::core::ffi::c_char,
-                arg3: ::core::ffi::c_int,
-            ) -> ::core::ffi::c_int,
-        >,
-        arg4: ::core::option::Option<
-            unsafe extern "C" fn(
-                arg1: *mut ::core::ffi::c_void,
-                arg2: fpos_t,
-                arg3: ::core::ffi::c_int,
-            ) -> fpos_t,
-        >,
-        arg5: ::core::option::Option<
-            unsafe extern "C" fn(arg1: *mut ::core::ffi::c_void) -> ::core::ffi::c_int,
-        >,
-    ) -> *mut FILE;
-}
-unsafe extern "C" {
-    pub fn __sprintf_chk(
-        arg1: *mut ::core::ffi::c_char,
-        arg2: ::core::ffi::c_int,
-        arg3: usize,
-        arg4: *const ::core::ffi::c_char,
-        ...
-    ) -> ::core::ffi::c_int;
-}
-unsafe extern "C" {
-    pub fn __snprintf_chk(
-        arg1: *mut ::core::ffi::c_char,
-        arg2: usize,
-        arg3: ::core::ffi::c_int,
-        arg4: usize,
-        arg5: *const ::core::ffi::c_char,
-        ...
-    ) -> ::core::ffi::c_int;
-}
-unsafe extern "C" {
-    pub fn __vsprintf_chk(
-        arg1: *mut ::core::ffi::c_char,
-        arg2: ::core::ffi::c_int,
-        arg3: usize,
-        arg4: *const ::core::ffi::c_char,
-        arg5: va_list,
-    ) -> ::core::ffi::c_int;
-}
-unsafe extern "C" {
-    pub fn __vsnprintf_chk(
-        arg1: *mut ::core::ffi::c_char,
-        arg2: usize,
-        arg3: ::core::ffi::c_int,
-        arg4: usize,
-        arg5: *const ::core::ffi::c_char,
-        arg6: va_list,
-    ) -> ::core::ffi::c_int;
 }
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
@@ -2631,7 +2144,7 @@ unsafe extern "C" {
 }
 unsafe extern "C" {
     pub fn ctime_r(arg1: *const time_t, arg2: *mut ::core::ffi::c_char)
-    -> *mut ::core::ffi::c_char;
+        -> *mut ::core::ffi::c_char;
 }
 unsafe extern "C" {
     pub fn gmtime_r(arg1: *const time_t, arg2: *mut tm) -> *mut tm;
@@ -3011,7 +2524,7 @@ unsafe extern "C" {
 }
 unsafe extern "C" {
     pub fn pthread_join(arg1: pthread_t, arg2: *mut *mut ::core::ffi::c_void)
-    -> ::core::ffi::c_int;
+        -> ::core::ffi::c_int;
 }
 unsafe extern "C" {
     pub fn pthread_key_create(
@@ -3811,20 +3324,9 @@ pub type z_element_eq_f = ::core::option::Option<
         right: *const ::core::ffi::c_void,
     ) -> bool,
 >;
-pub type z_element_cmp_f = ::core::option::Option<
-    unsafe extern "C" fn(
-        left: *const ::core::ffi::c_void,
-        right: *const ::core::ffi::c_void,
-    ) -> ::core::ffi::c_int,
->;
-pub type z_element_hash_f =
-    ::core::option::Option<unsafe extern "C" fn(e: *const ::core::ffi::c_void) -> usize>;
 pub type _z_noop_t = ::core::ffi::c_void;
 pub type _z_noop_eq_f = ::core::option::Option<
     unsafe extern "C" fn(left: *const _z_noop_t, right: *const _z_noop_t) -> bool,
->;
-pub type _z_noop_cmp_f = ::core::option::Option<
-    unsafe extern "C" fn(left: *const _z_noop_t, right: *const _z_noop_t) -> ::core::ffi::c_int,
 >;
 #[doc = " A dynamically allocated vector. Elements are stored as pointers."]
 #[repr(C)]
@@ -4025,9 +3527,6 @@ unsafe extern "C" {
 pub type _z_iosli_eq_f = ::core::option::Option<
     unsafe extern "C" fn(left: *const _z_iosli_t, right: *const _z_iosli_t) -> bool,
 >;
-pub type _z_iosli_cmp_f = ::core::option::Option<
-    unsafe extern "C" fn(left: *const _z_iosli_t, right: *const _z_iosli_t) -> ::core::ffi::c_int,
->;
 #[doc = " A dynamically allocated vector. Elements are stored by value."]
 pub type _z_iosli_svec_t = _z_svec_t;
 #[repr(C)]
@@ -4160,12 +3659,6 @@ unsafe extern "C" {
 }
 pub type _z_arc_slice_eq_f = ::core::option::Option<
     unsafe extern "C" fn(left: *const _z_arc_slice_t, right: *const _z_arc_slice_t) -> bool,
->;
-pub type _z_arc_slice_cmp_f = ::core::option::Option<
-    unsafe extern "C" fn(
-        left: *const _z_arc_slice_t,
-        right: *const _z_arc_slice_t,
-    ) -> ::core::ffi::c_int,
 >;
 #[doc = " A dynamically allocated vector. Elements are stored by value."]
 pub type _z_arc_slice_svec_t = _z_svec_t;
@@ -4351,17 +3844,7 @@ unsafe extern "C" {
     pub fn _z_list_push(xs: *mut _z_list_t, x: *mut ::core::ffi::c_void) -> *mut _z_list_t;
 }
 unsafe extern "C" {
-    pub fn _z_list_push_after(xs: *mut _z_list_t, x: *mut ::core::ffi::c_void) -> *mut _z_list_t;
-}
-unsafe extern "C" {
     pub fn _z_list_push_back(xs: *mut _z_list_t, x: *mut ::core::ffi::c_void) -> *mut _z_list_t;
-}
-unsafe extern "C" {
-    pub fn _z_list_push_sorted(
-        xs: *mut _z_list_t,
-        c_f: z_element_cmp_f,
-        x: *mut ::core::ffi::c_void,
-    ) -> *mut _z_list_t;
 }
 unsafe extern "C" {
     pub fn _z_list_pop(
@@ -4465,158 +3948,134 @@ unsafe extern "C" {
 unsafe extern "C" {
     pub fn _z_slist_free(node: *mut *mut _z_slist_t, f: z_element_clear_f);
 }
-#[doc = " A hashmap entry with generic keys.\n\n Members:\n   void *_key: the key of the entry\n   void *_val: the value of the entry"]
+#[doc = " An entry of a hashmap with integer keys.\n\n Members:\n   size_t key: the hashed key of the value\n   void *value: the value"]
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
-pub struct _z_hashmap_entry_t {
-    pub _key: *mut ::core::ffi::c_void,
+pub struct _z_int_void_map_entry_t {
+    pub _key: usize,
     pub _val: *mut ::core::ffi::c_void,
 }
 #[allow(clippy::unnecessary_operation, clippy::identity_op)]
 const _: () = {
-    ["Size of _z_hashmap_entry_t"][::core::mem::size_of::<_z_hashmap_entry_t>() - 16usize];
-    ["Alignment of _z_hashmap_entry_t"][::core::mem::align_of::<_z_hashmap_entry_t>() - 8usize];
-    ["Offset of field: _z_hashmap_entry_t::_key"]
-        [::core::mem::offset_of!(_z_hashmap_entry_t, _key) - 0usize];
-    ["Offset of field: _z_hashmap_entry_t::_val"]
-        [::core::mem::offset_of!(_z_hashmap_entry_t, _val) - 8usize];
+    ["Size of _z_int_void_map_entry_t"]
+        [::core::mem::size_of::<_z_int_void_map_entry_t>() - 16usize];
+    ["Alignment of _z_int_void_map_entry_t"]
+        [::core::mem::align_of::<_z_int_void_map_entry_t>() - 8usize];
+    ["Offset of field: _z_int_void_map_entry_t::_key"]
+        [::core::mem::offset_of!(_z_int_void_map_entry_t, _key) - 0usize];
+    ["Offset of field: _z_int_void_map_entry_t::_val"]
+        [::core::mem::offset_of!(_z_int_void_map_entry_t, _val) - 8usize];
 };
-#[doc = " A hashmap with generic keys.\n\n Members:\n    size_t _capacity: the number of buckets available in the hashmap\n   _z_list_t **_vals: the linked list containing the values\n   z_element_hash_f _f_hash: the hash function used to hash keys\n   z_element_eq_f _f_equals: the function used to compare keys for equality"]
+#[doc = " An hashmap with integer keys.\n\n Members:\n   z_intmap_t **vals: the linked intmap containing the values\n   size_t capacity: the capacity of the hashmap\n   size_t len: the actual length of the hashmap"]
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
-pub struct _z_hashmap_t {
+pub struct _z_int_void_map_t {
     pub _capacity: usize,
     pub _vals: *mut *mut _z_list_t,
-    pub _f_hash: z_element_hash_f,
-    pub _f_equals: z_element_eq_f,
 }
 #[allow(clippy::unnecessary_operation, clippy::identity_op)]
 const _: () = {
-    ["Size of _z_hashmap_t"][::core::mem::size_of::<_z_hashmap_t>() - 32usize];
-    ["Alignment of _z_hashmap_t"][::core::mem::align_of::<_z_hashmap_t>() - 8usize];
-    ["Offset of field: _z_hashmap_t::_capacity"]
-        [::core::mem::offset_of!(_z_hashmap_t, _capacity) - 0usize];
-    ["Offset of field: _z_hashmap_t::_vals"][::core::mem::offset_of!(_z_hashmap_t, _vals) - 8usize];
-    ["Offset of field: _z_hashmap_t::_f_hash"]
-        [::core::mem::offset_of!(_z_hashmap_t, _f_hash) - 16usize];
-    ["Offset of field: _z_hashmap_t::_f_equals"]
-        [::core::mem::offset_of!(_z_hashmap_t, _f_equals) - 24usize];
+    ["Size of _z_int_void_map_t"][::core::mem::size_of::<_z_int_void_map_t>() - 16usize];
+    ["Alignment of _z_int_void_map_t"][::core::mem::align_of::<_z_int_void_map_t>() - 8usize];
+    ["Offset of field: _z_int_void_map_t::_capacity"]
+        [::core::mem::offset_of!(_z_int_void_map_t, _capacity) - 0usize];
+    ["Offset of field: _z_int_void_map_t::_vals"]
+        [::core::mem::offset_of!(_z_int_void_map_t, _vals) - 8usize];
 };
-#[doc = " Iterator for a generic key-value hashmap."]
+#[doc = " An iterator of an hashmap with integer keys."]
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
-pub struct _z_hashmap_iterator_t {
-    pub _entry: *mut _z_hashmap_entry_t,
-    pub _map: *const _z_hashmap_t,
+pub struct _z_int_void_map_iterator_t {
+    pub _entry: *mut _z_int_void_map_entry_t,
+    pub _map: *const _z_int_void_map_t,
     pub _idx: usize,
     pub _list_ptr: *mut _z_list_t,
 }
 #[allow(clippy::unnecessary_operation, clippy::identity_op)]
 const _: () = {
-    ["Size of _z_hashmap_iterator_t"][::core::mem::size_of::<_z_hashmap_iterator_t>() - 32usize];
-    ["Alignment of _z_hashmap_iterator_t"]
-        [::core::mem::align_of::<_z_hashmap_iterator_t>() - 8usize];
-    ["Offset of field: _z_hashmap_iterator_t::_entry"]
-        [::core::mem::offset_of!(_z_hashmap_iterator_t, _entry) - 0usize];
-    ["Offset of field: _z_hashmap_iterator_t::_map"]
-        [::core::mem::offset_of!(_z_hashmap_iterator_t, _map) - 8usize];
-    ["Offset of field: _z_hashmap_iterator_t::_idx"]
-        [::core::mem::offset_of!(_z_hashmap_iterator_t, _idx) - 16usize];
-    ["Offset of field: _z_hashmap_iterator_t::_list_ptr"]
-        [::core::mem::offset_of!(_z_hashmap_iterator_t, _list_ptr) - 24usize];
+    ["Size of _z_int_void_map_iterator_t"]
+        [::core::mem::size_of::<_z_int_void_map_iterator_t>() - 32usize];
+    ["Alignment of _z_int_void_map_iterator_t"]
+        [::core::mem::align_of::<_z_int_void_map_iterator_t>() - 8usize];
+    ["Offset of field: _z_int_void_map_iterator_t::_entry"]
+        [::core::mem::offset_of!(_z_int_void_map_iterator_t, _entry) - 0usize];
+    ["Offset of field: _z_int_void_map_iterator_t::_map"]
+        [::core::mem::offset_of!(_z_int_void_map_iterator_t, _map) - 8usize];
+    ["Offset of field: _z_int_void_map_iterator_t::_idx"]
+        [::core::mem::offset_of!(_z_int_void_map_iterator_t, _idx) - 16usize];
+    ["Offset of field: _z_int_void_map_iterator_t::_list_ptr"]
+        [::core::mem::offset_of!(_z_int_void_map_iterator_t, _list_ptr) - 24usize];
 };
 unsafe extern "C" {
-    pub fn _z_hashmap_init(
-        map: *mut _z_hashmap_t,
-        capacity: usize,
-        f_hash: z_element_hash_f,
-        f_equals: z_element_eq_f,
-    );
+    pub fn _z_int_void_map_init(map: *mut _z_int_void_map_t, capacity: usize);
 }
 unsafe extern "C" {
-    pub fn _z_hashmap_make(
-        capacity: usize,
-        f_hash: z_element_hash_f,
-        f_equals: z_element_eq_f,
-    ) -> _z_hashmap_t;
+    pub fn _z_int_void_map_make(capacity: usize) -> _z_int_void_map_t;
 }
 unsafe extern "C" {
-    pub fn _z_hashmap_insert(
-        map: *mut _z_hashmap_t,
-        key: *mut ::core::ffi::c_void,
-        val: *mut ::core::ffi::c_void,
+    pub fn _z_int_void_map_insert(
+        map: *mut _z_int_void_map_t,
+        k: usize,
+        v: *mut ::core::ffi::c_void,
         f: z_element_free_f,
         replace: bool,
     ) -> *mut ::core::ffi::c_void;
 }
 unsafe extern "C" {
-    pub fn _z_hashmap_get(
-        map: *const _z_hashmap_t,
-        key: *const ::core::ffi::c_void,
-    ) -> *mut ::core::ffi::c_void;
+    pub fn _z_int_void_map_get(map: *const _z_int_void_map_t, k: usize)
+        -> *mut ::core::ffi::c_void;
 }
 unsafe extern "C" {
-    pub fn _z_hashmap_get_all(
-        map: *const _z_hashmap_t,
-        key: *const ::core::ffi::c_void,
-    ) -> *mut _z_list_t;
+    pub fn _z_int_void_map_get_all(map: *const _z_int_void_map_t, k: usize) -> *mut _z_list_t;
 }
 unsafe extern "C" {
-    pub fn _z_hashmap_remove(
-        map: *mut _z_hashmap_t,
-        key: *const ::core::ffi::c_void,
-        f: z_element_free_f,
-    );
+    pub fn _z_int_void_map_remove(map: *mut _z_int_void_map_t, k: usize, f: z_element_free_f);
 }
 unsafe extern "C" {
-    pub fn _z_hashmap_capacity(map: *const _z_hashmap_t) -> usize;
+    pub fn _z_int_void_map_capacity(map: *const _z_int_void_map_t) -> usize;
 }
 unsafe extern "C" {
-    pub fn _z_hashmap_len(map: *const _z_hashmap_t) -> usize;
+    pub fn _z_int_void_map_len(map: *const _z_int_void_map_t) -> usize;
 }
 unsafe extern "C" {
-    pub fn _z_hashmap_is_empty(map: *const _z_hashmap_t) -> bool;
+    pub fn _z_int_void_map_is_empty(map: *const _z_int_void_map_t) -> bool;
 }
 unsafe extern "C" {
-    pub fn _z_hashmap_copy(
-        dst: *mut _z_hashmap_t,
-        src: *const _z_hashmap_t,
+    pub fn _z_int_void_map_copy(
+        dst: *mut _z_int_void_map_t,
+        src: *const _z_int_void_map_t,
         f_c: z_element_clone_f,
     ) -> z_result_t;
 }
 unsafe extern "C" {
-    pub fn _z_hashmap_clone(
-        src: *const _z_hashmap_t,
+    pub fn _z_int_void_map_clone(
+        src: *const _z_int_void_map_t,
         f_c: z_element_clone_f,
         f_f: z_element_free_f,
-    ) -> _z_hashmap_t;
+    ) -> _z_int_void_map_t;
 }
 unsafe extern "C" {
-    pub fn _z_hashmap_clear(map: *mut _z_hashmap_t, f: z_element_free_f);
+    pub fn _z_int_void_map_clear(map: *mut _z_int_void_map_t, f: z_element_free_f);
 }
 unsafe extern "C" {
-    pub fn _z_hashmap_free(map: *mut *mut _z_hashmap_t, f: z_element_free_f);
+    pub fn _z_int_void_map_free(map: *mut *mut _z_int_void_map_t, f: z_element_free_f);
 }
 unsafe extern "C" {
-    pub fn _z_hashmap_iterator_make(map: *const _z_hashmap_t) -> _z_hashmap_iterator_t;
+    pub fn _z_int_void_map_iterator_make(
+        map: *const _z_int_void_map_t,
+    ) -> _z_int_void_map_iterator_t;
 }
 unsafe extern "C" {
-    pub fn _z_hashmap_iterator_next(iter: *mut _z_hashmap_iterator_t) -> bool;
+    pub fn _z_int_void_map_iterator_next(iter: *mut _z_int_void_map_iterator_t) -> bool;
 }
 unsafe extern "C" {
-    pub fn _z_hashmap_iterator_key(iter: *const _z_hashmap_iterator_t) -> *mut ::core::ffi::c_void;
+    pub fn _z_int_void_map_iterator_key(iter: *const _z_int_void_map_iterator_t) -> usize;
 }
 unsafe extern "C" {
-    pub fn _z_hashmap_iterator_value(
-        iter: *const _z_hashmap_iterator_t,
+    pub fn _z_int_void_map_iterator_value(
+        iter: *const _z_int_void_map_iterator_t,
     ) -> *mut ::core::ffi::c_void;
 }
-#[doc = " A hashmap with generic keys.\n\n Members:\n    size_t _capacity: the number of buckets available in the hashmap\n   _z_list_t **_vals: the linked list containing the values\n   z_element_hash_f _f_hash: the hash function used to hash keys\n   z_element_eq_f _f_equals: the function used to compare keys for equality"]
-pub type _z_int_void_map_t = _z_hashmap_t;
-#[doc = " A hashmap entry with generic keys.\n\n Members:\n   void *_key: the key of the entry\n   void *_val: the value of the entry"]
-pub type _z_int_void_map_entry_t = _z_hashmap_entry_t;
-#[doc = " Iterator for a generic key-value hashmap."]
-pub type _z_int_void_map_iterator_t = _z_hashmap_iterator_t;
 pub type _z_str_t = *mut ::core::ffi::c_char;
 unsafe extern "C" {
     pub fn _z_str_clone(src: *const ::core::ffi::c_char) -> *mut ::core::ffi::c_char;
@@ -4632,12 +4091,6 @@ unsafe extern "C" {
 }
 unsafe extern "C" {
     pub fn _z_str_eq(left: *const ::core::ffi::c_char, right: *const ::core::ffi::c_char) -> bool;
-}
-unsafe extern "C" {
-    pub fn _z_str_cmp(
-        left: *const ::core::ffi::c_char,
-        right: *const ::core::ffi::c_char,
-    ) -> ::core::ffi::c_int;
 }
 unsafe extern "C" {
     pub fn _z_str_size(src: *const ::core::ffi::c_char) -> usize;
@@ -4658,21 +4111,15 @@ pub type _z_str_eq_f = ::core::option::Option<
         right: *const ::core::ffi::c_char,
     ) -> bool,
 >;
-pub type _z_str_cmp_f = ::core::option::Option<
-    unsafe extern "C" fn(
-        left: *const ::core::ffi::c_char,
-        right: *const ::core::ffi::c_char,
-    ) -> ::core::ffi::c_int,
->;
 #[doc = " A dynamically allocated vector. Elements are stored as pointers."]
 pub type _z_str_vec_t = _z_vec_t;
 #[doc = " A single-linked list. Elements are stored as pointers.\n\n  Members:\n   void *lal: The pointer to the inner value.\n   struct z_list *tail: A pointer to the next element in the list."]
 pub type _z_str_list_t = _z_list_t;
-#[doc = " A hashmap entry with generic keys.\n\n Members:\n   void *_key: the key of the entry\n   void *_val: the value of the entry"]
+#[doc = " An entry of a hashmap with integer keys.\n\n Members:\n   size_t key: the hashed key of the value\n   void *value: the value"]
 pub type _z_str_intmap_entry_t = _z_int_void_map_entry_t;
-#[doc = " A hashmap with generic keys.\n\n Members:\n    size_t _capacity: the number of buckets available in the hashmap\n   _z_list_t **_vals: the linked list containing the values\n   z_element_hash_f _f_hash: the hash function used to hash keys\n   z_element_eq_f _f_equals: the function used to compare keys for equality"]
+#[doc = " An hashmap with integer keys.\n\n Members:\n   z_intmap_t **vals: the linked intmap containing the values\n   size_t capacity: the capacity of the hashmap\n   size_t len: the actual length of the hashmap"]
 pub type _z_str_intmap_t = _z_int_void_map_t;
-#[doc = " Iterator for a generic key-value hashmap."]
+#[doc = " An iterator of an hashmap with integer keys."]
 pub type _z_str_intmap_iterator_t = _z_int_void_map_iterator_t;
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
@@ -4746,7 +4193,7 @@ unsafe extern "C" {
 }
 unsafe extern "C" {
     pub fn _z_string_copy_from_substr(value: *const ::core::ffi::c_char, len: usize)
-    -> _z_string_t;
+        -> _z_string_t;
 }
 unsafe extern "C" {
     pub fn _z_string_copy_from_str_as_ptr(value: *const ::core::ffi::c_char) -> *mut _z_string_t;
@@ -4807,93 +4254,16 @@ unsafe extern "C" {
 pub type _z_string_eq_f = ::core::option::Option<
     unsafe extern "C" fn(left: *const _z_string_t, right: *const _z_string_t) -> bool,
 >;
-pub type _z_string_cmp_f = ::core::option::Option<
-    unsafe extern "C" fn(left: *const _z_string_t, right: *const _z_string_t) -> ::core::ffi::c_int,
->;
 #[doc = " A dynamically allocated vector. Elements are stored by value."]
 pub type _z_string_svec_t = _z_svec_t;
 #[doc = " A single-linked list. Elements are stored as pointers.\n\n  Members:\n   void *lal: The pointer to the inner value.\n   struct z_list *tail: A pointer to the next element in the list."]
 pub type _z_string_list_t = _z_list_t;
-#[doc = " A hashmap entry with generic keys.\n\n Members:\n   void *_key: the key of the entry\n   void *_val: the value of the entry"]
+#[doc = " An entry of a hashmap with integer keys.\n\n Members:\n   size_t key: the hashed key of the value\n   void *value: the value"]
 pub type _z_string_intmap_entry_t = _z_int_void_map_entry_t;
-#[doc = " A hashmap with generic keys.\n\n Members:\n    size_t _capacity: the number of buckets available in the hashmap\n   _z_list_t **_vals: the linked list containing the values\n   z_element_hash_f _f_hash: the hash function used to hash keys\n   z_element_eq_f _f_equals: the function used to compare keys for equality"]
+#[doc = " An hashmap with integer keys.\n\n Members:\n   z_intmap_t **vals: the linked intmap containing the values\n   size_t capacity: the capacity of the hashmap\n   size_t len: the actual length of the hashmap"]
 pub type _z_string_intmap_t = _z_int_void_map_t;
-#[doc = " Iterator for a generic key-value hashmap."]
+#[doc = " An iterator of an hashmap with integer keys."]
 pub type _z_string_intmap_iterator_t = _z_int_void_map_iterator_t;
-pub const z_what_t_Z_WHAT_ROUTER: z_what_t = 1;
-pub const z_what_t_Z_WHAT_PEER: z_what_t = 2;
-pub const z_what_t_Z_WHAT_CLIENT: z_what_t = 4;
-pub const z_what_t_Z_WHAT_ROUTER_PEER: z_what_t = 3;
-pub const z_what_t_Z_WHAT_ROUTER_CLIENT: z_what_t = 5;
-pub const z_what_t_Z_WHAT_PEER_CLIENT: z_what_t = 6;
-pub const z_what_t_Z_WHAT_ROUTER_PEER_CLIENT: z_what_t = 7;
-#[doc = " What bitmask for scouting.\n\n Enumerators:\n   Z_WHAT_ROUTER: Router.\n   Z_WHAT_PEER: Peer.\n   Z_WHAT_CLIENT: Client."]
-pub type z_what_t = ::core::ffi::c_uint;
-pub const z_whatami_t_Z_WHATAMI_ROUTER: z_whatami_t = 1;
-pub const z_whatami_t_Z_WHATAMI_PEER: z_whatami_t = 2;
-pub const z_whatami_t_Z_WHATAMI_CLIENT: z_whatami_t = 4;
-#[doc = " Whatami values, defined as a bitmask.\n\n Enumerators:\n   Z_WHATAMI_ROUTER: Bitmask to filter Zenoh routers.\n   Z_WHATAMI_PEER: Bitmask to filter for Zenoh peers.\n   Z_WHATAMI_CLIENT: Bitmask to filter for Zenoh clients."]
-pub type z_whatami_t = ::core::ffi::c_uint;
-pub const zp_keyexpr_canon_status_t_Z_KEYEXPR_CANON_SUCCESS: zp_keyexpr_canon_status_t = 0;
-pub const zp_keyexpr_canon_status_t_Z_KEYEXPR_CANON_LONE_DOLLAR_STAR: zp_keyexpr_canon_status_t =
-    -1;
-pub const zp_keyexpr_canon_status_t_Z_KEYEXPR_CANON_SINGLE_STAR_AFTER_DOUBLE_STAR:
-    zp_keyexpr_canon_status_t = -2;
-pub const zp_keyexpr_canon_status_t_Z_KEYEXPR_CANON_DOUBLE_STAR_AFTER_DOUBLE_STAR:
-    zp_keyexpr_canon_status_t = -3;
-pub const zp_keyexpr_canon_status_t_Z_KEYEXPR_CANON_EMPTY_CHUNK: zp_keyexpr_canon_status_t = -4;
-pub const zp_keyexpr_canon_status_t_Z_KEYEXPR_CANON_STARS_IN_CHUNK: zp_keyexpr_canon_status_t = -5;
-pub const zp_keyexpr_canon_status_t_Z_KEYEXPR_CANON_DOLLAR_AFTER_DOLLAR_OR_STAR:
-    zp_keyexpr_canon_status_t = -6;
-pub const zp_keyexpr_canon_status_t_Z_KEYEXPR_CANON_CONTAINS_SHARP_OR_QMARK:
-    zp_keyexpr_canon_status_t = -7;
-pub const zp_keyexpr_canon_status_t_Z_KEYEXPR_CANON_CONTAINS_UNBOUND_DOLLAR:
-    zp_keyexpr_canon_status_t = -8;
-#[doc = " Status values for keyexpr canonization operation.\n Used as return value of canonization-related functions,\n like :c:func:`z_keyexpr_is_canon` or :c:func:`z_keyexpr_canonize`.\n\n Enumerators:\n   Z_KEYEXPR_CANON_SUCCESS: The key expression is canon.\n   Z_KEYEXPR_CANON_LONE_DOLLAR_STAR: The key contains a ``$*`` chunk, which must be replaced by ``*``.\n   Z_KEYEXPR_CANON_SINGLE_STAR_AFTER_DOUBLE_STAR: The key contains ``** / *``, which must be replaced by ``* / **``.\n   Z_KEYEXPR_CANON_DOUBLE_STAR_AFTER_DOUBLE_STAR: The key contains ``** / **``, which must be replaced by ``**``.\n   Z_KEYEXPR_CANON_EMPTY_CHUNK: The key contains empty chunks.\n   Z_KEYEXPR_CANON_STARS_IN_CHUNK: The key contains a ``*`` in a chunk without being escaped by a DSL, which is\n     forbidden.\n   Z_KEYEXPR_CANON_DOLLAR_AFTER_DOLLAR_OR_STAR: The key contains ``$*$`` or ``$$``, which is forbidden.\n   Z_KEYEXPR_CANON_CONTAINS_SHARP_OR_QMARK: The key contains ``#`` or ``?``, which is forbidden.\n   Z_KEYEXPR_CANON_CONTAINS_UNBOUND_DOLLAR: The key contains a ``$`` which is not bound to a DSL."]
-pub type zp_keyexpr_canon_status_t = ::core::ffi::c_int;
-pub const z_keyexpr_intersection_level_t_Z_KEYEXPR_INTERSECTION_LEVEL_DISJOINT:
-    z_keyexpr_intersection_level_t = 0;
-pub const z_keyexpr_intersection_level_t_Z_KEYEXPR_INTERSECTION_LEVEL_INTERSECTS:
-    z_keyexpr_intersection_level_t = 1;
-pub const z_keyexpr_intersection_level_t_Z_KEYEXPR_INTERSECTION_LEVEL_INCLUDES:
-    z_keyexpr_intersection_level_t = 2;
-pub const z_keyexpr_intersection_level_t_Z_KEYEXPR_INTERSECTION_LEVEL_EQUALS:
-    z_keyexpr_intersection_level_t = 3;
-#[doc = " Intersection level of two key expressions.\n\n Enumerators:\n   Z_KEYEXPR_INTERSECTION_LEVEL_DISJOINT: The two key expressions do not intersect.\n   Z_KEYEXPR_INTERSECTION_LEVEL_INTERSECTS: The two key expressions intersect, i.e. there exists at least one key\n     expression that is included by both.\n   Z_KEYEXPR_INTERSECTION_LEVEL_INCLUDES: The first key expression is the superset of the second one.\n   Z_KEYEXPR_INTERSECTION_LEVEL_EQUALS: The two key expressions are equal."]
-pub type z_keyexpr_intersection_level_t = ::core::ffi::c_uint;
-pub const z_sample_kind_t_Z_SAMPLE_KIND_PUT: z_sample_kind_t = 0;
-pub const z_sample_kind_t_Z_SAMPLE_KIND_DELETE: z_sample_kind_t = 1;
-#[doc = " Sample kind values.\n\n Enumerators:\n   Z_SAMPLE_KIND_PUT: The Sample was issued by a ``put`` operation.\n   Z_SAMPLE_KIND_DELETE: The Sample was issued by a ``delete`` operation."]
-pub type z_sample_kind_t = ::core::ffi::c_uint;
-pub const z_consolidation_mode_t_Z_CONSOLIDATION_MODE_AUTO: z_consolidation_mode_t = -1;
-pub const z_consolidation_mode_t_Z_CONSOLIDATION_MODE_NONE: z_consolidation_mode_t = 0;
-pub const z_consolidation_mode_t_Z_CONSOLIDATION_MODE_MONOTONIC: z_consolidation_mode_t = 1;
-pub const z_consolidation_mode_t_Z_CONSOLIDATION_MODE_LATEST: z_consolidation_mode_t = 2;
-#[doc = " Consolidation mode values.\n\n Enumerators:\n   Z_CONSOLIDATION_MODE_AUTO: Let Zenoh decide the best consolidation mode depending on the query selector.\n   Z_CONSOLIDATION_MODE_NONE: No consolidation is applied. Replies may come in any order and any number.\n   Z_CONSOLIDATION_MODE_MONOTONIC: It guarantees that any reply for a given key expression will be monotonic in time\n     w.r.t. the previous received replies for the same key expression. I.e., for the same key expression multiple\n     replies may be received. It is guaranteed that two replies received at t1 and t2 will have timestamp\n     ts2 > ts1. It optimizes latency.\n   Z_CONSOLIDATION_MODE_LATEST: It guarantees unicity of replies for the same key expression.\n     It optimizes bandwidth."]
-pub type z_consolidation_mode_t = ::core::ffi::c_int;
-pub const z_reliability_t_Z_RELIABILITY_BEST_EFFORT: z_reliability_t = 1;
-pub const z_reliability_t_Z_RELIABILITY_RELIABLE: z_reliability_t = 0;
-#[doc = " Reliability values.\n\n Enumerators:\n   Z_RELIABILITY_BEST_EFFORT: Defines reliability as ``BEST_EFFORT``\n   Z_RELIABILITY_RELIABLE: Defines reliability as ``RELIABLE``\n\n .. warning:: This API has been marked as unstable: it works as advertised, but it may be changed in a future release."]
-pub type z_reliability_t = ::core::ffi::c_uint;
-pub const z_congestion_control_t_Z_CONGESTION_CONTROL_BLOCK: z_congestion_control_t = 1;
-pub const z_congestion_control_t_Z_CONGESTION_CONTROL_DROP: z_congestion_control_t = 0;
-#[doc = " Congestion control values.\n\n Enumerators:\n   Z_CONGESTION_CONTROL_BLOCK: Defines congestion control as ``BLOCK``. Messages are not dropped in case of\n     congestion control.\n   Z_CONGESTION_CONTROL_DROP: Defines congestion control as ``DROP``. Messages are dropped in case\n     of congestion control."]
-pub type z_congestion_control_t = ::core::ffi::c_uint;
-pub const z_priority_t__Z_PRIORITY_CONTROL: z_priority_t = 0;
-pub const z_priority_t_Z_PRIORITY_REAL_TIME: z_priority_t = 1;
-pub const z_priority_t_Z_PRIORITY_INTERACTIVE_HIGH: z_priority_t = 2;
-pub const z_priority_t_Z_PRIORITY_INTERACTIVE_LOW: z_priority_t = 3;
-pub const z_priority_t_Z_PRIORITY_DATA_HIGH: z_priority_t = 4;
-pub const z_priority_t_Z_PRIORITY_DATA: z_priority_t = 5;
-pub const z_priority_t_Z_PRIORITY_DATA_LOW: z_priority_t = 6;
-pub const z_priority_t_Z_PRIORITY_BACKGROUND: z_priority_t = 7;
-#[doc = " Priority of Zenoh messages values.\n\n Enumerators:\n   _Z_PRIORITY_CONTROL: Priority for ``Control`` messages.\n   Z_PRIORITY_REAL_TIME: Priority for ``RealTime`` messages.\n   Z_PRIORITY_INTERACTIVE_HIGH: Highest priority for ``Interactive`` messages.\n   Z_PRIORITY_INTERACTIVE_LOW: Lowest priority for ``Interactive`` messages.\n   Z_PRIORITY_DATA_HIGH: Highest priority for ``Data`` messages.\n   Z_PRIORITY_DATA: Default priority for ``Data`` messages.\n   Z_PRIORITY_DATA_LOW: Lowest priority for ``Data`` messages.\n   Z_PRIORITY_BACKGROUND: Priority for ``Background traffic`` messages."]
-pub type z_priority_t = ::core::ffi::c_uint;
-pub const z_query_target_t_Z_QUERY_TARGET_BEST_MATCHING: z_query_target_t = 0;
-pub const z_query_target_t_Z_QUERY_TARGET_ALL: z_query_target_t = 1;
-pub const z_query_target_t_Z_QUERY_TARGET_ALL_COMPLETE: z_query_target_t = 2;
-#[doc = " Query target values.\n\n Enumerators:\n   Z_QUERY_TARGET_BEST_MATCHING: The nearest complete queryable if any else all matching queryables.\n   Z_QUERY_TARGET_ALL: All matching queryables.\n   Z_QUERY_TARGET_ALL_COMPLETE: A set of complete queryables."]
-pub type z_query_target_t = ::core::ffi::c_uint;
 #[doc = " A zenoh encoding."]
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
@@ -4926,94 +4296,6 @@ unsafe extern "C" {
 unsafe extern "C" {
     pub fn _z_encoding_move(dst: *mut _z_encoding_t, src: *mut _z_encoding_t) -> z_result_t;
 }
-#[repr(C)]
-#[derive(Debug, Copy, Clone)]
-pub struct _z_str_se_t {
-    pub start: *const ::core::ffi::c_char,
-    pub end: *const ::core::ffi::c_char,
-}
-#[allow(clippy::unnecessary_operation, clippy::identity_op)]
-const _: () = {
-    ["Size of _z_str_se_t"][::core::mem::size_of::<_z_str_se_t>() - 16usize];
-    ["Alignment of _z_str_se_t"][::core::mem::align_of::<_z_str_se_t>() - 8usize];
-    ["Offset of field: _z_str_se_t::start"][::core::mem::offset_of!(_z_str_se_t, start) - 0usize];
-    ["Offset of field: _z_str_se_t::end"][::core::mem::offset_of!(_z_str_se_t, end) - 8usize];
-};
-#[repr(C)]
-#[derive(Debug, Copy, Clone)]
-pub struct _z_splitstr_t {
-    pub s: _z_str_se_t,
-    pub delimiter: *const ::core::ffi::c_char,
-}
-#[allow(clippy::unnecessary_operation, clippy::identity_op)]
-const _: () = {
-    ["Size of _z_splitstr_t"][::core::mem::size_of::<_z_splitstr_t>() - 24usize];
-    ["Alignment of _z_splitstr_t"][::core::mem::align_of::<_z_splitstr_t>() - 8usize];
-    ["Offset of field: _z_splitstr_t::s"][::core::mem::offset_of!(_z_splitstr_t, s) - 0usize];
-    ["Offset of field: _z_splitstr_t::delimiter"]
-        [::core::mem::offset_of!(_z_splitstr_t, delimiter) - 16usize];
-};
-unsafe extern "C" {
-    #[doc = " Creates a `_z_str_se_t` from a null-terminated C string."]
-    pub fn _z_bstrnew(start: *const ::core::ffi::c_char) -> _z_str_se_t;
-}
-unsafe extern "C" {
-    #[doc = " The reverse equivalent of libc's `strstr`.\n\n Returns NULL if the needle is not found.\n If found, the return pointer will point to the end of the last occurring\n needle within the haystack."]
-    pub fn _z_rstrstr(
-        haystack_start: *const ::core::ffi::c_char,
-        haystack_end: *const ::core::ffi::c_char,
-        needle: *const ::core::ffi::c_char,
-    ) -> *const ::core::ffi::c_char;
-}
-unsafe extern "C" {
-    #[doc = " A non-null-terminated haystack equivalent of libc's `strstr`.\n\n Returns NULL if the needle is not found.\n If found, the return pointer will point to the start of the first occurrence\n of the needle within the haystack."]
-    pub fn _z_strstr(
-        haystack_start: *const ::core::ffi::c_char,
-        haystack_end: *const ::core::ffi::c_char,
-        needle_start: *const ::core::ffi::c_char,
-    ) -> *const ::core::ffi::c_char;
-}
-unsafe extern "C" {
-    pub fn _z_strstr_skipneedle(
-        haystack_start: *const ::core::ffi::c_char,
-        haystack_end: *const ::core::ffi::c_char,
-        needle_start: *const ::core::ffi::c_char,
-    ) -> *const ::core::ffi::c_char;
-}
-unsafe extern "C" {
-    pub fn _z_bstrstr_skipneedle(
-        haystack: _z_str_se_t,
-        needle: _z_str_se_t,
-    ) -> *const ::core::ffi::c_char;
-}
-unsafe extern "C" {
-    pub fn _z_splitstr_is_empty(src: *const _z_splitstr_t) -> bool;
-}
-unsafe extern "C" {
-    pub fn _z_splitstr_next(str_: *mut _z_splitstr_t) -> _z_str_se_t;
-}
-unsafe extern "C" {
-    pub fn _z_splitstr_split_once(src: _z_splitstr_t, next: *mut _z_str_se_t) -> _z_str_se_t;
-}
-unsafe extern "C" {
-    pub fn _z_splitstr_nextback(str_: *mut _z_splitstr_t) -> _z_str_se_t;
-}
-unsafe extern "C" {
-    pub fn _z_strcnt(
-        haystack_start: *const ::core::ffi::c_char,
-        harstack_end: *const ::core::ffi::c_char,
-        needle_start: *const ::core::ffi::c_char,
-    ) -> usize;
-}
-unsafe extern "C" {
-    pub fn _z_str_startswith(
-        s: *const ::core::ffi::c_char,
-        needle: *const ::core::ffi::c_char,
-    ) -> usize;
-}
-unsafe extern "C" {
-    pub fn _z_str_se_atoui(str_: *const _z_str_se_t, result: *mut u32) -> bool;
-}
 #[doc = " A variable-length encoding unsigned integer."]
 pub type _z_zint_t = usize;
 #[repr(C)]
@@ -5033,18 +4315,6 @@ unsafe extern "C" {
 unsafe extern "C" {
     pub fn _z_id_len(id: _z_id_t) -> u8;
 }
-unsafe extern "C" {
-    pub fn _z_id_cmp(left: *const _z_id_t, right: *const _z_id_t) -> ::core::ffi::c_int;
-}
-unsafe extern "C" {
-    pub fn _z_id_hash(id: *const _z_id_t) -> usize;
-}
-pub type _z_id_eq_f = ::core::option::Option<
-    unsafe extern "C" fn(left: *const _z_id_t, right: *const _z_id_t) -> bool,
->;
-pub type _z_id_cmp_f = ::core::option::Option<
-    unsafe extern "C" fn(left: *const _z_id_t, right: *const _z_id_t) -> ::core::ffi::c_int,
->;
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
 pub struct _z_entity_global_id_t {
@@ -5061,30 +4331,13 @@ const _: () = {
     ["Offset of field: _z_entity_global_id_t::eid"]
         [::core::mem::offset_of!(_z_entity_global_id_t, eid) - 16usize];
 };
-unsafe extern "C" {
-    pub fn _z_entity_global_id_hash(id: *const _z_entity_global_id_t) -> usize;
-}
-pub type _z_entity_global_id_eq_f = ::core::option::Option<
-    unsafe extern "C" fn(
-        left: *const _z_entity_global_id_t,
-        right: *const _z_entity_global_id_t,
-    ) -> bool,
->;
-pub type _z_entity_global_id_cmp_f = ::core::option::Option<
-    unsafe extern "C" fn(
-        left: *const _z_entity_global_id_t,
-        right: *const _z_entity_global_id_t,
-    ) -> ::core::ffi::c_int,
->;
-#[doc = " NTP64 time."]
-pub type _z_ntp64_t = u64;
 #[doc = " A zenoh timestamp."]
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
 pub struct _z_timestamp_t {
     pub valid: bool,
     pub id: _z_id_t,
-    pub time: _z_ntp64_t,
+    pub time: u64,
 }
 #[allow(clippy::unnecessary_operation, clippy::identity_op)]
 const _: () = {
@@ -5109,23 +4362,8 @@ unsafe extern "C" {
     pub fn _z_timestamp_move(dst: *mut _z_timestamp_t, src: *mut _z_timestamp_t);
 }
 unsafe extern "C" {
-    pub fn _z_timestamp_cmp(
-        left: *const _z_timestamp_t,
-        right: *const _z_timestamp_t,
-    ) -> ::core::ffi::c_int;
+    pub fn _z_timestamp_ntp64_from_time(seconds: u32, nanos: u32) -> u64;
 }
-unsafe extern "C" {
-    pub fn _z_timestamp_ntp64_from_time(seconds: u32, nanos: u32) -> _z_ntp64_t;
-}
-pub type _z_timestamp_eq_f = ::core::option::Option<
-    unsafe extern "C" fn(left: *const _z_timestamp_t, right: *const _z_timestamp_t) -> bool,
->;
-pub type _z_timestamp_cmp_f = ::core::option::Option<
-    unsafe extern "C" fn(
-        left: *const _z_timestamp_t,
-        right: *const _z_timestamp_t,
-    ) -> ::core::ffi::c_int,
->;
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
 pub struct _z_keyexpr_t {
@@ -5238,9 +4476,6 @@ unsafe extern "C" {
 }
 pub type _z_hello_eq_f = ::core::option::Option<
     unsafe extern "C" fn(left: *const _z_hello_t, right: *const _z_hello_t) -> bool,
->;
-pub type _z_hello_cmp_f = ::core::option::Option<
-    unsafe extern "C" fn(left: *const _z_hello_t, right: *const _z_hello_t) -> ::core::ffi::c_int,
 >;
 pub type _z_hello_slist_t = _z_slist_t;
 #[repr(C)]
@@ -5928,12 +5163,6 @@ unsafe extern "C" {
 pub type _z_msg_ext_eq_f = ::core::option::Option<
     unsafe extern "C" fn(left: *const _z_msg_ext_t, right: *const _z_msg_ext_t) -> bool,
 >;
-pub type _z_msg_ext_cmp_f = ::core::option::Option<
-    unsafe extern "C" fn(
-        left: *const _z_msg_ext_t,
-        right: *const _z_msg_ext_t,
-    ) -> ::core::ffi::c_int,
->;
 #[doc = " A dynamically allocated vector. Elements are stored as pointers."]
 pub type _z_msg_ext_vec_t = _z_vec_t;
 #[doc = " QoS settings of zenoh message."]
@@ -6264,12 +5493,6 @@ pub type _z_network_message_eq_f = ::core::option::Option<
         right: *const _z_network_message_t,
     ) -> bool,
 >;
-pub type _z_network_message_cmp_f = ::core::option::Option<
-    unsafe extern "C" fn(
-        left: *const _z_network_message_t,
-        right: *const _z_network_message_t,
-    ) -> ::core::ffi::c_int,
->;
 #[doc = " A dynamically allocated vector. Elements are stored by value."]
 pub type _z_network_message_svec_t = _z_svec_t;
 pub type _z_network_message_slist_t = _z_slist_t;
@@ -6377,14 +5600,14 @@ pub struct _z_locator_t {
 }
 #[allow(clippy::unnecessary_operation, clippy::identity_op)]
 const _: () = {
-    ["Size of _z_locator_t"][::core::mem::size_of::<_z_locator_t>() - 96usize];
+    ["Size of _z_locator_t"][::core::mem::size_of::<_z_locator_t>() - 80usize];
     ["Alignment of _z_locator_t"][::core::mem::align_of::<_z_locator_t>() - 8usize];
     ["Offset of field: _z_locator_t::_metadata"]
         [::core::mem::offset_of!(_z_locator_t, _metadata) - 0usize];
     ["Offset of field: _z_locator_t::_protocol"]
-        [::core::mem::offset_of!(_z_locator_t, _protocol) - 32usize];
+        [::core::mem::offset_of!(_z_locator_t, _protocol) - 16usize];
     ["Offset of field: _z_locator_t::_address"]
-        [::core::mem::offset_of!(_z_locator_t, _address) - 64usize];
+        [::core::mem::offset_of!(_z_locator_t, _address) - 48usize];
 };
 unsafe extern "C" {
     pub fn _z_locator_eq(left: *const _z_locator_t, right: *const _z_locator_t) -> bool;
@@ -6406,12 +5629,6 @@ unsafe extern "C" {
 }
 pub type _z_locator_eq_f = ::core::option::Option<
     unsafe extern "C" fn(left: *const _z_locator_t, right: *const _z_locator_t) -> bool,
->;
-pub type _z_locator_cmp_f = ::core::option::Option<
-    unsafe extern "C" fn(
-        left: *const _z_locator_t,
-        right: *const _z_locator_t,
-    ) -> ::core::ffi::c_int,
 >;
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
@@ -6436,12 +5653,12 @@ pub struct _z_endpoint_t {
 }
 #[allow(clippy::unnecessary_operation, clippy::identity_op)]
 const _: () = {
-    ["Size of _z_endpoint_t"][::core::mem::size_of::<_z_endpoint_t>() - 128usize];
+    ["Size of _z_endpoint_t"][::core::mem::size_of::<_z_endpoint_t>() - 96usize];
     ["Alignment of _z_endpoint_t"][::core::mem::align_of::<_z_endpoint_t>() - 8usize];
     ["Offset of field: _z_endpoint_t::_locator"]
         [::core::mem::offset_of!(_z_endpoint_t, _locator) - 0usize];
     ["Offset of field: _z_endpoint_t::_config"]
-        [::core::mem::offset_of!(_z_endpoint_t, _config) - 96usize];
+        [::core::mem::offset_of!(_z_endpoint_t, _config) - 80usize];
 };
 unsafe extern "C" {
     pub fn _z_endpoint_to_string(e: *const _z_endpoint_t) -> _z_string_t;
@@ -6454,6 +5671,557 @@ unsafe extern "C" {
 }
 unsafe extern "C" {
     pub fn _z_endpoint_free(ep: *mut *mut _z_endpoint_t);
+}
+pub type va_list = __darwin_va_list;
+unsafe extern "C" {
+    pub fn renameat(
+        arg1: ::core::ffi::c_int,
+        arg2: *const ::core::ffi::c_char,
+        arg3: ::core::ffi::c_int,
+        arg4: *const ::core::ffi::c_char,
+    ) -> ::core::ffi::c_int;
+}
+unsafe extern "C" {
+    pub fn renamex_np(
+        arg1: *const ::core::ffi::c_char,
+        arg2: *const ::core::ffi::c_char,
+        arg3: ::core::ffi::c_uint,
+    ) -> ::core::ffi::c_int;
+}
+unsafe extern "C" {
+    pub fn renameatx_np(
+        arg1: ::core::ffi::c_int,
+        arg2: *const ::core::ffi::c_char,
+        arg3: ::core::ffi::c_int,
+        arg4: *const ::core::ffi::c_char,
+        arg5: ::core::ffi::c_uint,
+    ) -> ::core::ffi::c_int;
+}
+unsafe extern "C" {
+    pub fn printf(arg1: *const ::core::ffi::c_char, ...) -> ::core::ffi::c_int;
+}
+pub type fpos_t = __darwin_off_t;
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct __sbuf {
+    pub _base: *mut ::core::ffi::c_uchar,
+    pub _size: ::core::ffi::c_int,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of __sbuf"][::core::mem::size_of::<__sbuf>() - 16usize];
+    ["Alignment of __sbuf"][::core::mem::align_of::<__sbuf>() - 8usize];
+    ["Offset of field: __sbuf::_base"][::core::mem::offset_of!(__sbuf, _base) - 0usize];
+    ["Offset of field: __sbuf::_size"][::core::mem::offset_of!(__sbuf, _size) - 8usize];
+};
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct __sFILEX {
+    _unused: [u8; 0],
+}
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct __sFILE {
+    pub _p: *mut ::core::ffi::c_uchar,
+    pub _r: ::core::ffi::c_int,
+    pub _w: ::core::ffi::c_int,
+    pub _flags: ::core::ffi::c_short,
+    pub _file: ::core::ffi::c_short,
+    pub _bf: __sbuf,
+    pub _lbfsize: ::core::ffi::c_int,
+    pub _cookie: *mut ::core::ffi::c_void,
+    pub _close: ::core::option::Option<
+        unsafe extern "C" fn(arg1: *mut ::core::ffi::c_void) -> ::core::ffi::c_int,
+    >,
+    pub _read: ::core::option::Option<
+        unsafe extern "C" fn(
+            arg1: *mut ::core::ffi::c_void,
+            arg2: *mut ::core::ffi::c_char,
+            arg3: ::core::ffi::c_int,
+        ) -> ::core::ffi::c_int,
+    >,
+    pub _seek: ::core::option::Option<
+        unsafe extern "C" fn(
+            arg1: *mut ::core::ffi::c_void,
+            arg2: fpos_t,
+            arg3: ::core::ffi::c_int,
+        ) -> fpos_t,
+    >,
+    pub _write: ::core::option::Option<
+        unsafe extern "C" fn(
+            arg1: *mut ::core::ffi::c_void,
+            arg2: *const ::core::ffi::c_char,
+            arg3: ::core::ffi::c_int,
+        ) -> ::core::ffi::c_int,
+    >,
+    pub _ub: __sbuf,
+    pub _extra: *mut __sFILEX,
+    pub _ur: ::core::ffi::c_int,
+    pub _ubuf: [::core::ffi::c_uchar; 3usize],
+    pub _nbuf: [::core::ffi::c_uchar; 1usize],
+    pub _lb: __sbuf,
+    pub _blksize: ::core::ffi::c_int,
+    pub _offset: fpos_t,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of __sFILE"][::core::mem::size_of::<__sFILE>() - 152usize];
+    ["Alignment of __sFILE"][::core::mem::align_of::<__sFILE>() - 8usize];
+    ["Offset of field: __sFILE::_p"][::core::mem::offset_of!(__sFILE, _p) - 0usize];
+    ["Offset of field: __sFILE::_r"][::core::mem::offset_of!(__sFILE, _r) - 8usize];
+    ["Offset of field: __sFILE::_w"][::core::mem::offset_of!(__sFILE, _w) - 12usize];
+    ["Offset of field: __sFILE::_flags"][::core::mem::offset_of!(__sFILE, _flags) - 16usize];
+    ["Offset of field: __sFILE::_file"][::core::mem::offset_of!(__sFILE, _file) - 18usize];
+    ["Offset of field: __sFILE::_bf"][::core::mem::offset_of!(__sFILE, _bf) - 24usize];
+    ["Offset of field: __sFILE::_lbfsize"][::core::mem::offset_of!(__sFILE, _lbfsize) - 40usize];
+    ["Offset of field: __sFILE::_cookie"][::core::mem::offset_of!(__sFILE, _cookie) - 48usize];
+    ["Offset of field: __sFILE::_close"][::core::mem::offset_of!(__sFILE, _close) - 56usize];
+    ["Offset of field: __sFILE::_read"][::core::mem::offset_of!(__sFILE, _read) - 64usize];
+    ["Offset of field: __sFILE::_seek"][::core::mem::offset_of!(__sFILE, _seek) - 72usize];
+    ["Offset of field: __sFILE::_write"][::core::mem::offset_of!(__sFILE, _write) - 80usize];
+    ["Offset of field: __sFILE::_ub"][::core::mem::offset_of!(__sFILE, _ub) - 88usize];
+    ["Offset of field: __sFILE::_extra"][::core::mem::offset_of!(__sFILE, _extra) - 104usize];
+    ["Offset of field: __sFILE::_ur"][::core::mem::offset_of!(__sFILE, _ur) - 112usize];
+    ["Offset of field: __sFILE::_ubuf"][::core::mem::offset_of!(__sFILE, _ubuf) - 116usize];
+    ["Offset of field: __sFILE::_nbuf"][::core::mem::offset_of!(__sFILE, _nbuf) - 119usize];
+    ["Offset of field: __sFILE::_lb"][::core::mem::offset_of!(__sFILE, _lb) - 120usize];
+    ["Offset of field: __sFILE::_blksize"][::core::mem::offset_of!(__sFILE, _blksize) - 136usize];
+    ["Offset of field: __sFILE::_offset"][::core::mem::offset_of!(__sFILE, _offset) - 144usize];
+};
+pub type FILE = __sFILE;
+unsafe extern "C" {
+    pub static mut __stdinp: *mut FILE;
+}
+unsafe extern "C" {
+    pub static mut __stdoutp: *mut FILE;
+}
+unsafe extern "C" {
+    pub static mut __stderrp: *mut FILE;
+}
+unsafe extern "C" {
+    pub fn clearerr(arg1: *mut FILE);
+}
+unsafe extern "C" {
+    pub fn fclose(arg1: *mut FILE) -> ::core::ffi::c_int;
+}
+unsafe extern "C" {
+    pub fn feof(arg1: *mut FILE) -> ::core::ffi::c_int;
+}
+unsafe extern "C" {
+    pub fn ferror(arg1: *mut FILE) -> ::core::ffi::c_int;
+}
+unsafe extern "C" {
+    pub fn fflush(arg1: *mut FILE) -> ::core::ffi::c_int;
+}
+unsafe extern "C" {
+    pub fn fgetc(arg1: *mut FILE) -> ::core::ffi::c_int;
+}
+unsafe extern "C" {
+    pub fn fgetpos(arg1: *mut FILE, arg2: *mut fpos_t) -> ::core::ffi::c_int;
+}
+unsafe extern "C" {
+    pub fn fgets(
+        arg1: *mut ::core::ffi::c_char,
+        arg2: ::core::ffi::c_int,
+        arg3: *mut FILE,
+    ) -> *mut ::core::ffi::c_char;
+}
+unsafe extern "C" {
+    pub fn fopen(
+        __filename: *const ::core::ffi::c_char,
+        __mode: *const ::core::ffi::c_char,
+    ) -> *mut FILE;
+}
+unsafe extern "C" {
+    pub fn fprintf(arg1: *mut FILE, arg2: *const ::core::ffi::c_char, ...) -> ::core::ffi::c_int;
+}
+unsafe extern "C" {
+    pub fn fputc(arg1: ::core::ffi::c_int, arg2: *mut FILE) -> ::core::ffi::c_int;
+}
+unsafe extern "C" {
+    pub fn fputs(arg1: *const ::core::ffi::c_char, arg2: *mut FILE) -> ::core::ffi::c_int;
+}
+unsafe extern "C" {
+    pub fn fread(
+        __ptr: *mut ::core::ffi::c_void,
+        __size: ::core::ffi::c_ulong,
+        __nitems: ::core::ffi::c_ulong,
+        __stream: *mut FILE,
+    ) -> ::core::ffi::c_ulong;
+}
+unsafe extern "C" {
+    pub fn freopen(
+        arg1: *const ::core::ffi::c_char,
+        arg2: *const ::core::ffi::c_char,
+        arg3: *mut FILE,
+    ) -> *mut FILE;
+}
+unsafe extern "C" {
+    pub fn fscanf(arg1: *mut FILE, arg2: *const ::core::ffi::c_char, ...) -> ::core::ffi::c_int;
+}
+unsafe extern "C" {
+    pub fn fseek(
+        arg1: *mut FILE,
+        arg2: ::core::ffi::c_long,
+        arg3: ::core::ffi::c_int,
+    ) -> ::core::ffi::c_int;
+}
+unsafe extern "C" {
+    pub fn fsetpos(arg1: *mut FILE, arg2: *const fpos_t) -> ::core::ffi::c_int;
+}
+unsafe extern "C" {
+    pub fn ftell(arg1: *mut FILE) -> ::core::ffi::c_long;
+}
+unsafe extern "C" {
+    pub fn fwrite(
+        __ptr: *const ::core::ffi::c_void,
+        __size: ::core::ffi::c_ulong,
+        __nitems: ::core::ffi::c_ulong,
+        __stream: *mut FILE,
+    ) -> ::core::ffi::c_ulong;
+}
+unsafe extern "C" {
+    pub fn getc(arg1: *mut FILE) -> ::core::ffi::c_int;
+}
+unsafe extern "C" {
+    pub fn getchar() -> ::core::ffi::c_int;
+}
+unsafe extern "C" {
+    pub fn gets(arg1: *mut ::core::ffi::c_char) -> *mut ::core::ffi::c_char;
+}
+unsafe extern "C" {
+    pub fn perror(arg1: *const ::core::ffi::c_char);
+}
+unsafe extern "C" {
+    pub fn putc(arg1: ::core::ffi::c_int, arg2: *mut FILE) -> ::core::ffi::c_int;
+}
+unsafe extern "C" {
+    pub fn putchar(arg1: ::core::ffi::c_int) -> ::core::ffi::c_int;
+}
+unsafe extern "C" {
+    pub fn puts(arg1: *const ::core::ffi::c_char) -> ::core::ffi::c_int;
+}
+unsafe extern "C" {
+    pub fn remove(arg1: *const ::core::ffi::c_char) -> ::core::ffi::c_int;
+}
+unsafe extern "C" {
+    pub fn rename(
+        __old: *const ::core::ffi::c_char,
+        __new: *const ::core::ffi::c_char,
+    ) -> ::core::ffi::c_int;
+}
+unsafe extern "C" {
+    pub fn rewind(arg1: *mut FILE);
+}
+unsafe extern "C" {
+    pub fn scanf(arg1: *const ::core::ffi::c_char, ...) -> ::core::ffi::c_int;
+}
+unsafe extern "C" {
+    pub fn setbuf(arg1: *mut FILE, arg2: *mut ::core::ffi::c_char);
+}
+unsafe extern "C" {
+    pub fn setvbuf(
+        arg1: *mut FILE,
+        arg2: *mut ::core::ffi::c_char,
+        arg3: ::core::ffi::c_int,
+        arg4: usize,
+    ) -> ::core::ffi::c_int;
+}
+unsafe extern "C" {
+    pub fn sprintf(
+        arg1: *mut ::core::ffi::c_char,
+        arg2: *const ::core::ffi::c_char,
+        ...
+    ) -> ::core::ffi::c_int;
+}
+unsafe extern "C" {
+    pub fn sscanf(
+        arg1: *const ::core::ffi::c_char,
+        arg2: *const ::core::ffi::c_char,
+        ...
+    ) -> ::core::ffi::c_int;
+}
+unsafe extern "C" {
+    pub fn tmpfile() -> *mut FILE;
+}
+unsafe extern "C" {
+    pub fn tmpnam(arg1: *mut ::core::ffi::c_char) -> *mut ::core::ffi::c_char;
+}
+unsafe extern "C" {
+    pub fn ungetc(arg1: ::core::ffi::c_int, arg2: *mut FILE) -> ::core::ffi::c_int;
+}
+unsafe extern "C" {
+    pub fn vfprintf(
+        arg1: *mut FILE,
+        arg2: *const ::core::ffi::c_char,
+        arg3: __builtin_va_list,
+    ) -> ::core::ffi::c_int;
+}
+unsafe extern "C" {
+    pub fn vprintf(arg1: *const ::core::ffi::c_char, arg2: __builtin_va_list)
+        -> ::core::ffi::c_int;
+}
+unsafe extern "C" {
+    pub fn vsprintf(
+        arg1: *mut ::core::ffi::c_char,
+        arg2: *const ::core::ffi::c_char,
+        arg3: __builtin_va_list,
+    ) -> ::core::ffi::c_int;
+}
+unsafe extern "C" {
+    pub fn ctermid(arg1: *mut ::core::ffi::c_char) -> *mut ::core::ffi::c_char;
+}
+unsafe extern "C" {
+    pub fn fdopen(arg1: ::core::ffi::c_int, arg2: *const ::core::ffi::c_char) -> *mut FILE;
+}
+unsafe extern "C" {
+    pub fn fileno(arg1: *mut FILE) -> ::core::ffi::c_int;
+}
+unsafe extern "C" {
+    pub fn pclose(arg1: *mut FILE) -> ::core::ffi::c_int;
+}
+unsafe extern "C" {
+    pub fn popen(arg1: *const ::core::ffi::c_char, arg2: *const ::core::ffi::c_char) -> *mut FILE;
+}
+unsafe extern "C" {
+    pub fn __srget(arg1: *mut FILE) -> ::core::ffi::c_int;
+}
+unsafe extern "C" {
+    pub fn __svfscanf(
+        arg1: *mut FILE,
+        arg2: *const ::core::ffi::c_char,
+        arg3: va_list,
+    ) -> ::core::ffi::c_int;
+}
+unsafe extern "C" {
+    pub fn __swbuf(arg1: ::core::ffi::c_int, arg2: *mut FILE) -> ::core::ffi::c_int;
+}
+unsafe extern "C" {
+    pub fn flockfile(arg1: *mut FILE);
+}
+unsafe extern "C" {
+    pub fn ftrylockfile(arg1: *mut FILE) -> ::core::ffi::c_int;
+}
+unsafe extern "C" {
+    pub fn funlockfile(arg1: *mut FILE);
+}
+unsafe extern "C" {
+    pub fn getc_unlocked(arg1: *mut FILE) -> ::core::ffi::c_int;
+}
+unsafe extern "C" {
+    pub fn getchar_unlocked() -> ::core::ffi::c_int;
+}
+unsafe extern "C" {
+    pub fn putc_unlocked(arg1: ::core::ffi::c_int, arg2: *mut FILE) -> ::core::ffi::c_int;
+}
+unsafe extern "C" {
+    pub fn putchar_unlocked(arg1: ::core::ffi::c_int) -> ::core::ffi::c_int;
+}
+unsafe extern "C" {
+    pub fn getw(arg1: *mut FILE) -> ::core::ffi::c_int;
+}
+unsafe extern "C" {
+    pub fn putw(arg1: ::core::ffi::c_int, arg2: *mut FILE) -> ::core::ffi::c_int;
+}
+unsafe extern "C" {
+    pub fn tempnam(
+        __dir: *const ::core::ffi::c_char,
+        __prefix: *const ::core::ffi::c_char,
+    ) -> *mut ::core::ffi::c_char;
+}
+pub type off_t = __darwin_off_t;
+unsafe extern "C" {
+    pub fn fseeko(
+        __stream: *mut FILE,
+        __offset: off_t,
+        __whence: ::core::ffi::c_int,
+    ) -> ::core::ffi::c_int;
+}
+unsafe extern "C" {
+    pub fn ftello(__stream: *mut FILE) -> off_t;
+}
+unsafe extern "C" {
+    pub fn snprintf(
+        __str: *mut ::core::ffi::c_char,
+        __size: ::core::ffi::c_ulong,
+        __format: *const ::core::ffi::c_char,
+        ...
+    ) -> ::core::ffi::c_int;
+}
+unsafe extern "C" {
+    pub fn vfscanf(
+        __stream: *mut FILE,
+        __format: *const ::core::ffi::c_char,
+        arg1: __builtin_va_list,
+    ) -> ::core::ffi::c_int;
+}
+unsafe extern "C" {
+    pub fn vscanf(
+        __format: *const ::core::ffi::c_char,
+        arg1: __builtin_va_list,
+    ) -> ::core::ffi::c_int;
+}
+unsafe extern "C" {
+    pub fn vsnprintf(
+        __str: *mut ::core::ffi::c_char,
+        __size: ::core::ffi::c_ulong,
+        __format: *const ::core::ffi::c_char,
+        arg1: __builtin_va_list,
+    ) -> ::core::ffi::c_int;
+}
+unsafe extern "C" {
+    pub fn vsscanf(
+        __str: *const ::core::ffi::c_char,
+        __format: *const ::core::ffi::c_char,
+        arg1: __builtin_va_list,
+    ) -> ::core::ffi::c_int;
+}
+unsafe extern "C" {
+    pub fn dprintf(
+        arg1: ::core::ffi::c_int,
+        arg2: *const ::core::ffi::c_char,
+        ...
+    ) -> ::core::ffi::c_int;
+}
+unsafe extern "C" {
+    pub fn vdprintf(
+        arg1: ::core::ffi::c_int,
+        arg2: *const ::core::ffi::c_char,
+        arg3: va_list,
+    ) -> ::core::ffi::c_int;
+}
+unsafe extern "C" {
+    pub fn getdelim(
+        __linep: *mut *mut ::core::ffi::c_char,
+        __linecapp: *mut usize,
+        __delimiter: ::core::ffi::c_int,
+        __stream: *mut FILE,
+    ) -> isize;
+}
+unsafe extern "C" {
+    pub fn getline(
+        __linep: *mut *mut ::core::ffi::c_char,
+        __linecapp: *mut usize,
+        __stream: *mut FILE,
+    ) -> isize;
+}
+unsafe extern "C" {
+    pub fn fmemopen(
+        __buf: *mut ::core::ffi::c_void,
+        __size: usize,
+        __mode: *const ::core::ffi::c_char,
+    ) -> *mut FILE;
+}
+unsafe extern "C" {
+    pub fn open_memstream(__bufp: *mut *mut ::core::ffi::c_char, __sizep: *mut usize) -> *mut FILE;
+}
+unsafe extern "C" {
+    pub static sys_nerr: ::core::ffi::c_int;
+}
+unsafe extern "C" {
+    pub static sys_errlist: [*const ::core::ffi::c_char; 0usize];
+}
+unsafe extern "C" {
+    pub fn asprintf(
+        arg1: *mut *mut ::core::ffi::c_char,
+        arg2: *const ::core::ffi::c_char,
+        ...
+    ) -> ::core::ffi::c_int;
+}
+unsafe extern "C" {
+    pub fn ctermid_r(arg1: *mut ::core::ffi::c_char) -> *mut ::core::ffi::c_char;
+}
+unsafe extern "C" {
+    pub fn fgetln(arg1: *mut FILE, arg2: *mut usize) -> *mut ::core::ffi::c_char;
+}
+unsafe extern "C" {
+    pub fn fmtcheck(
+        arg1: *const ::core::ffi::c_char,
+        arg2: *const ::core::ffi::c_char,
+    ) -> *const ::core::ffi::c_char;
+}
+unsafe extern "C" {
+    pub fn fpurge(arg1: *mut FILE) -> ::core::ffi::c_int;
+}
+unsafe extern "C" {
+    pub fn setbuffer(arg1: *mut FILE, arg2: *mut ::core::ffi::c_char, arg3: ::core::ffi::c_int);
+}
+unsafe extern "C" {
+    pub fn setlinebuf(arg1: *mut FILE) -> ::core::ffi::c_int;
+}
+unsafe extern "C" {
+    pub fn vasprintf(
+        arg1: *mut *mut ::core::ffi::c_char,
+        arg2: *const ::core::ffi::c_char,
+        arg3: va_list,
+    ) -> ::core::ffi::c_int;
+}
+unsafe extern "C" {
+    pub fn funopen(
+        arg1: *const ::core::ffi::c_void,
+        arg2: ::core::option::Option<
+            unsafe extern "C" fn(
+                arg1: *mut ::core::ffi::c_void,
+                arg2: *mut ::core::ffi::c_char,
+                arg3: ::core::ffi::c_int,
+            ) -> ::core::ffi::c_int,
+        >,
+        arg3: ::core::option::Option<
+            unsafe extern "C" fn(
+                arg1: *mut ::core::ffi::c_void,
+                arg2: *const ::core::ffi::c_char,
+                arg3: ::core::ffi::c_int,
+            ) -> ::core::ffi::c_int,
+        >,
+        arg4: ::core::option::Option<
+            unsafe extern "C" fn(
+                arg1: *mut ::core::ffi::c_void,
+                arg2: fpos_t,
+                arg3: ::core::ffi::c_int,
+            ) -> fpos_t,
+        >,
+        arg5: ::core::option::Option<
+            unsafe extern "C" fn(arg1: *mut ::core::ffi::c_void) -> ::core::ffi::c_int,
+        >,
+    ) -> *mut FILE;
+}
+unsafe extern "C" {
+    pub fn __sprintf_chk(
+        arg1: *mut ::core::ffi::c_char,
+        arg2: ::core::ffi::c_int,
+        arg3: usize,
+        arg4: *const ::core::ffi::c_char,
+        ...
+    ) -> ::core::ffi::c_int;
+}
+unsafe extern "C" {
+    pub fn __snprintf_chk(
+        arg1: *mut ::core::ffi::c_char,
+        arg2: usize,
+        arg3: ::core::ffi::c_int,
+        arg4: usize,
+        arg5: *const ::core::ffi::c_char,
+        ...
+    ) -> ::core::ffi::c_int;
+}
+unsafe extern "C" {
+    pub fn __vsprintf_chk(
+        arg1: *mut ::core::ffi::c_char,
+        arg2: ::core::ffi::c_int,
+        arg3: usize,
+        arg4: *const ::core::ffi::c_char,
+        arg5: va_list,
+    ) -> ::core::ffi::c_int;
+}
+unsafe extern "C" {
+    pub fn __vsnprintf_chk(
+        arg1: *mut ::core::ffi::c_char,
+        arg2: usize,
+        arg3: ::core::ffi::c_int,
+        arg4: usize,
+        arg5: *const ::core::ffi::c_char,
+        arg6: va_list,
+    ) -> ::core::ffi::c_int;
 }
 #[repr(C)]
 #[derive(Copy, Clone)]
@@ -6879,29 +6647,29 @@ const _: () = {
 };
 #[allow(clippy::unnecessary_operation, clippy::identity_op)]
 const _: () = {
-    ["Size of _z_link_t"][::core::mem::size_of::<_z_link_t>() - 240usize];
+    ["Size of _z_link_t"][::core::mem::size_of::<_z_link_t>() - 208usize];
     ["Alignment of _z_link_t"][::core::mem::align_of::<_z_link_t>() - 8usize];
     ["Offset of field: _z_link_t::_endpoint"]
         [::core::mem::offset_of!(_z_link_t, _endpoint) - 0usize];
-    ["Offset of field: _z_link_t::_type"][::core::mem::offset_of!(_z_link_t, _type) - 128usize];
-    ["Offset of field: _z_link_t::_socket"][::core::mem::offset_of!(_z_link_t, _socket) - 136usize];
-    ["Offset of field: _z_link_t::_open_f"][::core::mem::offset_of!(_z_link_t, _open_f) - 160usize];
+    ["Offset of field: _z_link_t::_type"][::core::mem::offset_of!(_z_link_t, _type) - 96usize];
+    ["Offset of field: _z_link_t::_socket"][::core::mem::offset_of!(_z_link_t, _socket) - 104usize];
+    ["Offset of field: _z_link_t::_open_f"][::core::mem::offset_of!(_z_link_t, _open_f) - 128usize];
     ["Offset of field: _z_link_t::_listen_f"]
-        [::core::mem::offset_of!(_z_link_t, _listen_f) - 168usize];
+        [::core::mem::offset_of!(_z_link_t, _listen_f) - 136usize];
     ["Offset of field: _z_link_t::_close_f"]
-        [::core::mem::offset_of!(_z_link_t, _close_f) - 176usize];
+        [::core::mem::offset_of!(_z_link_t, _close_f) - 144usize];
     ["Offset of field: _z_link_t::_write_f"]
-        [::core::mem::offset_of!(_z_link_t, _write_f) - 184usize];
+        [::core::mem::offset_of!(_z_link_t, _write_f) - 152usize];
     ["Offset of field: _z_link_t::_write_all_f"]
-        [::core::mem::offset_of!(_z_link_t, _write_all_f) - 192usize];
-    ["Offset of field: _z_link_t::_read_f"][::core::mem::offset_of!(_z_link_t, _read_f) - 200usize];
+        [::core::mem::offset_of!(_z_link_t, _write_all_f) - 160usize];
+    ["Offset of field: _z_link_t::_read_f"][::core::mem::offset_of!(_z_link_t, _read_f) - 168usize];
     ["Offset of field: _z_link_t::_read_exact_f"]
-        [::core::mem::offset_of!(_z_link_t, _read_exact_f) - 208usize];
+        [::core::mem::offset_of!(_z_link_t, _read_exact_f) - 176usize];
     ["Offset of field: _z_link_t::_read_socket_f"]
-        [::core::mem::offset_of!(_z_link_t, _read_socket_f) - 216usize];
-    ["Offset of field: _z_link_t::_free_f"][::core::mem::offset_of!(_z_link_t, _free_f) - 224usize];
-    ["Offset of field: _z_link_t::_mtu"][::core::mem::offset_of!(_z_link_t, _mtu) - 232usize];
-    ["Offset of field: _z_link_t::_cap"][::core::mem::offset_of!(_z_link_t, _cap) - 234usize];
+        [::core::mem::offset_of!(_z_link_t, _read_socket_f) - 184usize];
+    ["Offset of field: _z_link_t::_free_f"][::core::mem::offset_of!(_z_link_t, _free_f) - 192usize];
+    ["Offset of field: _z_link_t::_mtu"][::core::mem::offset_of!(_z_link_t, _mtu) - 200usize];
+    ["Offset of field: _z_link_t::_cap"][::core::mem::offset_of!(_z_link_t, _cap) - 202usize];
 };
 unsafe extern "C" {
     pub fn _z_link_clear(zl: *mut _z_link_t);
@@ -7548,12 +7316,6 @@ pub type _z_transport_peer_multicast_eq_f = ::core::option::Option<
         right: *const _z_transport_peer_multicast_t,
     ) -> bool,
 >;
-pub type _z_transport_peer_multicast_cmp_f = ::core::option::Option<
-    unsafe extern "C" fn(
-        left: *const _z_transport_peer_multicast_t,
-        right: *const _z_transport_peer_multicast_t,
-    ) -> ::core::ffi::c_int,
->;
 pub type _z_transport_peer_multicast_slist_t = _z_slist_t;
 pub const _z_unicast_peer_flow_state_e__Z_FLOW_STATE_INACTIVE: _z_unicast_peer_flow_state_e = 0;
 pub const _z_unicast_peer_flow_state_e__Z_FLOW_STATE_PENDING_SIZE: _z_unicast_peer_flow_state_e = 1;
@@ -7619,12 +7381,6 @@ pub type _z_transport_peer_unicast_eq_f = ::core::option::Option<
         right: *const _z_transport_peer_unicast_t,
     ) -> bool,
 >;
-pub type _z_transport_peer_unicast_cmp_f = ::core::option::Option<
-    unsafe extern "C" fn(
-        left: *const _z_transport_peer_unicast_t,
-        right: *const _z_transport_peer_unicast_t,
-    ) -> ::core::ffi::c_int,
->;
 pub type _z_transport_peer_unicast_slist_t = _z_slist_t;
 pub type _z_session_rc_ref_t = _z_session_rc_t;
 #[repr(C)]
@@ -7652,7 +7408,7 @@ pub struct _z_transport_common_t {
 }
 #[allow(clippy::unnecessary_operation, clippy::identity_op)]
 const _: () = {
-    ["Size of _z_transport_common_t"][::core::mem::size_of::<_z_transport_common_t>() - 624usize];
+    ["Size of _z_transport_common_t"][::core::mem::size_of::<_z_transport_common_t>() - 592usize];
     ["Alignment of _z_transport_common_t"]
         [::core::mem::align_of::<_z_transport_common_t>() - 8usize];
     ["Offset of field: _z_transport_common_t::_session"]
@@ -7660,39 +7416,39 @@ const _: () = {
     ["Offset of field: _z_transport_common_t::_link"]
         [::core::mem::offset_of!(_z_transport_common_t, _link) - 8usize];
     ["Offset of field: _z_transport_common_t::_wbuf"]
-        [::core::mem::offset_of!(_z_transport_common_t, _wbuf) - 248usize];
+        [::core::mem::offset_of!(_z_transport_common_t, _wbuf) - 216usize];
     ["Offset of field: _z_transport_common_t::_zbuf"]
-        [::core::mem::offset_of!(_z_transport_common_t, _zbuf) - 304usize];
+        [::core::mem::offset_of!(_z_transport_common_t, _zbuf) - 272usize];
     ["Offset of field: _z_transport_common_t::_sn_res"]
-        [::core::mem::offset_of!(_z_transport_common_t, _sn_res) - 352usize];
+        [::core::mem::offset_of!(_z_transport_common_t, _sn_res) - 320usize];
     ["Offset of field: _z_transport_common_t::_sn_tx_reliable"]
-        [::core::mem::offset_of!(_z_transport_common_t, _sn_tx_reliable) - 360usize];
+        [::core::mem::offset_of!(_z_transport_common_t, _sn_tx_reliable) - 328usize];
     ["Offset of field: _z_transport_common_t::_sn_tx_best_effort"]
-        [::core::mem::offset_of!(_z_transport_common_t, _sn_tx_best_effort) - 368usize];
+        [::core::mem::offset_of!(_z_transport_common_t, _sn_tx_best_effort) - 336usize];
     ["Offset of field: _z_transport_common_t::_lease"]
-        [::core::mem::offset_of!(_z_transport_common_t, _lease) - 376usize];
+        [::core::mem::offset_of!(_z_transport_common_t, _lease) - 344usize];
     ["Offset of field: _z_transport_common_t::_transmitted"]
-        [::core::mem::offset_of!(_z_transport_common_t, _transmitted) - 384usize];
+        [::core::mem::offset_of!(_z_transport_common_t, _transmitted) - 352usize];
     ["Offset of field: _z_transport_common_t::_mutex_rx"]
-        [::core::mem::offset_of!(_z_transport_common_t, _mutex_rx) - 392usize];
+        [::core::mem::offset_of!(_z_transport_common_t, _mutex_rx) - 360usize];
     ["Offset of field: _z_transport_common_t::_mutex_tx"]
-        [::core::mem::offset_of!(_z_transport_common_t, _mutex_tx) - 456usize];
+        [::core::mem::offset_of!(_z_transport_common_t, _mutex_tx) - 424usize];
     ["Offset of field: _z_transport_common_t::_mutex_peer"]
-        [::core::mem::offset_of!(_z_transport_common_t, _mutex_peer) - 520usize];
+        [::core::mem::offset_of!(_z_transport_common_t, _mutex_peer) - 488usize];
     ["Offset of field: _z_transport_common_t::_read_task"]
-        [::core::mem::offset_of!(_z_transport_common_t, _read_task) - 584usize];
+        [::core::mem::offset_of!(_z_transport_common_t, _read_task) - 552usize];
     ["Offset of field: _z_transport_common_t::_lease_task"]
-        [::core::mem::offset_of!(_z_transport_common_t, _lease_task) - 592usize];
+        [::core::mem::offset_of!(_z_transport_common_t, _lease_task) - 560usize];
     ["Offset of field: _z_transport_common_t::_accept_task_running"]
-        [::core::mem::offset_of!(_z_transport_common_t, _accept_task_running) - 600usize];
+        [::core::mem::offset_of!(_z_transport_common_t, _accept_task_running) - 568usize];
     ["Offset of field: _z_transport_common_t::_read_task_running"]
-        [::core::mem::offset_of!(_z_transport_common_t, _read_task_running) - 608usize];
+        [::core::mem::offset_of!(_z_transport_common_t, _read_task_running) - 576usize];
     ["Offset of field: _z_transport_common_t::_lease_task_running"]
-        [::core::mem::offset_of!(_z_transport_common_t, _lease_task_running) - 609usize];
+        [::core::mem::offset_of!(_z_transport_common_t, _lease_task_running) - 577usize];
     ["Offset of field: _z_transport_common_t::_batch_state"]
-        [::core::mem::offset_of!(_z_transport_common_t, _batch_state) - 610usize];
+        [::core::mem::offset_of!(_z_transport_common_t, _batch_state) - 578usize];
     ["Offset of field: _z_transport_common_t::_batch_count"]
-        [::core::mem::offset_of!(_z_transport_common_t, _batch_count) - 616usize];
+        [::core::mem::offset_of!(_z_transport_common_t, _batch_count) - 584usize];
 };
 pub type _zp_f_send_tmsg = ::core::option::Option<
     unsafe extern "C" fn(
@@ -7708,13 +7464,13 @@ pub struct _z_transport_unicast_t {
 }
 #[allow(clippy::unnecessary_operation, clippy::identity_op)]
 const _: () = {
-    ["Size of _z_transport_unicast_t"][::core::mem::size_of::<_z_transport_unicast_t>() - 632usize];
+    ["Size of _z_transport_unicast_t"][::core::mem::size_of::<_z_transport_unicast_t>() - 600usize];
     ["Alignment of _z_transport_unicast_t"]
         [::core::mem::align_of::<_z_transport_unicast_t>() - 8usize];
     ["Offset of field: _z_transport_unicast_t::_common"]
         [::core::mem::offset_of!(_z_transport_unicast_t, _common) - 0usize];
     ["Offset of field: _z_transport_unicast_t::_peers"]
-        [::core::mem::offset_of!(_z_transport_unicast_t, _peers) - 624usize];
+        [::core::mem::offset_of!(_z_transport_unicast_t, _peers) - 592usize];
 };
 #[repr(C)]
 #[derive(Copy, Clone)]
@@ -7726,15 +7482,15 @@ pub struct _z_transport_multicast_t {
 #[allow(clippy::unnecessary_operation, clippy::identity_op)]
 const _: () = {
     ["Size of _z_transport_multicast_t"]
-        [::core::mem::size_of::<_z_transport_multicast_t>() - 640usize];
+        [::core::mem::size_of::<_z_transport_multicast_t>() - 608usize];
     ["Alignment of _z_transport_multicast_t"]
         [::core::mem::align_of::<_z_transport_multicast_t>() - 8usize];
     ["Offset of field: _z_transport_multicast_t::_common"]
         [::core::mem::offset_of!(_z_transport_multicast_t, _common) - 0usize];
     ["Offset of field: _z_transport_multicast_t::_peers"]
-        [::core::mem::offset_of!(_z_transport_multicast_t, _peers) - 624usize];
+        [::core::mem::offset_of!(_z_transport_multicast_t, _peers) - 592usize];
     ["Offset of field: _z_transport_multicast_t::_send_f"]
-        [::core::mem::offset_of!(_z_transport_multicast_t, _send_f) - 632usize];
+        [::core::mem::offset_of!(_z_transport_multicast_t, _send_f) - 600usize];
 };
 #[repr(C)]
 #[derive(Copy, Clone)]
@@ -7752,7 +7508,7 @@ pub union _z_transport_t__bindgen_ty_1 {
 #[allow(clippy::unnecessary_operation, clippy::identity_op)]
 const _: () = {
     ["Size of _z_transport_t__bindgen_ty_1"]
-        [::core::mem::size_of::<_z_transport_t__bindgen_ty_1>() - 640usize];
+        [::core::mem::size_of::<_z_transport_t__bindgen_ty_1>() - 608usize];
     ["Alignment of _z_transport_t__bindgen_ty_1"]
         [::core::mem::align_of::<_z_transport_t__bindgen_ty_1>() - 8usize];
     ["Offset of field: _z_transport_t__bindgen_ty_1::_unicast"]
@@ -7769,12 +7525,12 @@ pub const _z_transport_t__Z_TRANSPORT_NONE: _z_transport_t__bindgen_ty_2 = 3;
 pub type _z_transport_t__bindgen_ty_2 = ::core::ffi::c_uint;
 #[allow(clippy::unnecessary_operation, clippy::identity_op)]
 const _: () = {
-    ["Size of _z_transport_t"][::core::mem::size_of::<_z_transport_t>() - 648usize];
+    ["Size of _z_transport_t"][::core::mem::size_of::<_z_transport_t>() - 616usize];
     ["Alignment of _z_transport_t"][::core::mem::align_of::<_z_transport_t>() - 8usize];
     ["Offset of field: _z_transport_t::_transport"]
         [::core::mem::offset_of!(_z_transport_t, _transport) - 0usize];
     ["Offset of field: _z_transport_t::_type"]
-        [::core::mem::offset_of!(_z_transport_t, _type) - 640usize];
+        [::core::mem::offset_of!(_z_transport_t, _type) - 608usize];
 };
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
@@ -7929,26 +7685,14 @@ unsafe extern "C" {
 pub type _z_resource_eq_f = ::core::option::Option<
     unsafe extern "C" fn(left: *const _z_resource_t, right: *const _z_resource_t) -> bool,
 >;
-pub type _z_resource_cmp_f = ::core::option::Option<
-    unsafe extern "C" fn(
-        left: *const _z_resource_t,
-        right: *const _z_resource_t,
-    ) -> ::core::ffi::c_int,
->;
 pub type _z_keyexpr_eq_f = ::core::option::Option<
     unsafe extern "C" fn(left: *const _z_keyexpr_t, right: *const _z_keyexpr_t) -> bool,
 >;
-pub type _z_keyexpr_cmp_f = ::core::option::Option<
-    unsafe extern "C" fn(
-        left: *const _z_keyexpr_t,
-        right: *const _z_keyexpr_t,
-    ) -> ::core::ffi::c_int,
->;
-#[doc = " A hashmap entry with generic keys.\n\n Members:\n   void *_key: the key of the entry\n   void *_val: the value of the entry"]
+#[doc = " An entry of a hashmap with integer keys.\n\n Members:\n   size_t key: the hashed key of the value\n   void *value: the value"]
 pub type _z_keyexpr_intmap_entry_t = _z_int_void_map_entry_t;
-#[doc = " A hashmap with generic keys.\n\n Members:\n    size_t _capacity: the number of buckets available in the hashmap\n   _z_list_t **_vals: the linked list containing the values\n   z_element_hash_f _f_hash: the hash function used to hash keys\n   z_element_eq_f _f_equals: the function used to compare keys for equality"]
+#[doc = " An hashmap with integer keys.\n\n Members:\n   z_intmap_t **vals: the linked intmap containing the values\n   size_t capacity: the capacity of the hashmap\n   size_t len: the actual length of the hashmap"]
 pub type _z_keyexpr_intmap_t = _z_int_void_map_t;
-#[doc = " Iterator for a generic key-value hashmap."]
+#[doc = " An iterator of an hashmap with integer keys."]
 pub type _z_keyexpr_intmap_iterator_t = _z_int_void_map_iterator_t;
 #[doc = " The callback signature of the functions handling data messages."]
 pub type _z_closure_sample_callback_t = ::core::option::Option<
@@ -7986,7 +7730,7 @@ const _: () = {
 };
 unsafe extern "C" {
     pub fn _z_subscription_eq(one: *const _z_subscription_t, two: *const _z_subscription_t)
-    -> bool;
+        -> bool;
 }
 unsafe extern "C" {
     pub fn _z_subscription_clear(sub: *mut _z_subscription_t);
@@ -8025,23 +7769,11 @@ const _: () = {
 pub type _z_subscriber_eq_f = ::core::option::Option<
     unsafe extern "C" fn(left: *const _z_subscription_t, right: *const _z_subscription_t) -> bool,
 >;
-pub type _z_subscriber_cmp_f = ::core::option::Option<
-    unsafe extern "C" fn(
-        left: *const _z_subscription_t,
-        right: *const _z_subscription_t,
-    ) -> ::core::ffi::c_int,
->;
 pub type _z_subscription_rc_eq_f = ::core::option::Option<
     unsafe extern "C" fn(
         left: *const _z_subscription_rc_t,
         right: *const _z_subscription_rc_t,
     ) -> bool,
->;
-pub type _z_subscription_rc_cmp_f = ::core::option::Option<
-    unsafe extern "C" fn(
-        left: *const _z_subscription_rc_t,
-        right: *const _z_subscription_rc_t,
-    ) -> ::core::ffi::c_int,
 >;
 pub type _z_subscription_rc_slist_t = _z_slist_t;
 #[repr(C)]
@@ -8143,23 +7875,11 @@ pub type _z_session_queryable_eq_f = ::core::option::Option<
         right: *const _z_session_queryable_t,
     ) -> bool,
 >;
-pub type _z_session_queryable_cmp_f = ::core::option::Option<
-    unsafe extern "C" fn(
-        left: *const _z_session_queryable_t,
-        right: *const _z_session_queryable_t,
-    ) -> ::core::ffi::c_int,
->;
 pub type _z_session_queryable_rc_eq_f = ::core::option::Option<
     unsafe extern "C" fn(
         left: *const _z_session_queryable_rc_t,
         right: *const _z_session_queryable_rc_t,
     ) -> bool,
->;
-pub type _z_session_queryable_rc_cmp_f = ::core::option::Option<
-    unsafe extern "C" fn(
-        left: *const _z_session_queryable_rc_t,
-        right: *const _z_session_queryable_rc_t,
-    ) -> ::core::ffi::c_int,
 >;
 pub type _z_session_queryable_rc_slist_t = _z_slist_t;
 pub type _z_pending_reply_slist_t = _z_slist_t;
@@ -8220,12 +7940,6 @@ unsafe extern "C" {
 }
 pub type _z_pending_query_eq_f = ::core::option::Option<
     unsafe extern "C" fn(left: *const _z_pending_query_t, right: *const _z_pending_query_t) -> bool,
->;
-pub type _z_pending_query_cmp_f = ::core::option::Option<
-    unsafe extern "C" fn(
-        left: *const _z_pending_query_t,
-        right: *const _z_pending_query_t,
-    ) -> ::core::ffi::c_int,
 >;
 pub type _z_pending_query_slist_t = _z_slist_t;
 #[repr(C)]
@@ -8347,23 +8061,11 @@ pub type _z_session_interest_eq_f = ::core::option::Option<
         right: *const _z_session_interest_t,
     ) -> bool,
 >;
-pub type _z_session_interest_cmp_f = ::core::option::Option<
-    unsafe extern "C" fn(
-        left: *const _z_session_interest_t,
-        right: *const _z_session_interest_t,
-    ) -> ::core::ffi::c_int,
->;
 pub type _z_session_interest_rc_eq_f = ::core::option::Option<
     unsafe extern "C" fn(
         left: *const _z_session_interest_rc_t,
         right: *const _z_session_interest_rc_t,
     ) -> bool,
->;
-pub type _z_session_interest_rc_cmp_f = ::core::option::Option<
-    unsafe extern "C" fn(
-        left: *const _z_session_interest_rc_t,
-        right: *const _z_session_interest_rc_t,
-    ) -> ::core::ffi::c_int,
 >;
 pub type _z_session_interest_rc_slist_t = _z_slist_t;
 pub const _z_declare_type_t__Z_DECLARE_TYPE_SUBSCRIBER: _z_declare_type_t = 0;
@@ -8399,12 +8101,6 @@ unsafe extern "C" {
 }
 pub type _z_declare_data_eq_f = ::core::option::Option<
     unsafe extern "C" fn(left: *const _z_declare_data_t, right: *const _z_declare_data_t) -> bool,
->;
-pub type _z_declare_data_cmp_f = ::core::option::Option<
-    unsafe extern "C" fn(
-        left: *const _z_declare_data_t,
-        right: *const _z_declare_data_t,
-    ) -> ::core::ffi::c_int,
 >;
 pub type _z_declare_data_slist_t = _z_slist_t;
 #[repr(C)]
@@ -8450,17 +8146,11 @@ pub type _z_liveliness_pending_query_eq_f = ::core::option::Option<
         right: *const _z_liveliness_pending_query_t,
     ) -> bool,
 >;
-pub type _z_liveliness_pending_query_cmp_f = ::core::option::Option<
-    unsafe extern "C" fn(
-        left: *const _z_liveliness_pending_query_t,
-        right: *const _z_liveliness_pending_query_t,
-    ) -> ::core::ffi::c_int,
->;
-#[doc = " A hashmap entry with generic keys.\n\n Members:\n   void *_key: the key of the entry\n   void *_val: the value of the entry"]
+#[doc = " An entry of a hashmap with integer keys.\n\n Members:\n   size_t key: the hashed key of the value\n   void *value: the value"]
 pub type _z_liveliness_pending_query_intmap_entry_t = _z_int_void_map_entry_t;
-#[doc = " A hashmap with generic keys.\n\n Members:\n    size_t _capacity: the number of buckets available in the hashmap\n   _z_list_t **_vals: the linked list containing the values\n   z_element_hash_f _f_hash: the hash function used to hash keys\n   z_element_eq_f _f_equals: the function used to compare keys for equality"]
+#[doc = " An hashmap with integer keys.\n\n Members:\n   z_intmap_t **vals: the linked intmap containing the values\n   size_t capacity: the capacity of the hashmap\n   size_t len: the actual length of the hashmap"]
 pub type _z_liveliness_pending_query_intmap_t = _z_int_void_map_t;
-#[doc = " Iterator for a generic key-value hashmap."]
+#[doc = " An iterator of an hashmap with integer keys."]
 pub type _z_liveliness_pending_query_intmap_iterator_t = _z_int_void_map_iterator_t;
 unsafe extern "C" {
     pub fn _z_liveliness_get_query_id(zn: *mut _z_session_t) -> u32;
@@ -8634,17 +8324,11 @@ pub type _z_matching_listener_eq_f = ::core::option::Option<
         right: *const _z_matching_listener_state_t,
     ) -> bool,
 >;
-pub type _z_matching_listener_cmp_f = ::core::option::Option<
-    unsafe extern "C" fn(
-        left: *const _z_matching_listener_state_t,
-        right: *const _z_matching_listener_state_t,
-    ) -> ::core::ffi::c_int,
->;
-#[doc = " A hashmap entry with generic keys.\n\n Members:\n   void *_key: the key of the entry\n   void *_val: the value of the entry"]
+#[doc = " An entry of a hashmap with integer keys.\n\n Members:\n   size_t key: the hashed key of the value\n   void *value: the value"]
 pub type _z_matching_listener_intmap_entry_t = _z_int_void_map_entry_t;
-#[doc = " A hashmap with generic keys.\n\n Members:\n    size_t _capacity: the number of buckets available in the hashmap\n   _z_list_t **_vals: the linked list containing the values\n   z_element_hash_f _f_hash: the hash function used to hash keys\n   z_element_eq_f _f_equals: the function used to compare keys for equality"]
+#[doc = " An hashmap with integer keys.\n\n Members:\n   z_intmap_t **vals: the linked intmap containing the values\n   size_t capacity: the capacity of the hashmap\n   size_t len: the actual length of the hashmap"]
 pub type _z_matching_listener_intmap_t = _z_int_void_map_t;
-#[doc = " Iterator for a generic key-value hashmap."]
+#[doc = " An iterator of an hashmap with integer keys."]
 pub type _z_matching_listener_intmap_iterator_t = _z_int_void_map_iterator_t;
 pub type _z_lru_val_cmp_f = ::core::option::Option<
     unsafe extern "C" fn(
@@ -8721,12 +8405,6 @@ pub type _z_queryable_infos_eq_f = ::core::option::Option<
         left: *const _z_queryable_infos_t,
         right: *const _z_queryable_infos_t,
     ) -> bool,
->;
-pub type _z_queryable_infos_cmp_f = ::core::option::Option<
-    unsafe extern "C" fn(
-        left: *const _z_queryable_infos_t,
-        right: *const _z_queryable_infos_t,
-    ) -> ::core::ffi::c_int,
 >;
 #[doc = " A dynamically allocated vector. Elements are stored by value."]
 pub type _z_queryable_infos_svec_t = _z_svec_t;
@@ -8817,12 +8495,6 @@ pub type _z_subscription_infos_eq_f = ::core::option::Option<
         left: *const _z_subscription_infos_t,
         right: *const _z_subscription_infos_t,
     ) -> bool,
->;
-pub type _z_subscription_infos_cmp_f = ::core::option::Option<
-    unsafe extern "C" fn(
-        left: *const _z_subscription_infos_t,
-        right: *const _z_subscription_infos_t,
-    ) -> ::core::ffi::c_int,
 >;
 #[doc = " A dynamically allocated vector. Elements are stored by value."]
 pub type _z_subscription_infos_svec_t = _z_svec_t;
@@ -8980,7 +8652,7 @@ pub struct _z_session_t {
 }
 #[allow(clippy::unnecessary_operation, clippy::identity_op)]
 const _: () = {
-    ["Size of _z_session_t"][::core::mem::size_of::<_z_session_t>() - 1008usize];
+    ["Size of _z_session_t"][::core::mem::size_of::<_z_session_t>() - 896usize];
     ["Alignment of _z_session_t"][::core::mem::align_of::<_z_session_t>() - 8usize];
     ["Offset of field: _z_session_t::_mutex_inner"]
         [::core::mem::offset_of!(_z_session_t, _mutex_inner) - 0usize];
@@ -8988,47 +8660,47 @@ const _: () = {
         [::core::mem::offset_of!(_z_session_t, _mode) - 64usize];
     ["Offset of field: _z_session_t::_tp"][::core::mem::offset_of!(_z_session_t, _tp) - 72usize];
     ["Offset of field: _z_session_t::_local_zid"]
-        [::core::mem::offset_of!(_z_session_t, _local_zid) - 720usize];
+        [::core::mem::offset_of!(_z_session_t, _local_zid) - 688usize];
     ["Offset of field: _z_session_t::_resource_id"]
-        [::core::mem::offset_of!(_z_session_t, _resource_id) - 736usize];
+        [::core::mem::offset_of!(_z_session_t, _resource_id) - 704usize];
     ["Offset of field: _z_session_t::_entity_id"]
-        [::core::mem::offset_of!(_z_session_t, _entity_id) - 740usize];
+        [::core::mem::offset_of!(_z_session_t, _entity_id) - 708usize];
     ["Offset of field: _z_session_t::_query_id"]
-        [::core::mem::offset_of!(_z_session_t, _query_id) - 744usize];
+        [::core::mem::offset_of!(_z_session_t, _query_id) - 712usize];
     ["Offset of field: _z_session_t::_interest_id"]
-        [::core::mem::offset_of!(_z_session_t, _interest_id) - 752usize];
+        [::core::mem::offset_of!(_z_session_t, _interest_id) - 720usize];
     ["Offset of field: _z_session_t::_local_resources"]
-        [::core::mem::offset_of!(_z_session_t, _local_resources) - 760usize];
+        [::core::mem::offset_of!(_z_session_t, _local_resources) - 728usize];
     ["Offset of field: _z_session_t::_config"]
-        [::core::mem::offset_of!(_z_session_t, _config) - 768usize];
+        [::core::mem::offset_of!(_z_session_t, _config) - 736usize];
     ["Offset of field: _z_session_t::_declaration_cache"]
-        [::core::mem::offset_of!(_z_session_t, _declaration_cache) - 800usize];
+        [::core::mem::offset_of!(_z_session_t, _declaration_cache) - 752usize];
     ["Offset of field: _z_session_t::_lease_task_attr"]
-        [::core::mem::offset_of!(_z_session_t, _lease_task_attr) - 808usize];
+        [::core::mem::offset_of!(_z_session_t, _lease_task_attr) - 760usize];
     ["Offset of field: _z_session_t::_read_task_attr"]
-        [::core::mem::offset_of!(_z_session_t, _read_task_attr) - 816usize];
+        [::core::mem::offset_of!(_z_session_t, _read_task_attr) - 768usize];
     ["Offset of field: _z_session_t::_subscriptions"]
-        [::core::mem::offset_of!(_z_session_t, _subscriptions) - 824usize];
+        [::core::mem::offset_of!(_z_session_t, _subscriptions) - 776usize];
     ["Offset of field: _z_session_t::_liveliness_subscriptions"]
-        [::core::mem::offset_of!(_z_session_t, _liveliness_subscriptions) - 832usize];
+        [::core::mem::offset_of!(_z_session_t, _liveliness_subscriptions) - 784usize];
     ["Offset of field: _z_session_t::_local_tokens"]
-        [::core::mem::offset_of!(_z_session_t, _local_tokens) - 840usize];
+        [::core::mem::offset_of!(_z_session_t, _local_tokens) - 792usize];
     ["Offset of field: _z_session_t::_remote_tokens"]
-        [::core::mem::offset_of!(_z_session_t, _remote_tokens) - 872usize];
+        [::core::mem::offset_of!(_z_session_t, _remote_tokens) - 808usize];
     ["Offset of field: _z_session_t::_liveliness_query_id"]
-        [::core::mem::offset_of!(_z_session_t, _liveliness_query_id) - 904usize];
+        [::core::mem::offset_of!(_z_session_t, _liveliness_query_id) - 824usize];
     ["Offset of field: _z_session_t::_liveliness_pending_queries"]
-        [::core::mem::offset_of!(_z_session_t, _liveliness_pending_queries) - 912usize];
+        [::core::mem::offset_of!(_z_session_t, _liveliness_pending_queries) - 832usize];
     ["Offset of field: _z_session_t::_local_queryable"]
-        [::core::mem::offset_of!(_z_session_t, _local_queryable) - 944usize];
+        [::core::mem::offset_of!(_z_session_t, _local_queryable) - 848usize];
     ["Offset of field: _z_session_t::_pending_queries"]
-        [::core::mem::offset_of!(_z_session_t, _pending_queries) - 952usize];
+        [::core::mem::offset_of!(_z_session_t, _pending_queries) - 856usize];
     ["Offset of field: _z_session_t::_matching_listeners"]
-        [::core::mem::offset_of!(_z_session_t, _matching_listeners) - 960usize];
+        [::core::mem::offset_of!(_z_session_t, _matching_listeners) - 864usize];
     ["Offset of field: _z_session_t::_local_interests"]
-        [::core::mem::offset_of!(_z_session_t, _local_interests) - 992usize];
+        [::core::mem::offset_of!(_z_session_t, _local_interests) - 880usize];
     ["Offset of field: _z_session_t::_remote_declares"]
-        [::core::mem::offset_of!(_z_session_t, _remote_declares) - 1000usize];
+        [::core::mem::offset_of!(_z_session_t, _remote_declares) - 888usize];
 };
 unsafe extern "C" {
     pub fn _z_session_clear(zn: *mut _z_session_t);
@@ -9100,8 +8772,8 @@ unsafe extern "C" {
     pub fn _z_info(session: *const _z_session_t) -> *mut _z_config_t;
 }
 unsafe extern "C" {
-    #[doc = " Read from the network. This function should be called manually called when\n the read loop has not been started, e.g., when running in a single thread.\n\n Parameters:\n     session: The zenoh-net session. The caller keeps its ownership.\n     single_read: Read a single packet from the buffer instead of the whole buffer\n Returns:\n     ``0`` in case of success, ``-1`` in case of failure."]
-    pub fn _zp_read(z: *mut _z_session_t, single_read: bool) -> z_result_t;
+    #[doc = " Read from the network. This function should be called manually called when\n the read loop has not been started, e.g., when running in a single thread.\n\n Parameters:\n     session: The zenoh-net session. The caller keeps its ownership.\n Returns:\n     ``0`` in case of success, ``-1`` in case of failure."]
+    pub fn _zp_read(z: *mut _z_session_t) -> z_result_t;
 }
 unsafe extern "C" {
     #[doc = " Send a KeepAlive message.\n\n Parameters:\n     session: The zenoh-net session. The caller keeps its ownership.\n Returns:\n     ``0`` in case of success, ``-1`` in case of failure."]
@@ -9416,139 +9088,6 @@ unsafe extern "C" {
 unsafe extern "C" {
     pub fn _z_queryable_free(qbl: *mut *mut _z_queryable_t);
 }
-#[repr(C)]
-#[derive(Debug, Copy, Clone)]
-pub struct _z_ring_t {
-    pub _val: *mut *mut ::core::ffi::c_void,
-    pub _capacity: usize,
-    pub _len: usize,
-    pub _r_idx: usize,
-    pub _w_idx: usize,
-}
-#[allow(clippy::unnecessary_operation, clippy::identity_op)]
-const _: () = {
-    ["Size of _z_ring_t"][::core::mem::size_of::<_z_ring_t>() - 40usize];
-    ["Alignment of _z_ring_t"][::core::mem::align_of::<_z_ring_t>() - 8usize];
-    ["Offset of field: _z_ring_t::_val"][::core::mem::offset_of!(_z_ring_t, _val) - 0usize];
-    ["Offset of field: _z_ring_t::_capacity"]
-        [::core::mem::offset_of!(_z_ring_t, _capacity) - 8usize];
-    ["Offset of field: _z_ring_t::_len"][::core::mem::offset_of!(_z_ring_t, _len) - 16usize];
-    ["Offset of field: _z_ring_t::_r_idx"][::core::mem::offset_of!(_z_ring_t, _r_idx) - 24usize];
-    ["Offset of field: _z_ring_t::_w_idx"][::core::mem::offset_of!(_z_ring_t, _w_idx) - 32usize];
-};
-#[doc = " Forward iterator of a ring buffer."]
-#[repr(C)]
-#[derive(Debug, Copy, Clone)]
-pub struct _z_ring_iterator_t {
-    pub _val: *mut ::core::ffi::c_void,
-    pub _ring: *const _z_ring_t,
-    pub _r_idx: usize,
-    pub _w_idx: usize,
-}
-#[allow(clippy::unnecessary_operation, clippy::identity_op)]
-const _: () = {
-    ["Size of _z_ring_iterator_t"][::core::mem::size_of::<_z_ring_iterator_t>() - 32usize];
-    ["Alignment of _z_ring_iterator_t"][::core::mem::align_of::<_z_ring_iterator_t>() - 8usize];
-    ["Offset of field: _z_ring_iterator_t::_val"]
-        [::core::mem::offset_of!(_z_ring_iterator_t, _val) - 0usize];
-    ["Offset of field: _z_ring_iterator_t::_ring"]
-        [::core::mem::offset_of!(_z_ring_iterator_t, _ring) - 8usize];
-    ["Offset of field: _z_ring_iterator_t::_r_idx"]
-        [::core::mem::offset_of!(_z_ring_iterator_t, _r_idx) - 16usize];
-    ["Offset of field: _z_ring_iterator_t::_w_idx"]
-        [::core::mem::offset_of!(_z_ring_iterator_t, _w_idx) - 24usize];
-};
-#[doc = " Reverse iterator of a ring buffer."]
-#[repr(C)]
-#[derive(Debug, Copy, Clone)]
-pub struct _z_ring_reverse_iterator_t {
-    pub _val: *mut ::core::ffi::c_void,
-    pub _ring: *const _z_ring_t,
-    pub _r_idx: usize,
-    pub _w_idx: usize,
-}
-#[allow(clippy::unnecessary_operation, clippy::identity_op)]
-const _: () = {
-    ["Size of _z_ring_reverse_iterator_t"]
-        [::core::mem::size_of::<_z_ring_reverse_iterator_t>() - 32usize];
-    ["Alignment of _z_ring_reverse_iterator_t"]
-        [::core::mem::align_of::<_z_ring_reverse_iterator_t>() - 8usize];
-    ["Offset of field: _z_ring_reverse_iterator_t::_val"]
-        [::core::mem::offset_of!(_z_ring_reverse_iterator_t, _val) - 0usize];
-    ["Offset of field: _z_ring_reverse_iterator_t::_ring"]
-        [::core::mem::offset_of!(_z_ring_reverse_iterator_t, _ring) - 8usize];
-    ["Offset of field: _z_ring_reverse_iterator_t::_r_idx"]
-        [::core::mem::offset_of!(_z_ring_reverse_iterator_t, _r_idx) - 16usize];
-    ["Offset of field: _z_ring_reverse_iterator_t::_w_idx"]
-        [::core::mem::offset_of!(_z_ring_reverse_iterator_t, _w_idx) - 24usize];
-};
-unsafe extern "C" {
-    pub fn _z_ring_init(ring: *mut _z_ring_t, capacity: usize) -> z_result_t;
-}
-unsafe extern "C" {
-    pub fn _z_ring_make(capacity: usize) -> _z_ring_t;
-}
-unsafe extern "C" {
-    pub fn _z_ring_capacity(r: *const _z_ring_t) -> usize;
-}
-unsafe extern "C" {
-    pub fn _z_ring_len(r: *const _z_ring_t) -> usize;
-}
-unsafe extern "C" {
-    pub fn _z_ring_is_empty(r: *const _z_ring_t) -> bool;
-}
-unsafe extern "C" {
-    pub fn _z_ring_is_full(r: *const _z_ring_t) -> bool;
-}
-unsafe extern "C" {
-    pub fn _z_ring_push(r: *mut _z_ring_t, e: *mut ::core::ffi::c_void)
-    -> *mut ::core::ffi::c_void;
-}
-unsafe extern "C" {
-    pub fn _z_ring_push_force(
-        r: *mut _z_ring_t,
-        e: *mut ::core::ffi::c_void,
-    ) -> *mut ::core::ffi::c_void;
-}
-unsafe extern "C" {
-    pub fn _z_ring_push_force_drop(
-        r: *mut _z_ring_t,
-        e: *mut ::core::ffi::c_void,
-        f: z_element_free_f,
-    );
-}
-unsafe extern "C" {
-    pub fn _z_ring_pull(r: *mut _z_ring_t) -> *mut ::core::ffi::c_void;
-}
-unsafe extern "C" {
-    pub fn _z_ring_clone(xs: *const _z_ring_t, d_f: z_element_clone_f) -> *mut _z_ring_t;
-}
-unsafe extern "C" {
-    pub fn _z_ring_clear(v: *mut _z_ring_t, f: z_element_free_f);
-}
-unsafe extern "C" {
-    pub fn _z_ring_free(xs: *mut *mut _z_ring_t, f_f: z_element_free_f);
-}
-unsafe extern "C" {
-    pub fn _z_ring_iterator_make(ring: *const _z_ring_t) -> _z_ring_iterator_t;
-}
-unsafe extern "C" {
-    pub fn _z_ring_iterator_next(iter: *mut _z_ring_iterator_t) -> bool;
-}
-unsafe extern "C" {
-    pub fn _z_ring_iterator_value(iter: *const _z_ring_iterator_t) -> *mut ::core::ffi::c_void;
-}
-unsafe extern "C" {
-    pub fn _z_ring_reverse_iterator_make(ring: *const _z_ring_t) -> _z_ring_reverse_iterator_t;
-}
-unsafe extern "C" {
-    pub fn _z_ring_reverse_iterator_next(iter: *mut _z_ring_reverse_iterator_t) -> bool;
-}
-unsafe extern "C" {
-    pub fn _z_ring_reverse_iterator_value(
-        iter: *const _z_ring_reverse_iterator_t,
-    ) -> *mut ::core::ffi::c_void;
-}
 #[doc = " A zenoh-net data sample.\n\n A sample is the value associated to a given resource at a given point in time.\n\n Members:\n   _z_keyexpr_t key: The resource key of this data sample.\n   _z_slice_t value: The value of this data sample.\n   _z_encoding_t encoding: The encoding for the value of this data sample.\n   _z_source_info_t source_info: The source info for this data sample (unstable)."]
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
@@ -9602,20 +9141,6 @@ unsafe extern "C" {
     );
 }
 unsafe extern "C" {
-    pub fn _z_sample_copy_data(
-        dst: *mut _z_sample_t,
-        key: *const _z_keyexpr_t,
-        payload: *const _z_bytes_t,
-        timestamp: *const _z_timestamp_t,
-        encoding: *const _z_encoding_t,
-        kind: z_sample_kind_t,
-        qos: _z_qos_t,
-        attachment: *const _z_bytes_t,
-        reliability: z_reliability_t,
-        source_info: *const _z_source_info_t,
-    ) -> z_result_t;
-}
-unsafe extern "C" {
     pub fn _z_sample_move(dst: *mut _z_sample_t, src: *mut _z_sample_t) -> z_result_t;
 }
 unsafe extern "C" {
@@ -9628,17 +9153,6 @@ unsafe extern "C" {
 unsafe extern "C" {
     pub fn _z_sample_duplicate(src: *const _z_sample_t) -> _z_sample_t;
 }
-pub type _z_sample_eq_f = ::core::option::Option<
-    unsafe extern "C" fn(left: *const _z_sample_t, right: *const _z_sample_t) -> bool,
->;
-pub type _z_sample_cmp_f = ::core::option::Option<
-    unsafe extern "C" fn(left: *const _z_sample_t, right: *const _z_sample_t) -> ::core::ffi::c_int,
->;
-pub type _z_sample_ring_t = _z_ring_t;
-#[doc = " Forward iterator of a ring buffer."]
-pub type _z_sample_ring_iterator_t = _z_ring_iterator_t;
-#[doc = " Reverse iterator of a ring buffer."]
-pub type _z_sample_ring_reverse_iterator_t = _z_ring_reverse_iterator_t;
 pub const _z_reply_tag_t__Z_REPLY_TAG_DATA: _z_reply_tag_t = 0;
 pub const _z_reply_tag_t__Z_REPLY_TAG_FINAL: _z_reply_tag_t = 1;
 pub const _z_reply_tag_t__Z_REPLY_TAG_ERROR: _z_reply_tag_t = 2;
@@ -9686,7 +9200,7 @@ unsafe extern "C" {
 }
 unsafe extern "C" {
     pub fn _z_reply_data_copy(dst: *mut _z_reply_data_t, src: *const _z_reply_data_t)
-    -> z_result_t;
+        -> z_result_t;
 }
 #[doc = " An reply to a :c:func:`z_query`.\n\n Members:\n   _z_reply_t_Tag tag: Indicates if the reply contains data or if it's a FINAL reply.\n   _z_reply_data_t data: The reply data if :c:member:`_z_reply_t.tag` equals\n :c:member:`_z_reply_t_Tag._Z_REPLY_TAG_DATA`.\n"]
 #[repr(C)]
@@ -9759,12 +9273,6 @@ unsafe extern "C" {
 }
 pub type _z_pending_reply_eq_f = ::core::option::Option<
     unsafe extern "C" fn(left: *const _z_pending_reply_t, right: *const _z_pending_reply_t) -> bool,
->;
-pub type _z_pending_reply_cmp_f = ::core::option::Option<
-    unsafe extern "C" fn(
-        left: *const _z_pending_reply_t,
-        right: *const _z_pending_reply_t,
-    ) -> ::core::ffi::c_int,
 >;
 #[doc = " Return type when declaring a subscriber."]
 #[repr(C)]
@@ -9987,12 +9495,12 @@ pub struct z_owned_config_t {
 }
 #[allow(clippy::unnecessary_operation, clippy::identity_op)]
 const _: () = {
-    ["Size of z_owned_config_t"][::core::mem::size_of::<z_owned_config_t>() - 32usize];
+    ["Size of z_owned_config_t"][::core::mem::size_of::<z_owned_config_t>() - 16usize];
     ["Alignment of z_owned_config_t"][::core::mem::align_of::<z_owned_config_t>() - 8usize];
     ["Offset of field: z_owned_config_t::_val"]
         [::core::mem::offset_of!(z_owned_config_t, _val) - 0usize];
 };
-#[doc = " A hashmap with generic keys.\n\n Members:\n    size_t _capacity: the number of buckets available in the hashmap\n   _z_list_t **_vals: the linked list containing the values\n   z_element_hash_f _f_hash: the hash function used to hash keys\n   z_element_eq_f _f_equals: the function used to compare keys for equality"]
+#[doc = " An hashmap with integer keys.\n\n Members:\n   z_intmap_t **vals: the linked intmap containing the values\n   size_t capacity: the capacity of the hashmap\n   size_t len: the actual length of the hashmap"]
 pub type z_loaned_config_t = _z_config_t;
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
@@ -10001,7 +9509,7 @@ pub struct z_moved_config_t {
 }
 #[allow(clippy::unnecessary_operation, clippy::identity_op)]
 const _: () = {
-    ["Size of z_moved_config_t"][::core::mem::size_of::<z_moved_config_t>() - 32usize];
+    ["Size of z_moved_config_t"][::core::mem::size_of::<z_moved_config_t>() - 16usize];
     ["Alignment of z_moved_config_t"][::core::mem::align_of::<z_moved_config_t>() - 8usize];
     ["Offset of field: z_moved_config_t::_this"]
         [::core::mem::offset_of!(z_moved_config_t, _this) - 0usize];
@@ -10667,14 +10175,14 @@ const _: () = {
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
 pub struct zp_read_options_t {
-    pub single_read: bool,
+    pub __dummy: u8,
 }
 #[allow(clippy::unnecessary_operation, clippy::identity_op)]
 const _: () = {
     ["Size of zp_read_options_t"][::core::mem::size_of::<zp_read_options_t>() - 1usize];
     ["Alignment of zp_read_options_t"][::core::mem::align_of::<zp_read_options_t>() - 1usize];
-    ["Offset of field: zp_read_options_t::single_read"]
-        [::core::mem::offset_of!(zp_read_options_t, single_read) - 0usize];
+    ["Offset of field: zp_read_options_t::__dummy"]
+        [::core::mem::offset_of!(zp_read_options_t, __dummy) - 0usize];
 };
 #[doc = " Represents the configuration used to configure a send keep alive operation started via :c:func:`zp_send_keep_alive`."]
 #[repr(C)]
@@ -10720,20 +10228,6 @@ const _: () = {
         [::core::mem::offset_of!(z_scout_options_t, timeout_ms) - 0usize];
     ["Offset of field: z_scout_options_t::what"]
         [::core::mem::offset_of!(z_scout_options_t, what) - 4usize];
-};
-#[doc = " Represents missed samples.\n\n Members:\n   source: The source of missed samples.\n   nb: The number of missed samples.\n\n .. warning:: This API has been marked as unstable: it works as advertised, but it may be changed in a future release."]
-#[repr(C)]
-#[derive(Debug, Copy, Clone)]
-pub struct ze_miss_t {
-    pub source: z_entity_global_id_t,
-    pub nb: u32,
-}
-#[allow(clippy::unnecessary_operation, clippy::identity_op)]
-const _: () = {
-    ["Size of ze_miss_t"][::core::mem::size_of::<ze_miss_t>() - 24usize];
-    ["Alignment of ze_miss_t"][::core::mem::align_of::<ze_miss_t>() - 4usize];
-    ["Offset of field: ze_miss_t::source"][::core::mem::offset_of!(ze_miss_t, source) - 0usize];
-    ["Offset of field: ze_miss_t::nb"][::core::mem::offset_of!(ze_miss_t, nb) - 20usize];
 };
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
@@ -11120,1159 +10614,6 @@ const _: () = {
     ["Offset of field: z_moved_closure_matching_status_t::_this"]
         [::core::mem::offset_of!(z_moved_closure_matching_status_t, _this) - 0usize];
 };
-#[doc = " Represents the matching status callback closure."]
-pub type ze_closure_miss_callback_t = ::core::option::Option<
-    unsafe extern "C" fn(miss: *const ze_miss_t, arg: *mut ::core::ffi::c_void),
->;
-#[repr(C)]
-#[derive(Debug, Copy, Clone)]
-pub struct _ze_closure_miss_t {
-    pub context: *mut ::core::ffi::c_void,
-    pub call: ze_closure_miss_callback_t,
-    pub drop: z_closure_drop_callback_t,
-}
-#[allow(clippy::unnecessary_operation, clippy::identity_op)]
-const _: () = {
-    ["Size of _ze_closure_miss_t"][::core::mem::size_of::<_ze_closure_miss_t>() - 24usize];
-    ["Alignment of _ze_closure_miss_t"][::core::mem::align_of::<_ze_closure_miss_t>() - 8usize];
-    ["Offset of field: _ze_closure_miss_t::context"]
-        [::core::mem::offset_of!(_ze_closure_miss_t, context) - 0usize];
-    ["Offset of field: _ze_closure_miss_t::call"]
-        [::core::mem::offset_of!(_ze_closure_miss_t, call) - 8usize];
-    ["Offset of field: _ze_closure_miss_t::drop"]
-        [::core::mem::offset_of!(_ze_closure_miss_t, drop) - 16usize];
-};
-#[repr(C)]
-#[derive(Debug, Copy, Clone)]
-pub struct ze_owned_closure_miss_t {
-    pub _val: _ze_closure_miss_t,
-}
-#[allow(clippy::unnecessary_operation, clippy::identity_op)]
-const _: () = {
-    ["Size of ze_owned_closure_miss_t"]
-        [::core::mem::size_of::<ze_owned_closure_miss_t>() - 24usize];
-    ["Alignment of ze_owned_closure_miss_t"]
-        [::core::mem::align_of::<ze_owned_closure_miss_t>() - 8usize];
-    ["Offset of field: ze_owned_closure_miss_t::_val"]
-        [::core::mem::offset_of!(ze_owned_closure_miss_t, _val) - 0usize];
-};
-pub type ze_loaned_closure_miss_t = _ze_closure_miss_t;
-#[repr(C)]
-#[derive(Debug, Copy, Clone)]
-pub struct ze_moved_closure_miss_t {
-    pub _this: ze_owned_closure_miss_t,
-}
-#[allow(clippy::unnecessary_operation, clippy::identity_op)]
-const _: () = {
-    ["Size of ze_moved_closure_miss_t"]
-        [::core::mem::size_of::<ze_moved_closure_miss_t>() - 24usize];
-    ["Alignment of ze_moved_closure_miss_t"]
-        [::core::mem::align_of::<ze_moved_closure_miss_t>() - 8usize];
-    ["Offset of field: ze_moved_closure_miss_t::_this"]
-        [::core::mem::offset_of!(ze_moved_closure_miss_t, _this) - 0usize];
-};
-#[repr(C)]
-#[derive(Debug, Copy, Clone)]
-pub struct _z_liveliness_token_t {
-    pub _id: u32,
-    pub _key: _z_keyexpr_t,
-    pub _zn: _z_session_weak_t,
-}
-#[allow(clippy::unnecessary_operation, clippy::identity_op)]
-const _: () = {
-    ["Size of _z_liveliness_token_t"][::core::mem::size_of::<_z_liveliness_token_t>() - 72usize];
-    ["Alignment of _z_liveliness_token_t"]
-        [::core::mem::align_of::<_z_liveliness_token_t>() - 8usize];
-    ["Offset of field: _z_liveliness_token_t::_id"]
-        [::core::mem::offset_of!(_z_liveliness_token_t, _id) - 0usize];
-    ["Offset of field: _z_liveliness_token_t::_key"]
-        [::core::mem::offset_of!(_z_liveliness_token_t, _key) - 8usize];
-    ["Offset of field: _z_liveliness_token_t::_zn"]
-        [::core::mem::offset_of!(_z_liveliness_token_t, _zn) - 56usize];
-};
-unsafe extern "C" {
-    pub fn _z_liveliness_token_null() -> _z_liveliness_token_t;
-}
-#[repr(C)]
-#[derive(Debug, Copy, Clone)]
-pub struct z_owned_liveliness_token_t {
-    pub _val: _z_liveliness_token_t,
-}
-#[allow(clippy::unnecessary_operation, clippy::identity_op)]
-const _: () = {
-    ["Size of z_owned_liveliness_token_t"]
-        [::core::mem::size_of::<z_owned_liveliness_token_t>() - 72usize];
-    ["Alignment of z_owned_liveliness_token_t"]
-        [::core::mem::align_of::<z_owned_liveliness_token_t>() - 8usize];
-    ["Offset of field: z_owned_liveliness_token_t::_val"]
-        [::core::mem::offset_of!(z_owned_liveliness_token_t, _val) - 0usize];
-};
-pub type z_loaned_liveliness_token_t = _z_liveliness_token_t;
-#[repr(C)]
-#[derive(Debug, Copy, Clone)]
-pub struct z_moved_liveliness_token_t {
-    pub _this: z_owned_liveliness_token_t,
-}
-#[allow(clippy::unnecessary_operation, clippy::identity_op)]
-const _: () = {
-    ["Size of z_moved_liveliness_token_t"]
-        [::core::mem::size_of::<z_moved_liveliness_token_t>() - 72usize];
-    ["Alignment of z_moved_liveliness_token_t"]
-        [::core::mem::align_of::<z_moved_liveliness_token_t>() - 8usize];
-    ["Offset of field: z_moved_liveliness_token_t::_this"]
-        [::core::mem::offset_of!(z_moved_liveliness_token_t, _this) - 0usize];
-};
-unsafe extern "C" {
-    pub fn z_internal_liveliness_token_null(obj: *mut z_owned_liveliness_token_t);
-}
-unsafe extern "C" {
-    pub fn z_internal_liveliness_token_check(obj: *const z_owned_liveliness_token_t) -> bool;
-}
-unsafe extern "C" {
-    pub fn z_liveliness_token_loan(
-        obj: *const z_owned_liveliness_token_t,
-    ) -> *const z_loaned_liveliness_token_t;
-}
-unsafe extern "C" {
-    pub fn z_liveliness_token_loan_mut(
-        obj: *mut z_owned_liveliness_token_t,
-    ) -> *mut z_loaned_liveliness_token_t;
-}
-unsafe extern "C" {
-    pub fn z_liveliness_token_move(
-        obj: *mut z_owned_liveliness_token_t,
-    ) -> *mut z_moved_liveliness_token_t;
-}
-unsafe extern "C" {
-    pub fn z_liveliness_token_take(
-        obj: *mut z_owned_liveliness_token_t,
-        src: *mut z_moved_liveliness_token_t,
-    );
-}
-unsafe extern "C" {
-    pub fn z_liveliness_token_drop(obj: *mut z_moved_liveliness_token_t);
-}
-unsafe extern "C" {
-    pub fn z_liveliness_token_take_from_loaned(
-        dst: *mut z_owned_liveliness_token_t,
-        src: *mut z_loaned_liveliness_token_t,
-    ) -> z_result_t;
-}
-unsafe extern "C" {
-    pub fn z_liveliness_token_clone(
-        obj: *mut z_owned_liveliness_token_t,
-        src: *const z_loaned_liveliness_token_t,
-    ) -> z_result_t;
-}
-#[doc = " The options for :c:func:`z_liveliness_declare_token()`."]
-#[repr(C)]
-#[derive(Debug, Copy, Clone)]
-pub struct z_liveliness_token_options_t {
-    pub __dummy: u8,
-}
-#[allow(clippy::unnecessary_operation, clippy::identity_op)]
-const _: () = {
-    ["Size of z_liveliness_token_options_t"]
-        [::core::mem::size_of::<z_liveliness_token_options_t>() - 1usize];
-    ["Alignment of z_liveliness_token_options_t"]
-        [::core::mem::align_of::<z_liveliness_token_options_t>() - 1usize];
-    ["Offset of field: z_liveliness_token_options_t::__dummy"]
-        [::core::mem::offset_of!(z_liveliness_token_options_t, __dummy) - 0usize];
-};
-unsafe extern "C" {
-    #[doc = " Constructs default value for :c:type:`z_liveliness_token_options_t`."]
-    pub fn z_liveliness_token_options_default(
-        options: *mut z_liveliness_token_options_t,
-    ) -> z_result_t;
-}
-unsafe extern "C" {
-    #[doc = " Constructs and declares a liveliness token on the network.\n\n Liveliness token subscribers on an intersecting key expression will receive a PUT sample when connectivity\n is achieved, and a DELETE sample if it's lost.\n\n Parameters:\n   zs: A Zenos session to declare the liveliness token.\n   token: An uninitialized memory location where liveliness token will be constructed.\n   keyexpr: A keyexpr to declare a liveliess token for.\n   options: Liveliness token declaration options.\n\n Return:\n   ``0`` if put operation is successful, ``negative value`` otherwise."]
-    pub fn z_liveliness_declare_token(
-        zs: *const z_loaned_session_t,
-        token: *mut z_owned_liveliness_token_t,
-        keyexpr: *const z_loaned_keyexpr_t,
-        options: *const z_liveliness_token_options_t,
-    ) -> z_result_t;
-}
-unsafe extern "C" {
-    #[doc = " Undeclare a liveliness token, notifying subscribers of its destruction.\n\n Parameters:\n   token: Moved :c:type:`z_owned_liveliness_token_t` to undeclare.\n\n Return:\n   ``0`` if put operation is successful, ``negative value`` otherwise."]
-    pub fn z_liveliness_undeclare_token(token: *mut z_moved_liveliness_token_t) -> z_result_t;
-}
-#[doc = " The options for :c:func:`z_liveliness_declare_subscriber()`"]
-#[repr(C)]
-#[derive(Debug, Copy, Clone)]
-pub struct z_liveliness_subscriber_options_t {
-    pub history: bool,
-}
-#[allow(clippy::unnecessary_operation, clippy::identity_op)]
-const _: () = {
-    ["Size of z_liveliness_subscriber_options_t"]
-        [::core::mem::size_of::<z_liveliness_subscriber_options_t>() - 1usize];
-    ["Alignment of z_liveliness_subscriber_options_t"]
-        [::core::mem::align_of::<z_liveliness_subscriber_options_t>() - 1usize];
-    ["Offset of field: z_liveliness_subscriber_options_t::history"]
-        [::core::mem::offset_of!(z_liveliness_subscriber_options_t, history) - 0usize];
-};
-unsafe extern "C" {
-    #[doc = " Constucts default value for :c:type:`z_liveliness_subscriber_options_t`."]
-    pub fn z_liveliness_subscriber_options_default(
-        options: *mut z_liveliness_subscriber_options_t,
-    ) -> z_result_t;
-}
-unsafe extern "C" {
-    #[doc = " Declares a subscriber on liveliness tokens that intersect `keyexpr`.\n\n Parameters:\n   zs: The Zenoh session.\n   sub: An uninitialized memory location where subscriber will be constructed.\n   keyexpr: The key expression to subscribe to.\n   callback: The callback function that will be called each time a liveliness token status is changed.\n   options: The options to be passed to the liveliness subscriber declaration.\n\n Return:\n   ``0`` if put operation is successful, ``negative value`` otherwise."]
-    pub fn z_liveliness_declare_subscriber(
-        zs: *const z_loaned_session_t,
-        sub: *mut z_owned_subscriber_t,
-        keyexpr: *const z_loaned_keyexpr_t,
-        callback: *mut z_moved_closure_sample_t,
-        options: *mut z_liveliness_subscriber_options_t,
-    ) -> z_result_t;
-}
-unsafe extern "C" {
-    #[doc = " Declares a background subscriber on liveliness tokens that intersect `keyexpr`.\n Subscriber callback will be called to process the messages, until the corresponding session is closed or dropped.\n\n Parameters:\n   zs: The Zenoh session.\n   keyexpr: The key expression to subscribe to.\n   callback: The callback function that will be called each time a liveliness token status is changed.\n   options: The options to be passed to the liveliness subscriber declaration.\n\n Return:\n   ``0`` if declare is successful, ``negative value`` otherwise."]
-    pub fn z_liveliness_declare_background_subscriber(
-        zs: *const z_loaned_session_t,
-        keyexpr: *const z_loaned_keyexpr_t,
-        callback: *mut z_moved_closure_sample_t,
-        options: *mut z_liveliness_subscriber_options_t,
-    ) -> z_result_t;
-}
-#[doc = " The options for :c:func:`z_liveliness_get()`"]
-#[repr(C)]
-#[derive(Debug, Copy, Clone)]
-pub struct z_liveliness_get_options_t {
-    pub timeout_ms: u64,
-}
-#[allow(clippy::unnecessary_operation, clippy::identity_op)]
-const _: () = {
-    ["Size of z_liveliness_get_options_t"]
-        [::core::mem::size_of::<z_liveliness_get_options_t>() - 8usize];
-    ["Alignment of z_liveliness_get_options_t"]
-        [::core::mem::align_of::<z_liveliness_get_options_t>() - 8usize];
-    ["Offset of field: z_liveliness_get_options_t::timeout_ms"]
-        [::core::mem::offset_of!(z_liveliness_get_options_t, timeout_ms) - 0usize];
-};
-unsafe extern "C" {
-    #[doc = " Constructs default value :c:type:`z_liveliness_get_options_t`."]
-    pub fn z_liveliness_get_options_default(options: *mut z_liveliness_get_options_t)
-    -> z_result_t;
-}
-unsafe extern "C" {
-    #[doc = " Queries liveliness tokens currently on the network with a key expression intersecting with `keyexpr`.\n\n Parameters:\n   zs: The Zenoh session.\n   keyexpr: The key expression to query liveliness tokens for.\n   callback: The callback function that will be called for each received reply.\n   options: Additional options for the liveliness get operation.\n\n Return:\n   ``0`` if put operation is successful, ``negative value`` otherwise."]
-    pub fn z_liveliness_get(
-        zs: *const z_loaned_session_t,
-        keyexpr: *const z_loaned_keyexpr_t,
-        callback: *mut z_moved_closure_reply_t,
-        options: *mut z_liveliness_get_options_t,
-    ) -> z_result_t;
-}
-#[doc = " Represents the set of options that can be applied to an advaned publishers cache.\n The cache allows advanced subscribers to recover history and/or lost samples.\n\n Members:\n   bool is_enabled: Must be set to ``true``, to enable the cache.\n   size_t max_samples: Number of samples to keep for each resource.\n   z_congestion_control_t congestion_control: The congestion control to apply to replies.\n   z_priority_t priority: The priority of replies.\n   bool is_express: If set to ``true``, this cache replies will not be batched. This usually\n     has a positive impact on latency but negative impact on throughput."]
-#[repr(C)]
-#[derive(Debug, Copy, Clone)]
-pub struct ze_advanced_publisher_cache_options_t {
-    pub is_enabled: bool,
-    pub max_samples: usize,
-    pub congestion_control: z_congestion_control_t,
-    pub priority: z_priority_t,
-    pub is_express: bool,
-    pub _liveliness: bool,
-}
-#[allow(clippy::unnecessary_operation, clippy::identity_op)]
-const _: () = {
-    ["Size of ze_advanced_publisher_cache_options_t"]
-        [::core::mem::size_of::<ze_advanced_publisher_cache_options_t>() - 32usize];
-    ["Alignment of ze_advanced_publisher_cache_options_t"]
-        [::core::mem::align_of::<ze_advanced_publisher_cache_options_t>() - 8usize];
-    ["Offset of field: ze_advanced_publisher_cache_options_t::is_enabled"]
-        [::core::mem::offset_of!(ze_advanced_publisher_cache_options_t, is_enabled) - 0usize];
-    ["Offset of field: ze_advanced_publisher_cache_options_t::max_samples"]
-        [::core::mem::offset_of!(ze_advanced_publisher_cache_options_t, max_samples) - 8usize];
-    ["Offset of field: ze_advanced_publisher_cache_options_t::congestion_control"][::core::mem::offset_of!(
-        ze_advanced_publisher_cache_options_t,
-        congestion_control
-    ) - 16usize];
-    ["Offset of field: ze_advanced_publisher_cache_options_t::priority"]
-        [::core::mem::offset_of!(ze_advanced_publisher_cache_options_t, priority) - 20usize];
-    ["Offset of field: ze_advanced_publisher_cache_options_t::is_express"]
-        [::core::mem::offset_of!(ze_advanced_publisher_cache_options_t, is_express) - 24usize];
-    ["Offset of field: ze_advanced_publisher_cache_options_t::_liveliness"]
-        [::core::mem::offset_of!(ze_advanced_publisher_cache_options_t, _liveliness) - 25usize];
-};
-#[repr(C)]
-#[derive(Debug, Copy, Clone)]
-pub struct _ze_advanced_cache_t {
-    pub _cache: _z_sample_ring_t,
-    pub _outbox: *mut _z_sample_t,
-    pub _outbox_cap: usize,
-    pub _mutex: _z_mutex_t,
-    pub _outbox_mutex: _z_mutex_t,
-    pub _queryable: z_owned_queryable_t,
-    pub _liveliness: z_owned_liveliness_token_t,
-    pub _congestion_control: z_congestion_control_t,
-    pub _priority: z_priority_t,
-    pub _is_express: bool,
-}
-#[allow(clippy::unnecessary_operation, clippy::identity_op)]
-const _: () = {
-    ["Size of _ze_advanced_cache_t"][::core::mem::size_of::<_ze_advanced_cache_t>() - 296usize];
-    ["Alignment of _ze_advanced_cache_t"][::core::mem::align_of::<_ze_advanced_cache_t>() - 8usize];
-    ["Offset of field: _ze_advanced_cache_t::_cache"]
-        [::core::mem::offset_of!(_ze_advanced_cache_t, _cache) - 0usize];
-    ["Offset of field: _ze_advanced_cache_t::_outbox"]
-        [::core::mem::offset_of!(_ze_advanced_cache_t, _outbox) - 40usize];
-    ["Offset of field: _ze_advanced_cache_t::_outbox_cap"]
-        [::core::mem::offset_of!(_ze_advanced_cache_t, _outbox_cap) - 48usize];
-    ["Offset of field: _ze_advanced_cache_t::_mutex"]
-        [::core::mem::offset_of!(_ze_advanced_cache_t, _mutex) - 56usize];
-    ["Offset of field: _ze_advanced_cache_t::_outbox_mutex"]
-        [::core::mem::offset_of!(_ze_advanced_cache_t, _outbox_mutex) - 120usize];
-    ["Offset of field: _ze_advanced_cache_t::_queryable"]
-        [::core::mem::offset_of!(_ze_advanced_cache_t, _queryable) - 184usize];
-    ["Offset of field: _ze_advanced_cache_t::_liveliness"]
-        [::core::mem::offset_of!(_ze_advanced_cache_t, _liveliness) - 208usize];
-    ["Offset of field: _ze_advanced_cache_t::_congestion_control"]
-        [::core::mem::offset_of!(_ze_advanced_cache_t, _congestion_control) - 280usize];
-    ["Offset of field: _ze_advanced_cache_t::_priority"]
-        [::core::mem::offset_of!(_ze_advanced_cache_t, _priority) - 284usize];
-    ["Offset of field: _ze_advanced_cache_t::_is_express"]
-        [::core::mem::offset_of!(_ze_advanced_cache_t, _is_express) - 288usize];
-};
-pub const memory_order_memory_order_relaxed: memory_order = 0;
-pub const memory_order_memory_order_consume: memory_order = 1;
-pub const memory_order_memory_order_acquire: memory_order = 2;
-pub const memory_order_memory_order_release: memory_order = 3;
-pub const memory_order_memory_order_acq_rel: memory_order = 4;
-pub const memory_order_memory_order_seq_cst: memory_order = 5;
-pub type memory_order = ::core::ffi::c_uint;
-unsafe extern "C" {
-    pub fn atomic_thread_fence(arg1: memory_order);
-}
-unsafe extern "C" {
-    pub fn atomic_signal_fence(arg1: memory_order);
-}
-pub type atomic_bool = bool;
-pub type atomic_char = ::core::ffi::c_char;
-pub type atomic_schar = ::core::ffi::c_schar;
-pub type atomic_uchar = ::core::ffi::c_uchar;
-pub type atomic_short = ::core::ffi::c_short;
-pub type atomic_ushort = ::core::ffi::c_ushort;
-pub type atomic_int = ::core::ffi::c_int;
-pub type atomic_uint = ::core::ffi::c_uint;
-pub type atomic_long = ::core::ffi::c_long;
-pub type atomic_ulong = ::core::ffi::c_ulong;
-pub type atomic_llong = ::core::ffi::c_longlong;
-pub type atomic_ullong = ::core::ffi::c_ulonglong;
-pub type atomic_char16_t = uint_least16_t;
-pub type atomic_char32_t = uint_least32_t;
-pub type atomic_wchar_t = wchar_t;
-pub type atomic_int_least8_t = int_least8_t;
-pub type atomic_uint_least8_t = uint_least8_t;
-pub type atomic_int_least16_t = int_least16_t;
-pub type atomic_uint_least16_t = uint_least16_t;
-pub type atomic_int_least32_t = int_least32_t;
-pub type atomic_uint_least32_t = uint_least32_t;
-pub type atomic_int_least64_t = int_least64_t;
-pub type atomic_uint_least64_t = uint_least64_t;
-pub type atomic_int_fast8_t = int_fast8_t;
-pub type atomic_uint_fast8_t = uint_fast8_t;
-pub type atomic_int_fast16_t = int_fast16_t;
-pub type atomic_uint_fast16_t = uint_fast16_t;
-pub type atomic_int_fast32_t = int_fast32_t;
-pub type atomic_uint_fast32_t = uint_fast32_t;
-pub type atomic_int_fast64_t = int_fast64_t;
-pub type atomic_uint_fast64_t = uint_fast64_t;
-pub type atomic_intptr_t = isize;
-pub type atomic_uintptr_t = usize;
-pub type atomic_size_t = usize;
-pub type atomic_ptrdiff_t = isize;
-pub type atomic_intmax_t = intmax_t;
-pub type atomic_uintmax_t = uintmax_t;
-#[repr(C)]
-#[derive(Debug, Copy, Clone)]
-pub struct atomic_flag {
-    pub _Value: atomic_bool,
-}
-#[allow(clippy::unnecessary_operation, clippy::identity_op)]
-const _: () = {
-    ["Size of atomic_flag"][::core::mem::size_of::<atomic_flag>() - 1usize];
-    ["Alignment of atomic_flag"][::core::mem::align_of::<atomic_flag>() - 1usize];
-    ["Offset of field: atomic_flag::_Value"][::core::mem::offset_of!(atomic_flag, _Value) - 0usize];
-};
-unsafe extern "C" {
-    pub fn atomic_flag_test_and_set(arg1: *mut atomic_flag) -> bool;
-}
-unsafe extern "C" {
-    pub fn atomic_flag_test_and_set_explicit(arg1: *mut atomic_flag, arg2: memory_order) -> bool;
-}
-unsafe extern "C" {
-    pub fn atomic_flag_clear(arg1: *mut atomic_flag);
-}
-unsafe extern "C" {
-    pub fn atomic_flag_clear_explicit(arg1: *mut atomic_flag, arg2: memory_order);
-}
-#[repr(C)]
-#[derive(Debug, Copy, Clone)]
-pub struct _z_seqnumber_t {
-    pub _seq: u32,
-}
-#[allow(clippy::unnecessary_operation, clippy::identity_op)]
-const _: () = {
-    ["Size of _z_seqnumber_t"][::core::mem::size_of::<_z_seqnumber_t>() - 4usize];
-    ["Alignment of _z_seqnumber_t"][::core::mem::align_of::<_z_seqnumber_t>() - 4usize];
-    ["Offset of field: _z_seqnumber_t::_seq"]
-        [::core::mem::offset_of!(_z_seqnumber_t, _seq) - 0usize];
-};
-unsafe extern "C" {
-    pub fn _z_seqnumber_init(seq: *mut _z_seqnumber_t) -> z_result_t;
-}
-unsafe extern "C" {
-    pub fn _z_seqnumber_fetch(seq: *mut _z_seqnumber_t, value: *mut u32) -> z_result_t;
-}
-unsafe extern "C" {
-    pub fn _z_seqnumber_fetch_and_increment(
-        seq: *mut _z_seqnumber_t,
-        value: *mut u32,
-    ) -> z_result_t;
-}
-pub const _ze_advanced_publisher_sequencing_t__ZE_ADVANCED_PUBLISHER_SEQUENCING_NONE:
-    _ze_advanced_publisher_sequencing_t = 0;
-pub const _ze_advanced_publisher_sequencing_t__ZE_ADVANCED_PUBLISHER_SEQUENCING_TIMESTAMP:
-    _ze_advanced_publisher_sequencing_t = 1;
-pub const _ze_advanced_publisher_sequencing_t__ZE_ADVANCED_PUBLISHER_SEQUENCING_SEQUENCE_NUMBER:
-    _ze_advanced_publisher_sequencing_t = 2;
-pub type _ze_advanced_publisher_sequencing_t = ::core::ffi::c_uint;
-pub const ze_advanced_publisher_heartbeat_mode_t_ZE_ADVANCED_PUBLISHER_HEARTBEAT_MODE_NONE:
-    ze_advanced_publisher_heartbeat_mode_t = 0;
-pub const ze_advanced_publisher_heartbeat_mode_t_ZE_ADVANCED_PUBLISHER_HEARTBEAT_MODE_PERIODIC:
-    ze_advanced_publisher_heartbeat_mode_t = 1;
-pub const ze_advanced_publisher_heartbeat_mode_t_ZE_ADVANCED_PUBLISHER_HEARTBEAT_MODE_SPORADIC:
-    ze_advanced_publisher_heartbeat_mode_t = 2;
-#[doc = " Whatami values, defined as a bitmask.\n\n Enumerators:\n   ZE_ADVANCED_PUBLISHER_HEARTBEAT_MODE_NONE: Disable heartbeat-based last sample miss detection.\n   ZE_ADVANCED_PUBLISHER_HEARTBEAT_MODE_PERIODIC: Allow last sample miss detection through periodic\n     heartbeat. Periodically send the last published Sample's sequence number to allow last sample recovery.\n   ZE_ADVANCED_PUBLISHER_HEARTBEAT_MODE_SPORADIC: Allow last sample miss detection through sporadic\n     heartbeat. Each period, the last published Sample's sequence number is sent with\n     `Z_CONGESTION_CONTROL_DROP` but only if it changed since last period.\n\n .. warning:: This API has been marked as unstable: it works as advertised, but it may be changed in a future release."]
-pub type ze_advanced_publisher_heartbeat_mode_t = ::core::ffi::c_uint;
-#[repr(C)]
-#[derive(Debug, Copy, Clone)]
-pub struct _ze_advanced_publisher_state_t {
-    pub _seqnumber: _z_seqnumber_t,
-    pub _heartbeat_mode: ze_advanced_publisher_heartbeat_mode_t,
-    pub _zn: _z_session_weak_t,
-    pub _publisher: z_owned_publisher_t,
-    pub _state_publisher_task_id: u32,
-    pub _last_published_sn: u32,
-}
-#[allow(clippy::unnecessary_operation, clippy::identity_op)]
-const _: () = {
-    ["Size of _ze_advanced_publisher_state_t"]
-        [::core::mem::size_of::<_ze_advanced_publisher_state_t>() - 176usize];
-    ["Alignment of _ze_advanced_publisher_state_t"]
-        [::core::mem::align_of::<_ze_advanced_publisher_state_t>() - 8usize];
-    ["Offset of field: _ze_advanced_publisher_state_t::_seqnumber"]
-        [::core::mem::offset_of!(_ze_advanced_publisher_state_t, _seqnumber) - 0usize];
-    ["Offset of field: _ze_advanced_publisher_state_t::_heartbeat_mode"]
-        [::core::mem::offset_of!(_ze_advanced_publisher_state_t, _heartbeat_mode) - 4usize];
-    ["Offset of field: _ze_advanced_publisher_state_t::_zn"]
-        [::core::mem::offset_of!(_ze_advanced_publisher_state_t, _zn) - 8usize];
-    ["Offset of field: _ze_advanced_publisher_state_t::_publisher"]
-        [::core::mem::offset_of!(_ze_advanced_publisher_state_t, _publisher) - 24usize];
-    ["Offset of field: _ze_advanced_publisher_state_t::_state_publisher_task_id"][::core::mem::offset_of!(
-        _ze_advanced_publisher_state_t,
-        _state_publisher_task_id
-    ) - 168usize];
-    ["Offset of field: _ze_advanced_publisher_state_t::_last_published_sn"]
-        [::core::mem::offset_of!(_ze_advanced_publisher_state_t, _last_published_sn) - 172usize];
-};
-unsafe extern "C" {
-    pub fn _ze_advanced_publisher_state_clear(state: *mut _ze_advanced_publisher_state_t);
-}
-#[repr(C)]
-#[derive(Debug, Copy, Clone)]
-pub struct _ze_advanced_publisher_state_rc_t {
-    pub _val: *mut _ze_advanced_publisher_state_t,
-    pub _cnt: *mut ::core::ffi::c_void,
-}
-#[allow(clippy::unnecessary_operation, clippy::identity_op)]
-const _: () = {
-    ["Size of _ze_advanced_publisher_state_rc_t"]
-        [::core::mem::size_of::<_ze_advanced_publisher_state_rc_t>() - 16usize];
-    ["Alignment of _ze_advanced_publisher_state_rc_t"]
-        [::core::mem::align_of::<_ze_advanced_publisher_state_rc_t>() - 8usize];
-    ["Offset of field: _ze_advanced_publisher_state_rc_t::_val"]
-        [::core::mem::offset_of!(_ze_advanced_publisher_state_rc_t, _val) - 0usize];
-    ["Offset of field: _ze_advanced_publisher_state_rc_t::_cnt"]
-        [::core::mem::offset_of!(_ze_advanced_publisher_state_rc_t, _cnt) - 8usize];
-};
-#[repr(C)]
-#[derive(Debug, Copy, Clone)]
-pub struct _ze_advanced_publisher_state_weak_t {
-    pub _val: *mut _ze_advanced_publisher_state_t,
-    pub _cnt: *mut ::core::ffi::c_void,
-}
-#[allow(clippy::unnecessary_operation, clippy::identity_op)]
-const _: () = {
-    ["Size of _ze_advanced_publisher_state_weak_t"]
-        [::core::mem::size_of::<_ze_advanced_publisher_state_weak_t>() - 16usize];
-    ["Alignment of _ze_advanced_publisher_state_weak_t"]
-        [::core::mem::align_of::<_ze_advanced_publisher_state_weak_t>() - 8usize];
-    ["Offset of field: _ze_advanced_publisher_state_weak_t::_val"]
-        [::core::mem::offset_of!(_ze_advanced_publisher_state_weak_t, _val) - 0usize];
-    ["Offset of field: _ze_advanced_publisher_state_weak_t::_cnt"]
-        [::core::mem::offset_of!(_ze_advanced_publisher_state_weak_t, _cnt) - 8usize];
-};
-#[repr(C)]
-#[derive(Debug, Copy, Clone)]
-pub struct _ze_advanced_publisher_t {
-    pub _publisher: z_owned_publisher_t,
-    pub _cache: *mut _ze_advanced_cache_t,
-    pub _has_liveliness: bool,
-    pub _liveliness: z_owned_liveliness_token_t,
-    pub _sequencing: _ze_advanced_publisher_sequencing_t,
-    pub _state: _ze_advanced_publisher_state_rc_t,
-}
-#[allow(clippy::unnecessary_operation, clippy::identity_op)]
-const _: () = {
-    ["Size of _ze_advanced_publisher_t"]
-        [::core::mem::size_of::<_ze_advanced_publisher_t>() - 256usize];
-    ["Alignment of _ze_advanced_publisher_t"]
-        [::core::mem::align_of::<_ze_advanced_publisher_t>() - 8usize];
-    ["Offset of field: _ze_advanced_publisher_t::_publisher"]
-        [::core::mem::offset_of!(_ze_advanced_publisher_t, _publisher) - 0usize];
-    ["Offset of field: _ze_advanced_publisher_t::_cache"]
-        [::core::mem::offset_of!(_ze_advanced_publisher_t, _cache) - 144usize];
-    ["Offset of field: _ze_advanced_publisher_t::_has_liveliness"]
-        [::core::mem::offset_of!(_ze_advanced_publisher_t, _has_liveliness) - 152usize];
-    ["Offset of field: _ze_advanced_publisher_t::_liveliness"]
-        [::core::mem::offset_of!(_ze_advanced_publisher_t, _liveliness) - 160usize];
-    ["Offset of field: _ze_advanced_publisher_t::_sequencing"]
-        [::core::mem::offset_of!(_ze_advanced_publisher_t, _sequencing) - 232usize];
-    ["Offset of field: _ze_advanced_publisher_t::_state"]
-        [::core::mem::offset_of!(_ze_advanced_publisher_t, _state) - 240usize];
-};
-#[repr(C)]
-#[derive(Debug, Copy, Clone)]
-pub struct ze_owned_advanced_publisher_t {
-    pub _val: _ze_advanced_publisher_t,
-}
-#[allow(clippy::unnecessary_operation, clippy::identity_op)]
-const _: () = {
-    ["Size of ze_owned_advanced_publisher_t"]
-        [::core::mem::size_of::<ze_owned_advanced_publisher_t>() - 256usize];
-    ["Alignment of ze_owned_advanced_publisher_t"]
-        [::core::mem::align_of::<ze_owned_advanced_publisher_t>() - 8usize];
-    ["Offset of field: ze_owned_advanced_publisher_t::_val"]
-        [::core::mem::offset_of!(ze_owned_advanced_publisher_t, _val) - 0usize];
-};
-pub type ze_loaned_advanced_publisher_t = _ze_advanced_publisher_t;
-#[repr(C)]
-#[derive(Debug, Copy, Clone)]
-pub struct ze_moved_advanced_publisher_t {
-    pub _this: ze_owned_advanced_publisher_t,
-}
-#[allow(clippy::unnecessary_operation, clippy::identity_op)]
-const _: () = {
-    ["Size of ze_moved_advanced_publisher_t"]
-        [::core::mem::size_of::<ze_moved_advanced_publisher_t>() - 256usize];
-    ["Alignment of ze_moved_advanced_publisher_t"]
-        [::core::mem::align_of::<ze_moved_advanced_publisher_t>() - 8usize];
-    ["Offset of field: ze_moved_advanced_publisher_t::_this"]
-        [::core::mem::offset_of!(ze_moved_advanced_publisher_t, _this) - 0usize];
-};
-unsafe extern "C" {
-    pub fn ze_internal_advanced_publisher_null(obj: *mut ze_owned_advanced_publisher_t);
-}
-unsafe extern "C" {
-    pub fn ze_internal_advanced_publisher_check(obj: *const ze_owned_advanced_publisher_t) -> bool;
-}
-unsafe extern "C" {
-    pub fn ze_advanced_publisher_loan(
-        obj: *const ze_owned_advanced_publisher_t,
-    ) -> *const ze_loaned_advanced_publisher_t;
-}
-unsafe extern "C" {
-    pub fn ze_advanced_publisher_loan_mut(
-        obj: *mut ze_owned_advanced_publisher_t,
-    ) -> *mut ze_loaned_advanced_publisher_t;
-}
-unsafe extern "C" {
-    pub fn ze_advanced_publisher_move(
-        obj: *mut ze_owned_advanced_publisher_t,
-    ) -> *mut ze_moved_advanced_publisher_t;
-}
-unsafe extern "C" {
-    pub fn ze_advanced_publisher_take(
-        obj: *mut ze_owned_advanced_publisher_t,
-        src: *mut ze_moved_advanced_publisher_t,
-    );
-}
-unsafe extern "C" {
-    pub fn ze_advanced_publisher_drop(obj: *mut ze_moved_advanced_publisher_t);
-}
-#[doc = " A map entry.\n\n Members:\n   void *_key: the key of the entry\n   void *_val: the value of the entry"]
-#[repr(C)]
-#[derive(Debug, Copy, Clone)]
-pub struct _z_sortedmap_entry_t {
-    pub _key: *mut ::core::ffi::c_void,
-    pub _val: *mut ::core::ffi::c_void,
-}
-#[allow(clippy::unnecessary_operation, clippy::identity_op)]
-const _: () = {
-    ["Size of _z_sortedmap_entry_t"][::core::mem::size_of::<_z_sortedmap_entry_t>() - 16usize];
-    ["Alignment of _z_sortedmap_entry_t"][::core::mem::align_of::<_z_sortedmap_entry_t>() - 8usize];
-    ["Offset of field: _z_sortedmap_entry_t::_key"]
-        [::core::mem::offset_of!(_z_sortedmap_entry_t, _key) - 0usize];
-    ["Offset of field: _z_sortedmap_entry_t::_val"]
-        [::core::mem::offset_of!(_z_sortedmap_entry_t, _val) - 8usize];
-};
-#[doc = " A sorted map.\n\n Members:\n   _z_list_t *_vals: a linked list containing the values\n   z_element_cmp_f _f_cmp: the function used to compare keys"]
-#[repr(C)]
-#[derive(Debug, Copy, Clone)]
-pub struct _z_sortedmap_t {
-    pub _vals: *mut _z_list_t,
-    pub _f_cmp: z_element_cmp_f,
-}
-#[allow(clippy::unnecessary_operation, clippy::identity_op)]
-const _: () = {
-    ["Size of _z_sortedmap_t"][::core::mem::size_of::<_z_sortedmap_t>() - 16usize];
-    ["Alignment of _z_sortedmap_t"][::core::mem::align_of::<_z_sortedmap_t>() - 8usize];
-    ["Offset of field: _z_sortedmap_t::_vals"]
-        [::core::mem::offset_of!(_z_sortedmap_t, _vals) - 0usize];
-    ["Offset of field: _z_sortedmap_t::_f_cmp"]
-        [::core::mem::offset_of!(_z_sortedmap_t, _f_cmp) - 8usize];
-};
-#[doc = " Iterator for a generic key-value hashmap."]
-#[repr(C)]
-#[derive(Debug, Copy, Clone)]
-pub struct _z_sortedmap_iterator_t {
-    pub _entry: *mut _z_sortedmap_entry_t,
-    pub _map: *const _z_sortedmap_t,
-    pub _list_ptr: *mut _z_list_t,
-    pub _initialized: bool,
-}
-#[allow(clippy::unnecessary_operation, clippy::identity_op)]
-const _: () = {
-    ["Size of _z_sortedmap_iterator_t"]
-        [::core::mem::size_of::<_z_sortedmap_iterator_t>() - 32usize];
-    ["Alignment of _z_sortedmap_iterator_t"]
-        [::core::mem::align_of::<_z_sortedmap_iterator_t>() - 8usize];
-    ["Offset of field: _z_sortedmap_iterator_t::_entry"]
-        [::core::mem::offset_of!(_z_sortedmap_iterator_t, _entry) - 0usize];
-    ["Offset of field: _z_sortedmap_iterator_t::_map"]
-        [::core::mem::offset_of!(_z_sortedmap_iterator_t, _map) - 8usize];
-    ["Offset of field: _z_sortedmap_iterator_t::_list_ptr"]
-        [::core::mem::offset_of!(_z_sortedmap_iterator_t, _list_ptr) - 16usize];
-    ["Offset of field: _z_sortedmap_iterator_t::_initialized"]
-        [::core::mem::offset_of!(_z_sortedmap_iterator_t, _initialized) - 24usize];
-};
-unsafe extern "C" {
-    pub fn _z_sortedmap_init(map: *mut _z_sortedmap_t, f_cmp: z_element_cmp_f);
-}
-unsafe extern "C" {
-    pub fn _z_sortedmap_make(f_cmp: z_element_cmp_f) -> _z_sortedmap_t;
-}
-unsafe extern "C" {
-    pub fn _z_sortedmap_insert(
-        map: *mut _z_sortedmap_t,
-        key: *mut ::core::ffi::c_void,
-        val: *mut ::core::ffi::c_void,
-        f: z_element_free_f,
-        replace: bool,
-    ) -> *mut ::core::ffi::c_void;
-}
-unsafe extern "C" {
-    pub fn _z_sortedmap_get(
-        map: *const _z_sortedmap_t,
-        key: *const ::core::ffi::c_void,
-    ) -> *mut ::core::ffi::c_void;
-}
-unsafe extern "C" {
-    pub fn _z_sortedmap_pop_first(map: *mut _z_sortedmap_t) -> *mut _z_sortedmap_entry_t;
-}
-unsafe extern "C" {
-    pub fn _z_sortedmap_remove(
-        map: *mut _z_sortedmap_t,
-        key: *const ::core::ffi::c_void,
-        f: z_element_free_f,
-    );
-}
-unsafe extern "C" {
-    pub fn _z_sortedmap_len(map: *const _z_sortedmap_t) -> usize;
-}
-unsafe extern "C" {
-    pub fn _z_sortedmap_is_empty(map: *const _z_sortedmap_t) -> bool;
-}
-unsafe extern "C" {
-    pub fn _z_sortedmap_copy(
-        dst: *mut _z_sortedmap_t,
-        src: *const _z_sortedmap_t,
-        f_c: z_element_clone_f,
-    ) -> z_result_t;
-}
-unsafe extern "C" {
-    pub fn _z_sortedmap_clone(
-        src: *const _z_sortedmap_t,
-        f_c: z_element_clone_f,
-        f_f: z_element_free_f,
-    ) -> _z_sortedmap_t;
-}
-unsafe extern "C" {
-    pub fn _z_sortedmap_clear(map: *mut _z_sortedmap_t, f: z_element_free_f);
-}
-unsafe extern "C" {
-    pub fn _z_sortedmap_free(map: *mut *mut _z_sortedmap_t, f: z_element_free_f);
-}
-unsafe extern "C" {
-    pub fn _z_sortedmap_iterator_make(map: *const _z_sortedmap_t) -> _z_sortedmap_iterator_t;
-}
-unsafe extern "C" {
-    pub fn _z_sortedmap_iterator_next(iter: *mut _z_sortedmap_iterator_t) -> bool;
-}
-unsafe extern "C" {
-    pub fn _z_sortedmap_iterator_key(
-        iter: *const _z_sortedmap_iterator_t,
-    ) -> *mut ::core::ffi::c_void;
-}
-unsafe extern "C" {
-    pub fn _z_sortedmap_iterator_value(
-        iter: *const _z_sortedmap_iterator_t,
-    ) -> *mut ::core::ffi::c_void;
-}
-pub type _z_uint32_eq_f =
-    ::core::option::Option<unsafe extern "C" fn(left: *const u32, right: *const u32) -> bool>;
-pub type _z_uint32_cmp_f = ::core::option::Option<
-    unsafe extern "C" fn(left: *const u32, right: *const u32) -> ::core::ffi::c_int,
->;
-#[doc = " A map entry.\n\n Members:\n   void *_key: the key of the entry\n   void *_val: the value of the entry"]
-pub type _z_uint32__z_sample_sortedmap_entry_t = _z_sortedmap_entry_t;
-#[doc = " A sorted map.\n\n Members:\n   _z_list_t *_vals: a linked list containing the values\n   z_element_cmp_f _f_cmp: the function used to compare keys"]
-pub type _z_uint32__z_sample_sortedmap_t = _z_sortedmap_t;
-#[doc = " Iterator for a generic key-value hashmap."]
-pub type _z_uint32__z_sample_sortedmap_iterator_t = _z_sortedmap_iterator_t;
-#[doc = " A map entry.\n\n Members:\n   void *_key: the key of the entry\n   void *_val: the value of the entry"]
-pub type _z_timestamp__z_sample_sortedmap_entry_t = _z_sortedmap_entry_t;
-#[doc = " A sorted map.\n\n Members:\n   _z_list_t *_vals: a linked list containing the values\n   z_element_cmp_f _f_cmp: the function used to compare keys"]
-pub type _z_timestamp__z_sample_sortedmap_t = _z_sortedmap_t;
-#[doc = " Iterator for a generic key-value hashmap."]
-pub type _z_timestamp__z_sample_sortedmap_iterator_t = _z_sortedmap_iterator_t;
-#[repr(C)]
-#[derive(Debug, Copy, Clone)]
-pub struct _ze_advanced_subscriber_sequenced_state_t {
-    pub _zn: _z_session_weak_t,
-    pub _has_last_delivered: bool,
-    pub _last_delivered: u32,
-    pub _pending_queries: u64,
-    pub _pending_samples: _z_uint32__z_sample_sortedmap_t,
-    pub _periodic_query_id: u32,
-    pub _query_keyexpr: z_owned_keyexpr_t,
-}
-#[allow(clippy::unnecessary_operation, clippy::identity_op)]
-const _: () = {
-    ["Size of _ze_advanced_subscriber_sequenced_state_t"]
-        [::core::mem::size_of::<_ze_advanced_subscriber_sequenced_state_t>() - 104usize];
-    ["Alignment of _ze_advanced_subscriber_sequenced_state_t"]
-        [::core::mem::align_of::<_ze_advanced_subscriber_sequenced_state_t>() - 8usize];
-    ["Offset of field: _ze_advanced_subscriber_sequenced_state_t::_zn"]
-        [::core::mem::offset_of!(_ze_advanced_subscriber_sequenced_state_t, _zn) - 0usize];
-    ["Offset of field: _ze_advanced_subscriber_sequenced_state_t::_has_last_delivered"][::core::mem::offset_of!(
-        _ze_advanced_subscriber_sequenced_state_t,
-        _has_last_delivered
-    )
-        - 16usize];
-    ["Offset of field: _ze_advanced_subscriber_sequenced_state_t::_last_delivered"][::core::mem::offset_of!(
-        _ze_advanced_subscriber_sequenced_state_t,
-        _last_delivered
-    ) - 20usize];
-    ["Offset of field: _ze_advanced_subscriber_sequenced_state_t::_pending_queries"][::core::mem::offset_of!(
-        _ze_advanced_subscriber_sequenced_state_t,
-        _pending_queries
-    ) - 24usize];
-    ["Offset of field: _ze_advanced_subscriber_sequenced_state_t::_pending_samples"][::core::mem::offset_of!(
-        _ze_advanced_subscriber_sequenced_state_t,
-        _pending_samples
-    ) - 32usize];
-    ["Offset of field: _ze_advanced_subscriber_sequenced_state_t::_periodic_query_id"][::core::mem::offset_of!(
-        _ze_advanced_subscriber_sequenced_state_t,
-        _periodic_query_id
-    ) - 48usize];
-    ["Offset of field: _ze_advanced_subscriber_sequenced_state_t::_query_keyexpr"][::core::mem::offset_of!(
-        _ze_advanced_subscriber_sequenced_state_t,
-        _query_keyexpr
-    ) - 56usize];
-};
-unsafe extern "C" {
-    pub fn _ze_advanced_subscriber_sequenced_state_clear(
-        s: *mut _ze_advanced_subscriber_sequenced_state_t,
-    );
-}
-pub type _ze_advanced_subscriber_sequenced_state_eq_f = ::core::option::Option<
-    unsafe extern "C" fn(
-        left: *const _ze_advanced_subscriber_sequenced_state_t,
-        right: *const _ze_advanced_subscriber_sequenced_state_t,
-    ) -> bool,
->;
-pub type _ze_advanced_subscriber_sequenced_state_cmp_f = ::core::option::Option<
-    unsafe extern "C" fn(
-        left: *const _ze_advanced_subscriber_sequenced_state_t,
-        right: *const _ze_advanced_subscriber_sequenced_state_t,
-    ) -> ::core::ffi::c_int,
->;
-#[repr(C)]
-#[derive(Debug, Copy, Clone)]
-pub struct _ze_advanced_subscriber_timestamped_state_t {
-    pub _has_last_delivered: bool,
-    pub _last_delivered: _z_timestamp_t,
-    pub _pending_queries: u64,
-    pub _pending_samples: _z_timestamp__z_sample_sortedmap_t,
-}
-#[allow(clippy::unnecessary_operation, clippy::identity_op)]
-const _: () = {
-    ["Size of _ze_advanced_subscriber_timestamped_state_t"]
-        [::core::mem::size_of::<_ze_advanced_subscriber_timestamped_state_t>() - 64usize];
-    ["Alignment of _ze_advanced_subscriber_timestamped_state_t"]
-        [::core::mem::align_of::<_ze_advanced_subscriber_timestamped_state_t>() - 8usize];
-    ["Offset of field: _ze_advanced_subscriber_timestamped_state_t::_has_last_delivered"][::core::mem::offset_of!(
-        _ze_advanced_subscriber_timestamped_state_t,
-        _has_last_delivered
-    )
-        - 0usize];
-    ["Offset of field: _ze_advanced_subscriber_timestamped_state_t::_last_delivered"][::core::mem::offset_of!(
-        _ze_advanced_subscriber_timestamped_state_t,
-        _last_delivered
-    ) - 8usize];
-    ["Offset of field: _ze_advanced_subscriber_timestamped_state_t::_pending_queries"][::core::mem::offset_of!(
-        _ze_advanced_subscriber_timestamped_state_t,
-        _pending_queries
-    ) - 40usize];
-    ["Offset of field: _ze_advanced_subscriber_timestamped_state_t::_pending_samples"][::core::mem::offset_of!(
-        _ze_advanced_subscriber_timestamped_state_t,
-        _pending_samples
-    ) - 48usize];
-};
-unsafe extern "C" {
-    pub fn _ze_advanced_subscriber_timestamped_state_clear(
-        s: *mut _ze_advanced_subscriber_timestamped_state_t,
-    );
-}
-pub type _ze_advanced_subscriber_timestamped_state_eq_f = ::core::option::Option<
-    unsafe extern "C" fn(
-        left: *const _ze_advanced_subscriber_timestamped_state_t,
-        right: *const _ze_advanced_subscriber_timestamped_state_t,
-    ) -> bool,
->;
-pub type _ze_advanced_subscriber_timestamped_state_cmp_f = ::core::option::Option<
-    unsafe extern "C" fn(
-        left: *const _ze_advanced_subscriber_timestamped_state_t,
-        right: *const _ze_advanced_subscriber_timestamped_state_t,
-    ) -> ::core::ffi::c_int,
->;
-#[doc = " A hashmap entry with generic keys.\n\n Members:\n   void *_key: the key of the entry\n   void *_val: the value of the entry"]
-pub type _z_entity_global_id__ze_advanced_subscriber_sequenced_state_hashmap_entry_t =
-    _z_hashmap_entry_t;
-#[doc = " A hashmap with generic keys.\n\n Members:\n    size_t _capacity: the number of buckets available in the hashmap\n   _z_list_t **_vals: the linked list containing the values\n   z_element_hash_f _f_hash: the hash function used to hash keys\n   z_element_eq_f _f_equals: the function used to compare keys for equality"]
-pub type _z_entity_global_id__ze_advanced_subscriber_sequenced_state_hashmap_t = _z_hashmap_t;
-#[doc = " Iterator for a generic key-value hashmap."]
-pub type _z_entity_global_id__ze_advanced_subscriber_sequenced_state_hashmap_iterator_t =
-    _z_hashmap_iterator_t;
-#[doc = " A hashmap entry with generic keys.\n\n Members:\n   void *_key: the key of the entry\n   void *_val: the value of the entry"]
-pub type _z_id__ze_advanced_subscriber_timestamped_state_hashmap_entry_t = _z_hashmap_entry_t;
-#[doc = " A hashmap with generic keys.\n\n Members:\n    size_t _capacity: the number of buckets available in the hashmap\n   _z_list_t **_vals: the linked list containing the values\n   z_element_hash_f _f_hash: the hash function used to hash keys\n   z_element_eq_f _f_equals: the function used to compare keys for equality"]
-pub type _z_id__ze_advanced_subscriber_timestamped_state_hashmap_t = _z_hashmap_t;
-#[doc = " Iterator for a generic key-value hashmap."]
-pub type _z_id__ze_advanced_subscriber_timestamped_state_hashmap_iterator_t = _z_hashmap_iterator_t;
-pub type _ze_closure_miss_eq_f = ::core::option::Option<
-    unsafe extern "C" fn(left: *const _ze_closure_miss_t, right: *const _ze_closure_miss_t) -> bool,
->;
-pub type _ze_closure_miss_cmp_f = ::core::option::Option<
-    unsafe extern "C" fn(
-        left: *const _ze_closure_miss_t,
-        right: *const _ze_closure_miss_t,
-    ) -> ::core::ffi::c_int,
->;
-#[doc = " A hashmap entry with generic keys.\n\n Members:\n   void *_key: the key of the entry\n   void *_val: the value of the entry"]
-pub type _ze_closure_miss_intmap_entry_t = _z_int_void_map_entry_t;
-#[doc = " A hashmap with generic keys.\n\n Members:\n    size_t _capacity: the number of buckets available in the hashmap\n   _z_list_t **_vals: the linked list containing the values\n   z_element_hash_f _f_hash: the hash function used to hash keys\n   z_element_eq_f _f_equals: the function used to compare keys for equality"]
-pub type _ze_closure_miss_intmap_t = _z_int_void_map_t;
-#[doc = " Iterator for a generic key-value hashmap."]
-pub type _ze_closure_miss_intmap_iterator_t = _z_int_void_map_iterator_t;
-#[repr(C)]
-#[derive(Debug, Copy, Clone)]
-pub struct _ze_advanced_subscriber_state_t {
-    pub _mutex: z_owned_mutex_t,
-    pub _next_id: usize,
-    pub _global_pending_queries: u64,
-    pub _sequenced_states: _z_entity_global_id__ze_advanced_subscriber_sequenced_state_hashmap_t,
-    pub _timestamped_states: _z_id__ze_advanced_subscriber_timestamped_state_hashmap_t,
-    pub _zn: _z_session_weak_t,
-    pub _keyexpr: z_owned_keyexpr_t,
-    pub _retransmission: bool,
-    pub _has_period: bool,
-    pub _period_ms: u64,
-    pub _history_depth: usize,
-    pub _history_age: u64,
-    pub _query_target: z_query_target_t,
-    pub _query_timeout: u64,
-    pub _callback: _z_closure_sample_callback_t,
-    pub _dropper: _z_drop_handler_t,
-    pub _ctx: *mut ::core::ffi::c_void,
-    pub _miss_handlers: _ze_closure_miss_intmap_t,
-    pub _has_token: bool,
-    pub _token: z_owned_liveliness_token_t,
-}
-#[allow(clippy::unnecessary_operation, clippy::identity_op)]
-const _: () = {
-    ["Size of _ze_advanced_subscriber_state_t"]
-        [::core::mem::size_of::<_ze_advanced_subscriber_state_t>() - 392usize];
-    ["Alignment of _ze_advanced_subscriber_state_t"]
-        [::core::mem::align_of::<_ze_advanced_subscriber_state_t>() - 8usize];
-    ["Offset of field: _ze_advanced_subscriber_state_t::_mutex"]
-        [::core::mem::offset_of!(_ze_advanced_subscriber_state_t, _mutex) - 0usize];
-    ["Offset of field: _ze_advanced_subscriber_state_t::_next_id"]
-        [::core::mem::offset_of!(_ze_advanced_subscriber_state_t, _next_id) - 64usize];
-    ["Offset of field: _ze_advanced_subscriber_state_t::_global_pending_queries"][::core::mem::offset_of!(
-        _ze_advanced_subscriber_state_t,
-        _global_pending_queries
-    ) - 72usize];
-    ["Offset of field: _ze_advanced_subscriber_state_t::_sequenced_states"]
-        [::core::mem::offset_of!(_ze_advanced_subscriber_state_t, _sequenced_states) - 80usize];
-    ["Offset of field: _ze_advanced_subscriber_state_t::_timestamped_states"]
-        [::core::mem::offset_of!(_ze_advanced_subscriber_state_t, _timestamped_states) - 112usize];
-    ["Offset of field: _ze_advanced_subscriber_state_t::_zn"]
-        [::core::mem::offset_of!(_ze_advanced_subscriber_state_t, _zn) - 144usize];
-    ["Offset of field: _ze_advanced_subscriber_state_t::_keyexpr"]
-        [::core::mem::offset_of!(_ze_advanced_subscriber_state_t, _keyexpr) - 160usize];
-    ["Offset of field: _ze_advanced_subscriber_state_t::_retransmission"]
-        [::core::mem::offset_of!(_ze_advanced_subscriber_state_t, _retransmission) - 208usize];
-    ["Offset of field: _ze_advanced_subscriber_state_t::_has_period"]
-        [::core::mem::offset_of!(_ze_advanced_subscriber_state_t, _has_period) - 209usize];
-    ["Offset of field: _ze_advanced_subscriber_state_t::_period_ms"]
-        [::core::mem::offset_of!(_ze_advanced_subscriber_state_t, _period_ms) - 216usize];
-    ["Offset of field: _ze_advanced_subscriber_state_t::_history_depth"]
-        [::core::mem::offset_of!(_ze_advanced_subscriber_state_t, _history_depth) - 224usize];
-    ["Offset of field: _ze_advanced_subscriber_state_t::_history_age"]
-        [::core::mem::offset_of!(_ze_advanced_subscriber_state_t, _history_age) - 232usize];
-    ["Offset of field: _ze_advanced_subscriber_state_t::_query_target"]
-        [::core::mem::offset_of!(_ze_advanced_subscriber_state_t, _query_target) - 240usize];
-    ["Offset of field: _ze_advanced_subscriber_state_t::_query_timeout"]
-        [::core::mem::offset_of!(_ze_advanced_subscriber_state_t, _query_timeout) - 248usize];
-    ["Offset of field: _ze_advanced_subscriber_state_t::_callback"]
-        [::core::mem::offset_of!(_ze_advanced_subscriber_state_t, _callback) - 256usize];
-    ["Offset of field: _ze_advanced_subscriber_state_t::_dropper"]
-        [::core::mem::offset_of!(_ze_advanced_subscriber_state_t, _dropper) - 264usize];
-    ["Offset of field: _ze_advanced_subscriber_state_t::_ctx"]
-        [::core::mem::offset_of!(_ze_advanced_subscriber_state_t, _ctx) - 272usize];
-    ["Offset of field: _ze_advanced_subscriber_state_t::_miss_handlers"]
-        [::core::mem::offset_of!(_ze_advanced_subscriber_state_t, _miss_handlers) - 280usize];
-    ["Offset of field: _ze_advanced_subscriber_state_t::_has_token"]
-        [::core::mem::offset_of!(_ze_advanced_subscriber_state_t, _has_token) - 312usize];
-    ["Offset of field: _ze_advanced_subscriber_state_t::_token"]
-        [::core::mem::offset_of!(_ze_advanced_subscriber_state_t, _token) - 320usize];
-};
-unsafe extern "C" {
-    pub fn _ze_advanced_subscriber_state_null() -> _ze_advanced_subscriber_state_t;
-}
-unsafe extern "C" {
-    pub fn _ze_advanced_subscriber_state_clear(state: *mut _ze_advanced_subscriber_state_t);
-}
-#[repr(C)]
-#[derive(Debug, Copy, Clone)]
-pub struct _ze_advanced_subscriber_state_rc_t {
-    pub _val: *mut _ze_advanced_subscriber_state_t,
-    pub _cnt: *mut ::core::ffi::c_void,
-}
-#[allow(clippy::unnecessary_operation, clippy::identity_op)]
-const _: () = {
-    ["Size of _ze_advanced_subscriber_state_rc_t"]
-        [::core::mem::size_of::<_ze_advanced_subscriber_state_rc_t>() - 16usize];
-    ["Alignment of _ze_advanced_subscriber_state_rc_t"]
-        [::core::mem::align_of::<_ze_advanced_subscriber_state_rc_t>() - 8usize];
-    ["Offset of field: _ze_advanced_subscriber_state_rc_t::_val"]
-        [::core::mem::offset_of!(_ze_advanced_subscriber_state_rc_t, _val) - 0usize];
-    ["Offset of field: _ze_advanced_subscriber_state_rc_t::_cnt"]
-        [::core::mem::offset_of!(_ze_advanced_subscriber_state_rc_t, _cnt) - 8usize];
-};
-#[repr(C)]
-#[derive(Debug, Copy, Clone)]
-pub struct _ze_advanced_subscriber_state_weak_t {
-    pub _val: *mut _ze_advanced_subscriber_state_t,
-    pub _cnt: *mut ::core::ffi::c_void,
-}
-#[allow(clippy::unnecessary_operation, clippy::identity_op)]
-const _: () = {
-    ["Size of _ze_advanced_subscriber_state_weak_t"]
-        [::core::mem::size_of::<_ze_advanced_subscriber_state_weak_t>() - 16usize];
-    ["Alignment of _ze_advanced_subscriber_state_weak_t"]
-        [::core::mem::align_of::<_ze_advanced_subscriber_state_weak_t>() - 8usize];
-    ["Offset of field: _ze_advanced_subscriber_state_weak_t::_val"]
-        [::core::mem::offset_of!(_ze_advanced_subscriber_state_weak_t, _val) - 0usize];
-    ["Offset of field: _ze_advanced_subscriber_state_weak_t::_cnt"]
-        [::core::mem::offset_of!(_ze_advanced_subscriber_state_weak_t, _cnt) - 8usize];
-};
-#[repr(C)]
-#[derive(Debug, Copy, Clone)]
-pub struct _ze_advanced_subscriber_t {
-    pub _subscriber: z_owned_subscriber_t,
-    pub _has_liveliness_subscriber: bool,
-    pub _liveliness_subscriber: z_owned_subscriber_t,
-    pub _has_heartbeat_subscriber: bool,
-    pub _heartbeat_subscriber: z_owned_subscriber_t,
-    pub _state: _ze_advanced_subscriber_state_rc_t,
-}
-#[allow(clippy::unnecessary_operation, clippy::identity_op)]
-const _: () = {
-    ["Size of _ze_advanced_subscriber_t"]
-        [::core::mem::size_of::<_ze_advanced_subscriber_t>() - 104usize];
-    ["Alignment of _ze_advanced_subscriber_t"]
-        [::core::mem::align_of::<_ze_advanced_subscriber_t>() - 8usize];
-    ["Offset of field: _ze_advanced_subscriber_t::_subscriber"]
-        [::core::mem::offset_of!(_ze_advanced_subscriber_t, _subscriber) - 0usize];
-    ["Offset of field: _ze_advanced_subscriber_t::_has_liveliness_subscriber"]
-        [::core::mem::offset_of!(_ze_advanced_subscriber_t, _has_liveliness_subscriber) - 24usize];
-    ["Offset of field: _ze_advanced_subscriber_t::_liveliness_subscriber"]
-        [::core::mem::offset_of!(_ze_advanced_subscriber_t, _liveliness_subscriber) - 32usize];
-    ["Offset of field: _ze_advanced_subscriber_t::_has_heartbeat_subscriber"]
-        [::core::mem::offset_of!(_ze_advanced_subscriber_t, _has_heartbeat_subscriber) - 56usize];
-    ["Offset of field: _ze_advanced_subscriber_t::_heartbeat_subscriber"]
-        [::core::mem::offset_of!(_ze_advanced_subscriber_t, _heartbeat_subscriber) - 64usize];
-    ["Offset of field: _ze_advanced_subscriber_t::_state"]
-        [::core::mem::offset_of!(_ze_advanced_subscriber_t, _state) - 88usize];
-};
-#[repr(C)]
-#[derive(Debug, Copy, Clone)]
-pub struct ze_owned_advanced_subscriber_t {
-    pub _val: _ze_advanced_subscriber_t,
-}
-#[allow(clippy::unnecessary_operation, clippy::identity_op)]
-const _: () = {
-    ["Size of ze_owned_advanced_subscriber_t"]
-        [::core::mem::size_of::<ze_owned_advanced_subscriber_t>() - 104usize];
-    ["Alignment of ze_owned_advanced_subscriber_t"]
-        [::core::mem::align_of::<ze_owned_advanced_subscriber_t>() - 8usize];
-    ["Offset of field: ze_owned_advanced_subscriber_t::_val"]
-        [::core::mem::offset_of!(ze_owned_advanced_subscriber_t, _val) - 0usize];
-};
-pub type ze_loaned_advanced_subscriber_t = _ze_advanced_subscriber_t;
-#[repr(C)]
-#[derive(Debug, Copy, Clone)]
-pub struct ze_moved_advanced_subscriber_t {
-    pub _this: ze_owned_advanced_subscriber_t,
-}
-#[allow(clippy::unnecessary_operation, clippy::identity_op)]
-const _: () = {
-    ["Size of ze_moved_advanced_subscriber_t"]
-        [::core::mem::size_of::<ze_moved_advanced_subscriber_t>() - 104usize];
-    ["Alignment of ze_moved_advanced_subscriber_t"]
-        [::core::mem::align_of::<ze_moved_advanced_subscriber_t>() - 8usize];
-    ["Offset of field: ze_moved_advanced_subscriber_t::_this"]
-        [::core::mem::offset_of!(ze_moved_advanced_subscriber_t, _this) - 0usize];
-};
-unsafe extern "C" {
-    pub fn ze_internal_advanced_subscriber_null(obj: *mut ze_owned_advanced_subscriber_t);
-}
-unsafe extern "C" {
-    pub fn ze_internal_advanced_subscriber_check(
-        obj: *const ze_owned_advanced_subscriber_t,
-    ) -> bool;
-}
-unsafe extern "C" {
-    pub fn ze_advanced_subscriber_loan(
-        obj: *const ze_owned_advanced_subscriber_t,
-    ) -> *const ze_loaned_advanced_subscriber_t;
-}
-unsafe extern "C" {
-    pub fn ze_advanced_subscriber_loan_mut(
-        obj: *mut ze_owned_advanced_subscriber_t,
-    ) -> *mut ze_loaned_advanced_subscriber_t;
-}
-unsafe extern "C" {
-    pub fn ze_advanced_subscriber_move(
-        obj: *mut ze_owned_advanced_subscriber_t,
-    ) -> *mut ze_moved_advanced_subscriber_t;
-}
-unsafe extern "C" {
-    pub fn ze_advanced_subscriber_take(
-        obj: *mut ze_owned_advanced_subscriber_t,
-        src: *mut ze_moved_advanced_subscriber_t,
-    );
-}
-unsafe extern "C" {
-    pub fn ze_advanced_subscriber_drop(obj: *mut ze_moved_advanced_subscriber_t);
-}
-#[repr(C)]
-#[derive(Debug, Copy, Clone)]
-pub struct _ze_sample_miss_listener_t {
-    pub _id: usize,
-    pub _statesref: _ze_advanced_subscriber_state_weak_t,
-}
-#[allow(clippy::unnecessary_operation, clippy::identity_op)]
-const _: () = {
-    ["Size of _ze_sample_miss_listener_t"]
-        [::core::mem::size_of::<_ze_sample_miss_listener_t>() - 24usize];
-    ["Alignment of _ze_sample_miss_listener_t"]
-        [::core::mem::align_of::<_ze_sample_miss_listener_t>() - 8usize];
-    ["Offset of field: _ze_sample_miss_listener_t::_id"]
-        [::core::mem::offset_of!(_ze_sample_miss_listener_t, _id) - 0usize];
-    ["Offset of field: _ze_sample_miss_listener_t::_statesref"]
-        [::core::mem::offset_of!(_ze_sample_miss_listener_t, _statesref) - 8usize];
-};
-#[repr(C)]
-#[derive(Debug, Copy, Clone)]
-pub struct ze_owned_sample_miss_listener_t {
-    pub _val: _ze_sample_miss_listener_t,
-}
-#[allow(clippy::unnecessary_operation, clippy::identity_op)]
-const _: () = {
-    ["Size of ze_owned_sample_miss_listener_t"]
-        [::core::mem::size_of::<ze_owned_sample_miss_listener_t>() - 24usize];
-    ["Alignment of ze_owned_sample_miss_listener_t"]
-        [::core::mem::align_of::<ze_owned_sample_miss_listener_t>() - 8usize];
-    ["Offset of field: ze_owned_sample_miss_listener_t::_val"]
-        [::core::mem::offset_of!(ze_owned_sample_miss_listener_t, _val) - 0usize];
-};
-pub type ze_loaned_sample_miss_listener_t = _ze_sample_miss_listener_t;
-#[repr(C)]
-#[derive(Debug, Copy, Clone)]
-pub struct ze_moved_sample_miss_listener_t {
-    pub _this: ze_owned_sample_miss_listener_t,
-}
-#[allow(clippy::unnecessary_operation, clippy::identity_op)]
-const _: () = {
-    ["Size of ze_moved_sample_miss_listener_t"]
-        [::core::mem::size_of::<ze_moved_sample_miss_listener_t>() - 24usize];
-    ["Alignment of ze_moved_sample_miss_listener_t"]
-        [::core::mem::align_of::<ze_moved_sample_miss_listener_t>() - 8usize];
-    ["Offset of field: ze_moved_sample_miss_listener_t::_this"]
-        [::core::mem::offset_of!(ze_moved_sample_miss_listener_t, _this) - 0usize];
-};
-unsafe extern "C" {
-    pub fn ze_internal_sample_miss_listener_null(obj: *mut ze_owned_sample_miss_listener_t);
-}
-unsafe extern "C" {
-    pub fn ze_internal_sample_miss_listener_check(
-        obj: *const ze_owned_sample_miss_listener_t,
-    ) -> bool;
-}
-unsafe extern "C" {
-    pub fn ze_sample_miss_listener_loan(
-        obj: *const ze_owned_sample_miss_listener_t,
-    ) -> *const ze_loaned_sample_miss_listener_t;
-}
-unsafe extern "C" {
-    pub fn ze_sample_miss_listener_loan_mut(
-        obj: *mut ze_owned_sample_miss_listener_t,
-    ) -> *mut ze_loaned_sample_miss_listener_t;
-}
-unsafe extern "C" {
-    pub fn ze_sample_miss_listener_move(
-        obj: *mut ze_owned_sample_miss_listener_t,
-    ) -> *mut ze_moved_sample_miss_listener_t;
-}
-unsafe extern "C" {
-    pub fn ze_sample_miss_listener_take(
-        obj: *mut ze_owned_sample_miss_listener_t,
-        src: *mut ze_moved_sample_miss_listener_t,
-    );
-}
-unsafe extern "C" {
-    pub fn ze_sample_miss_listener_drop(obj: *mut ze_moved_sample_miss_listener_t);
-}
 unsafe extern "C" {
     #[doc = " Just some bytes.\n\n Constant alias for string: `\"zenoh/bytes\"`.\n\n This encoding supposes that the payload was created with c:func:`z_bytes_from_buf`, c:func:`z_bytes_from_slice` or\n similar functions and its data can be accessed via c:func:`z_bytes_to_slice`."]
     pub fn z_encoding_zenoh_bytes() -> *const z_loaned_encoding_t;
@@ -12733,29 +11074,6 @@ unsafe extern "C" {
     ) -> z_result_t;
 }
 unsafe extern "C" {
-    #[doc = " Appends the suffix portion of a key expression to another key expression (automatically inserting '/').\n\n Only the suffix portion of the key expression is preserved. All other components of the resulting key\n expression will be discarded.\n The resulting key expression is automatically canonized.\n\n Parameters:\n   prefix: Pointer to :c:type:`z_owned_keyexpr_t` to the key expression to append to.\n   right: Pointer to :c:type:`z_loaned_keyexpr_t` whose suffix will be appended.\n\n Return:\n   ``0`` if the append was successful; a ``negative value`` otherwise."]
-    pub fn _z_keyexpr_append_suffix(
-        prefix: *mut z_owned_keyexpr_t,
-        right: *const z_loaned_keyexpr_t,
-    ) -> z_result_t;
-}
-unsafe extern "C" {
-    #[doc = " Appends a string segment to a key expression (automatically inserting '/'). The resulting key expression is\n automatically canonized.\n\n Parameters:\n   prefix: Pointer to :c:type:`z_owned_keyexpr_t` to the key expression to append to.\n   right: Pointer to a character array representing the string to append.\n   len: Length of the string segment in ``right`` to append.\n\n Return:\n   ``0`` if append successful, ``negative value`` otherwise."]
-    pub fn _z_keyexpr_append_substr(
-        prefix: *mut z_owned_keyexpr_t,
-        right: *const ::core::ffi::c_char,
-        len: usize,
-    ) -> z_result_t;
-}
-unsafe extern "C" {
-    #[doc = " Appends multiple null-terminated strings to a key expression (automatically inserting '/' between each component).\n The resulting key expression is automatically canonized.\n\n Parameters:\n   prefix: Pointer to :c:type:`z_owned_keyexpr_t` representing the key expression to append to.\n   strs: Array of ``count`` null-terminated strings to append, in order.\n   count: Number of strings in the array.\n\n Return:\n   ``0`` if all appends were successful, ``negative value`` if any append failed."]
-    pub fn _z_keyexpr_append_str_array(
-        prefix: *mut z_owned_keyexpr_t,
-        strs: *mut *const ::core::ffi::c_char,
-        count: usize,
-    ) -> z_result_t;
-}
-unsafe extern "C" {
     #[doc = " Returns the relation between `left` and `right` from the `left`'s point of view.\n\n Note that this is slower than `z_keyexpr_intersects` and `keyexpr_includes`, so you should favor these methods for\n most applications.\n\n Parameters:\n   left: Pointer to :c:type:`z_loaned_keyexpr_t` representing left key expression.\n   right: Pointer to :c:type:`z_loaned_keyexpr_t` representing right key expression.\n\n Return:\n   Relation between `left` and `right` from the `left`'s point of view."]
     pub fn z_keyexpr_relation_to(
         left: *const z_loaned_keyexpr_t,
@@ -12781,7 +11099,7 @@ unsafe extern "C" {
 unsafe extern "C" {
     #[doc = " Checks if a given keyexpr intersects with another keyexpr.\n\n Parameters:\n   l: Pointer to a :c:type:`z_loaned_keyexpr_t`.\n   r: Pointer to a :c:type:`z_loaned_keyexpr_t`.\n\n Return:\n   ``true`` if keyexprs intersect, i.e. there exists at least one key which is contained in both of the\n   sets defined by ``l`` and ``r``. Otherwise, returns ``false``."]
     pub fn z_keyexpr_intersects(l: *const z_loaned_keyexpr_t, r: *const z_loaned_keyexpr_t)
-    -> bool;
+        -> bool;
 }
 unsafe extern "C" {
     #[doc = " Checks if two keyexpr are equal.\n\n Parameters:\n   l: Pointer to a :c:type:`z_loaned_keyexpr_t`.\n   r: Pointer to a :c:type:`z_loaned_keyexpr_t`.\n\n Return:\n   ``true`` if both ``l`` and ``r`` are equal. Otherwise, returns  ``false``."]
@@ -12960,7 +11278,7 @@ unsafe extern "C" {
 unsafe extern "C" {
     #[doc = " Converts a string into a :c:type:`z_owned_bytes_t`.\n\n Parameters:\n   bytes: An uninitialized :c:type:`z_owned_bytes_t` to contain the encoded string.\n   s: Pointer to the string to convert. The string will be consumed upon function return.\n\n Return:\n   ``0`` if conversion is successful, ``negative value`` otherwise."]
     pub fn z_bytes_from_string(bytes: *mut z_owned_bytes_t, s: *mut z_moved_string_t)
-    -> z_result_t;
+        -> z_result_t;
 }
 unsafe extern "C" {
     #[doc = " Converts a string into a :c:type:`z_owned_bytes_t` by copying.\n\n Parameters:\n   bytes: An uninitialized :c:type:`z_owned_bytes_t` to contain the encoded string.\n   s: Pointer to the string to convert.\n\n Return:\n   ``0`` if conversion is successful, ``negative value`` otherwise."]
@@ -13163,7 +11481,7 @@ unsafe extern "C" {
     pub fn z_query_keyexpr(query: *const z_loaned_query_t) -> *const z_loaned_keyexpr_t;
 }
 unsafe extern "C" {
-    #[doc = " Builds a new sample closure.\n It consists of a structure that contains all the elements for stateful, memory-leak-free callbacks.\n\n Parameters:\n   closure: Pointer to an uninitialized :c:type:`z_owned_closure_sample_t`.\n   call: Pointer to the callback function. ``context`` will be passed as its last argument.\n   drop: Pointer to the function that will free the callback state. ``context`` will be passed as its last argument.\n   context: Pointer to an arbitrary state.\n\n Return:\n   ``0`` in case of success, negative error code otherwise"]
+    #[doc = " Builds a new sample closure.\n It consists on a structure that contains all the elements for stateful, memory-leak-free callbacks.\n\n Parameters:\n   closure: Pointer to an uninitialized :c:type:`z_owned_closure_sample_t`.\n   call: Pointer to the callback function. ``context`` will be passed as its last argument.\n   drop: Pointer to the function that will free the callback state. ``context`` will be passed as its last argument.\n   context: Pointer to an arbitrary state.\n\n Return:\n   ``0`` in case of success, negative error code otherwise"]
     pub fn z_closure_sample(
         closure: *mut z_owned_closure_sample_t,
         call: z_closure_sample_callback_t,
@@ -13179,7 +11497,7 @@ unsafe extern "C" {
     );
 }
 unsafe extern "C" {
-    #[doc = " Builds a new query closure.\n It consists of a structure that contains all the elements for stateful, memory-leak-free callbacks.\n\n Parameters:\n   closure: Pointer to an uninitialized :c:type:`z_owned_closure_query_t`.\n   call: Pointer to the callback function. ``context`` will be passed as its last argument.\n   drop: Pointer to the function that will free the callback state. ``context`` will be passed as its last argument.\n   context: Pointer to an arbitrary state.\n\n Return:\n   ``0`` in case of success, negative error code otherwise"]
+    #[doc = " Builds a new query closure.\n It consists on a structure that contains all the elements for stateful, memory-leak-free callbacks.\n\n Parameters:\n   closure: Pointer to an uninitialized :c:type:`z_owned_closure_query_t`.\n   call: Pointer to the callback function. ``context`` will be passed as its last argument.\n   drop: Pointer to the function that will free the callback state. ``context`` will be passed as its last argument.\n   context: Pointer to an arbitrary state.\n\n Return:\n   ``0`` in case of success, negative error code otherwise"]
     pub fn z_closure_query(
         closure: *mut z_owned_closure_query_t,
         call: z_closure_query_callback_t,
@@ -13195,7 +11513,7 @@ unsafe extern "C" {
     );
 }
 unsafe extern "C" {
-    #[doc = " Builds a new reply closure.\n It consists of a structure that contains all the elements for stateful, memory-leak-free callbacks.\n\n Parameters:\n   closure: Pointer to an uninitialized :c:type:`z_owned_closure_reply_t`.\n   call: Pointer to the callback function. ``context`` will be passed as its last argument.\n   drop: Pointer to the function that will free the callback state. ``context`` will be passed as its last argument.\n   context: Pointer to an arbitrary state.\n\n Return:\n   ``0`` in case of success, negative error code otherwise"]
+    #[doc = " Builds a new reply closure.\n It consists on a structure that contains all the elements for stateful, memory-leak-free callbacks.\n\n Parameters:\n   closure: Pointer to an uninitialized :c:type:`z_owned_closure_reply_t`.\n   call: Pointer to the callback function. ``context`` will be passed as its last argument.\n   drop: Pointer to the function that will free the callback state. ``context`` will be passed as its last argument.\n   context: Pointer to an arbitrary state.\n\n Return:\n   ``0`` in case of success, negative error code otherwise"]
     pub fn z_closure_reply(
         closure: *mut z_owned_closure_reply_t,
         call: z_closure_reply_callback_t,
@@ -13211,7 +11529,7 @@ unsafe extern "C" {
     );
 }
 unsafe extern "C" {
-    #[doc = " Builds a new hello closure.\n It consists of a structure that contains all the elements for stateful, memory-leak-free callbacks.\n\n Parameters:\n   closure: Pointer to an uninitialized :c:type:`z_owned_closure_hello_t`.\n   call: Pointer to the callback function. ``context`` will be passed as its last argument.\n   drop: Pointer to the function that will free the callback state. ``context`` will be passed as its last argument.\n   context: Pointer to an arbitrary state.\n\n Return:\n   ``0`` in case of success, negative error code otherwise"]
+    #[doc = " Builds a new hello closure.\n It consists on a structure that contains all the elements for stateful, memory-leak-free callbacks.\n\n Parameters:\n   closure: Pointer to an uninitialized :c:type:`z_owned_closure_hello_t`.\n   call: Pointer to the callback function. ``context`` will be passed as its last argument.\n   drop: Pointer to the function that will free the callback state. ``context`` will be passed as its last argument.\n   context: Pointer to an arbitrary state.\n\n Return:\n   ``0`` in case of success, negative error code otherwise"]
     pub fn z_closure_hello(
         closure: *mut z_owned_closure_hello_t,
         call: z_closure_hello_callback_t,
@@ -13227,7 +11545,7 @@ unsafe extern "C" {
     );
 }
 unsafe extern "C" {
-    #[doc = " Builds a new zid closure.\n It consists of a structure that contains all the elements for stateful, memory-leak-free callbacks.\n\n Parameters:\n   closure: Pointer to an uninitialized :c:type:`z_owned_closure_zid_t`.\n   call: Pointer to the callback function. ``context`` will be passed as its last argument.\n   drop: Pointer to the function that will free the callback state. ``context`` will be passed as its last argument.\n   context: Pointer to an arbitrary state.\n\n Return:\n   ``0`` in case of success, negative error code otherwise"]
+    #[doc = " Builds a new zid closure.\n It consists on a structure that contains all the elements for stateful, memory-leak-free callbacks.\n\n Parameters:\n   closure: Pointer to an uninitialized :c:type:`z_owned_closure_zid_t`.\n   call: Pointer to the callback function. ``context`` will be passed as its last argument.\n   drop: Pointer to the function that will free the callback state. ``context`` will be passed as its last argument.\n   context: Pointer to an arbitrary state.\n\n Return:\n   ``0`` in case of success, negative error code otherwise"]
     pub fn z_closure_zid(
         closure: *mut z_owned_closure_zid_t,
         call: z_closure_zid_callback_t,
@@ -13240,7 +11558,7 @@ unsafe extern "C" {
     pub fn z_closure_zid_call(closure: *const z_loaned_closure_zid_t, id: *const z_id_t);
 }
 unsafe extern "C" {
-    #[doc = " Builds a new matching status closure.\n It consists of a structure that contains all the elements for stateful, memory-leak-free callbacks.\n\n Parameters:\n   closure: Pointer to an uninitialized :c:type:`z_owned_closure_matching_status_t`.\n   call: Pointer to the callback function. ``context`` will be passed as its last argument.\n   drop: Pointer to the function that will free the callback state. ``context`` will be passed as its last argument.\n   context: Pointer to an arbitrary state.\n\n Return:\n   ``0`` in case of success, negative error code otherwise"]
+    #[doc = " Builds a new matching status closure.\n It consists on a structure that contains all the elements for stateful, memory-leak-free callbacks.\n\n Parameters:\n   closure: Pointer to an uninitialized :c:type:`z_owned_closure_matching_status_t`.\n   call: Pointer to the callback function. ``context`` will be passed as its last argument.\n   drop: Pointer to the function that will free the callback state. ``context`` will be passed as its last argument.\n   context: Pointer to an arbitrary state.\n\n Return:\n   ``0`` in case of success, negative error code otherwise"]
     pub fn z_closure_matching_status(
         closure: *mut z_owned_closure_matching_status_t,
         call: z_closure_matching_status_callback_t,
@@ -13254,19 +11572,6 @@ unsafe extern "C" {
         closure: *const z_loaned_closure_matching_status_t,
         status: *const z_matching_status_t,
     );
-}
-unsafe extern "C" {
-    #[doc = " Builds a new sample miss closure.\n It consists of a structure that contains all the elements for stateful, memory-leak-free callbacks.\n\n Parameters:\n   closure: Pointer to an uninitialized :c:type:`ze_owned_closure_miss_t`.\n   call: Pointer to the callback function. ``context`` will be passed as its last argument.\n   drop: Pointer to the function that will free the callback state. ``context`` will be passed as its last argument.\n   context: Pointer to an arbitrary state.\n\n Return:\n   ``0`` in case of success, negative error code otherwise\n\n .. warning:: This API has been marked as unstable: it works as advertised, but it may be changed in a future release."]
-    pub fn ze_closure_miss(
-        closure: *mut ze_owned_closure_miss_t,
-        call: ze_closure_miss_callback_t,
-        drop: z_closure_drop_callback_t,
-        context: *mut ::core::ffi::c_void,
-    ) -> z_result_t;
-}
-unsafe extern "C" {
-    #[doc = " Calls a sample miss closure.\n\n Parameters:\n   closure: Pointer to the :c:type:`ze_loaned_closure_miss_t` to call.\n   status: Pointer to the :c:type:`ze_miss_t` to pass to the closure.\n\n .. warning:: This API has been marked as unstable: it works as advertised, but it may be changed in a future release."]
-    pub fn ze_closure_miss_call(closure: *const ze_loaned_closure_miss_t, miss: *const ze_miss_t);
 }
 unsafe extern "C" {
     pub fn z_internal_string_null(obj: *mut z_owned_string_t);
@@ -13986,29 +12291,6 @@ unsafe extern "C" {
     ) -> *const z_loaned_closure_matching_status_t;
 }
 unsafe extern "C" {
-    pub fn ze_internal_closure_miss_null(closure_miss: *mut ze_owned_closure_miss_t);
-}
-unsafe extern "C" {
-    pub fn ze_internal_closure_miss_check(val: *const ze_owned_closure_miss_t) -> bool;
-}
-unsafe extern "C" {
-    pub fn ze_closure_miss_move(val: *mut ze_owned_closure_miss_t) -> *mut ze_moved_closure_miss_t;
-}
-unsafe extern "C" {
-    pub fn ze_closure_miss_take(
-        obj: *mut ze_owned_closure_miss_t,
-        src: *mut ze_moved_closure_miss_t,
-    );
-}
-unsafe extern "C" {
-    pub fn ze_closure_miss_drop(obj: *mut ze_moved_closure_miss_t);
-}
-unsafe extern "C" {
-    pub fn ze_closure_miss_loan(
-        val: *const ze_owned_closure_miss_t,
-    ) -> *const ze_loaned_closure_miss_t;
-}
-unsafe extern "C" {
     pub fn z_view_keyexpr_is_empty(obj: *const z_view_keyexpr_t) -> bool;
 }
 unsafe extern "C" {
@@ -14276,13 +12558,6 @@ unsafe extern "C" {
     ) -> z_result_t;
 }
 unsafe extern "C" {
-    pub fn _z_publisher_put_impl(
-        pub_: *const z_loaned_publisher_t,
-        payload: *mut z_moved_bytes_t,
-        options: *const z_publisher_put_options_t,
-    ) -> z_result_t;
-}
-unsafe extern "C" {
     #[doc = " Deletes data from the keyexpr bound to the given publisher.\n\n Parameters:\n   pub: Pointer to a :c:type:`z_loaned_publisher_t` from where to delete the data.\n   options: Pointer to a :c:type:`z_publisher_delete_options_t` to configure the delete operation.\n\n Return:\n   ``0`` if delete operation is successful, ``negative value`` otherwise."]
     pub fn z_publisher_delete(
         pub_: *const z_loaned_publisher_t,
@@ -14290,18 +12565,12 @@ unsafe extern "C" {
     ) -> z_result_t;
 }
 unsafe extern "C" {
-    pub fn _z_publisher_delete_impl(
-        pub_: *const z_loaned_publisher_t,
-        options: *const z_publisher_delete_options_t,
-    ) -> z_result_t;
-}
-unsafe extern "C" {
     #[doc = " Gets the keyexpr from a publisher.\n\n Parameters:\n   publisher: Pointer to a :c:type:`z_loaned_publisher_t` to get the keyexpr from.\n\n Return:\n   The keyexpr wrapped as a :c:type:`z_loaned_keyexpr_t`."]
     pub fn z_publisher_keyexpr(publisher: *const z_loaned_publisher_t)
-    -> *const z_loaned_keyexpr_t;
+        -> *const z_loaned_keyexpr_t;
 }
 unsafe extern "C" {
-    #[doc = " Gets the entity global Id from a publisher.\n\n Parameters:\n   publisher: Pointer to a :c:type:`z_loaned_publisher_t` to get the entity global Id from.\n\n Return:\n   The entity gloabl Id wrapped as a :c:type:`z_entity_global_id_t`.\n\n .. warning:: This API has been marked as unstable: it works as advertised, but it may be changed in a future release."]
+    #[doc = " Gets the entity global Id from a publisher.\n\n Parameters:\n   publisher: Pointer to a :c:type:`z_loaned_publisher_t` to get the entity global Id from.\n\n Return:\n   The entity gloabl Id wrapped as a :c:type:`z_entity_global_global_id_t`."]
     pub fn z_publisher_id(publisher: *const z_loaned_publisher_t) -> z_entity_global_id_t;
 }
 unsafe extern "C" {
@@ -14485,13 +12754,6 @@ unsafe extern "C" {
     ) -> z_result_t;
 }
 unsafe extern "C" {
-    pub fn _z_query_reply_sample(
-        query: *const z_loaned_query_t,
-        sample: *const z_loaned_sample_t,
-        options: *const z_query_reply_options_t,
-    ) -> z_result_t;
-}
-unsafe extern "C" {
     #[doc = " Builds a :c:type:`z_query_reply_del_options_t` with default values.\n\n Parameters:\n   options: Pointer to an uninitialized :c:type:`z_query_reply_del_options_t`."]
     pub fn z_query_reply_del_options_default(options: *mut z_query_reply_del_options_t);
 }
@@ -14522,7 +12784,7 @@ unsafe extern "C" {
 unsafe extern "C" {
     #[doc = " Gets the keyexpr from a queryable.\n\n Parameters:\n   queryable: Pointer to a :c:type:`z_loaned_queryable_t` to get the keyexpr from.\n\n Return:\n   The keyexpr wrapped as a :c:type:`z_loaned_keyexpr_t`. Will return NULL if\n   corresponding session is closed or dropped."]
     pub fn z_queryable_keyexpr(queryable: *const z_loaned_queryable_t)
-    -> *const z_loaned_keyexpr_t;
+        -> *const z_loaned_keyexpr_t;
 }
 unsafe extern "C" {
     #[doc = " Builds a new keyexpr.\n\n Parameters:\n   keyexpr: Pointer to an uninitialized :c:type:`z_owned_keyexpr_t` to store the keyexpr.\n   name: Pointer to the null-terminated string of the keyexpr.\n\n Return:\n   ``0`` if creation is successful, ``negative value`` otherwise."]
@@ -14636,10 +12898,6 @@ unsafe extern "C" {
     ) -> *const z_loaned_keyexpr_t;
 }
 unsafe extern "C" {
-    #[doc = " Gets the entity global Id from a subscriber.\n\n Parameters:\n   subscriber: Pointer to a :c:type:`z_loaned_subscriber_t` to get the entity global Id from.\n\n Return:\n   The entity gloabl Id wrapped as a :c:type:`z_entity_global_global_id_t`.\n\n .. warning:: This API has been marked as unstable: it works as advertised, but it may be changed in a future release."]
-    pub fn z_subscriber_id(subscriber: *const z_loaned_subscriber_t) -> z_entity_global_id_t;
-}
-unsafe extern "C" {
     #[doc = " Activate the batching mechanism, any message that would have been sent on the network by a subsequent api call (e.g\n z_put, z_get) will be instead stored until either: the batch is full, flushed with :c:func:`zp_batch_flush`, batching\n is stopped with :c:func:`zp_batch_stop`, a message needs to be sent immediately.\n\n Parameters:\n   zs: Pointer to a :c:type:`z_loaned_session_t` that will start batching messages.\n\n Return:\n   ``0`` if batching started, ``negative value`` otherwise."]
     pub fn zp_batch_start(zs: *const z_loaned_session_t) -> z_result_t;
 }
@@ -14717,6 +12975,73 @@ unsafe extern "C" {
 }
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
+pub struct _z_ring_t {
+    pub _val: *mut *mut ::core::ffi::c_void,
+    pub _capacity: usize,
+    pub _len: usize,
+    pub _r_idx: usize,
+    pub _w_idx: usize,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of _z_ring_t"][::core::mem::size_of::<_z_ring_t>() - 40usize];
+    ["Alignment of _z_ring_t"][::core::mem::align_of::<_z_ring_t>() - 8usize];
+    ["Offset of field: _z_ring_t::_val"][::core::mem::offset_of!(_z_ring_t, _val) - 0usize];
+    ["Offset of field: _z_ring_t::_capacity"]
+        [::core::mem::offset_of!(_z_ring_t, _capacity) - 8usize];
+    ["Offset of field: _z_ring_t::_len"][::core::mem::offset_of!(_z_ring_t, _len) - 16usize];
+    ["Offset of field: _z_ring_t::_r_idx"][::core::mem::offset_of!(_z_ring_t, _r_idx) - 24usize];
+    ["Offset of field: _z_ring_t::_w_idx"][::core::mem::offset_of!(_z_ring_t, _w_idx) - 32usize];
+};
+unsafe extern "C" {
+    pub fn _z_ring_init(ring: *mut _z_ring_t, capacity: usize) -> z_result_t;
+}
+unsafe extern "C" {
+    pub fn _z_ring_make(capacity: usize) -> _z_ring_t;
+}
+unsafe extern "C" {
+    pub fn _z_ring_capacity(r: *const _z_ring_t) -> usize;
+}
+unsafe extern "C" {
+    pub fn _z_ring_len(r: *const _z_ring_t) -> usize;
+}
+unsafe extern "C" {
+    pub fn _z_ring_is_empty(r: *const _z_ring_t) -> bool;
+}
+unsafe extern "C" {
+    pub fn _z_ring_is_full(r: *const _z_ring_t) -> bool;
+}
+unsafe extern "C" {
+    pub fn _z_ring_push(r: *mut _z_ring_t, e: *mut ::core::ffi::c_void)
+        -> *mut ::core::ffi::c_void;
+}
+unsafe extern "C" {
+    pub fn _z_ring_push_force(
+        r: *mut _z_ring_t,
+        e: *mut ::core::ffi::c_void,
+    ) -> *mut ::core::ffi::c_void;
+}
+unsafe extern "C" {
+    pub fn _z_ring_push_force_drop(
+        r: *mut _z_ring_t,
+        e: *mut ::core::ffi::c_void,
+        f: z_element_free_f,
+    );
+}
+unsafe extern "C" {
+    pub fn _z_ring_pull(r: *mut _z_ring_t) -> *mut ::core::ffi::c_void;
+}
+unsafe extern "C" {
+    pub fn _z_ring_clone(xs: *const _z_ring_t, d_f: z_element_clone_f) -> *mut _z_ring_t;
+}
+unsafe extern "C" {
+    pub fn _z_ring_clear(v: *mut _z_ring_t, f: z_element_free_f);
+}
+unsafe extern "C" {
+    pub fn _z_ring_free(xs: *mut *mut _z_ring_t, f_f: z_element_free_f);
+}
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
 pub struct _z_fifo_t {
     pub _ring: _z_ring_t,
 }
@@ -14746,7 +13071,7 @@ unsafe extern "C" {
 }
 unsafe extern "C" {
     pub fn _z_fifo_push(r: *mut _z_fifo_t, e: *mut ::core::ffi::c_void)
-    -> *mut ::core::ffi::c_void;
+        -> *mut ::core::ffi::c_void;
 }
 unsafe extern "C" {
     pub fn _z_fifo_push_drop(r: *mut _z_fifo_t, e: *mut ::core::ffi::c_void, f: z_element_free_f);
@@ -15340,6 +13665,202 @@ const _: () = {
     ["Offset of field: z_moved_fifo_handler_reply_t::_this"]
         [::core::mem::offset_of!(z_moved_fifo_handler_reply_t, _this) - 0usize];
 };
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct _z_liveliness_token_t {
+    pub _id: u32,
+    pub _key: _z_keyexpr_t,
+    pub _zn: _z_session_weak_t,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of _z_liveliness_token_t"][::core::mem::size_of::<_z_liveliness_token_t>() - 72usize];
+    ["Alignment of _z_liveliness_token_t"]
+        [::core::mem::align_of::<_z_liveliness_token_t>() - 8usize];
+    ["Offset of field: _z_liveliness_token_t::_id"]
+        [::core::mem::offset_of!(_z_liveliness_token_t, _id) - 0usize];
+    ["Offset of field: _z_liveliness_token_t::_key"]
+        [::core::mem::offset_of!(_z_liveliness_token_t, _key) - 8usize];
+    ["Offset of field: _z_liveliness_token_t::_zn"]
+        [::core::mem::offset_of!(_z_liveliness_token_t, _zn) - 56usize];
+};
+unsafe extern "C" {
+    pub fn _z_liveliness_token_null() -> _z_liveliness_token_t;
+}
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct z_owned_liveliness_token_t {
+    pub _val: _z_liveliness_token_t,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of z_owned_liveliness_token_t"]
+        [::core::mem::size_of::<z_owned_liveliness_token_t>() - 72usize];
+    ["Alignment of z_owned_liveliness_token_t"]
+        [::core::mem::align_of::<z_owned_liveliness_token_t>() - 8usize];
+    ["Offset of field: z_owned_liveliness_token_t::_val"]
+        [::core::mem::offset_of!(z_owned_liveliness_token_t, _val) - 0usize];
+};
+pub type z_loaned_liveliness_token_t = _z_liveliness_token_t;
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct z_moved_liveliness_token_t {
+    pub _this: z_owned_liveliness_token_t,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of z_moved_liveliness_token_t"]
+        [::core::mem::size_of::<z_moved_liveliness_token_t>() - 72usize];
+    ["Alignment of z_moved_liveliness_token_t"]
+        [::core::mem::align_of::<z_moved_liveliness_token_t>() - 8usize];
+    ["Offset of field: z_moved_liveliness_token_t::_this"]
+        [::core::mem::offset_of!(z_moved_liveliness_token_t, _this) - 0usize];
+};
+unsafe extern "C" {
+    pub fn z_internal_liveliness_token_null(obj: *mut z_owned_liveliness_token_t);
+}
+unsafe extern "C" {
+    pub fn z_internal_liveliness_token_check(obj: *const z_owned_liveliness_token_t) -> bool;
+}
+unsafe extern "C" {
+    pub fn z_liveliness_token_loan(
+        obj: *const z_owned_liveliness_token_t,
+    ) -> *const z_loaned_liveliness_token_t;
+}
+unsafe extern "C" {
+    pub fn z_liveliness_token_loan_mut(
+        obj: *mut z_owned_liveliness_token_t,
+    ) -> *mut z_loaned_liveliness_token_t;
+}
+unsafe extern "C" {
+    pub fn z_liveliness_token_move(
+        obj: *mut z_owned_liveliness_token_t,
+    ) -> *mut z_moved_liveliness_token_t;
+}
+unsafe extern "C" {
+    pub fn z_liveliness_token_take(
+        obj: *mut z_owned_liveliness_token_t,
+        src: *mut z_moved_liveliness_token_t,
+    );
+}
+unsafe extern "C" {
+    pub fn z_liveliness_token_drop(obj: *mut z_moved_liveliness_token_t);
+}
+unsafe extern "C" {
+    pub fn z_liveliness_token_take_from_loaned(
+        dst: *mut z_owned_liveliness_token_t,
+        src: *mut z_loaned_liveliness_token_t,
+    ) -> z_result_t;
+}
+unsafe extern "C" {
+    pub fn z_liveliness_token_clone(
+        obj: *mut z_owned_liveliness_token_t,
+        src: *const z_loaned_liveliness_token_t,
+    ) -> z_result_t;
+}
+#[doc = " The options for :c:func:`z_liveliness_declare_token()`."]
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct z_liveliness_token_options_t {
+    pub __dummy: u8,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of z_liveliness_token_options_t"]
+        [::core::mem::size_of::<z_liveliness_token_options_t>() - 1usize];
+    ["Alignment of z_liveliness_token_options_t"]
+        [::core::mem::align_of::<z_liveliness_token_options_t>() - 1usize];
+    ["Offset of field: z_liveliness_token_options_t::__dummy"]
+        [::core::mem::offset_of!(z_liveliness_token_options_t, __dummy) - 0usize];
+};
+unsafe extern "C" {
+    #[doc = " Constructs default value for :c:type:`z_liveliness_token_options_t`."]
+    pub fn z_liveliness_token_options_default(
+        options: *mut z_liveliness_token_options_t,
+    ) -> z_result_t;
+}
+unsafe extern "C" {
+    #[doc = " Constructs and declares a liveliness token on the network.\n\n Liveliness token subscribers on an intersecting key expression will receive a PUT sample when connectivity\n is achieved, and a DELETE sample if it's lost.\n\n Parameters:\n   zs: A Zenos session to declare the liveliness token.\n   token: An uninitialized memory location where liveliness token will be constructed.\n   keyexpr: A keyexpr to declare a liveliess token for.\n   options: Liveliness token declaration options.\n\n Return:\n   ``0`` if put operation is successful, ``negative value`` otherwise."]
+    pub fn z_liveliness_declare_token(
+        zs: *const z_loaned_session_t,
+        token: *mut z_owned_liveliness_token_t,
+        keyexpr: *const z_loaned_keyexpr_t,
+        options: *const z_liveliness_token_options_t,
+    ) -> z_result_t;
+}
+unsafe extern "C" {
+    #[doc = " Undeclare a liveliness token, notifying subscribers of its destruction.\n\n Parameters:\n   token: Moved :c:type:`z_owned_liveliness_token_t` to undeclare.\n\n Return:\n   ``0`` if put operation is successful, ``negative value`` otherwise."]
+    pub fn z_liveliness_undeclare_token(token: *mut z_moved_liveliness_token_t) -> z_result_t;
+}
+#[doc = " The options for :c:func:`z_liveliness_declare_subscriber()`"]
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct z_liveliness_subscriber_options_t {
+    pub history: bool,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of z_liveliness_subscriber_options_t"]
+        [::core::mem::size_of::<z_liveliness_subscriber_options_t>() - 1usize];
+    ["Alignment of z_liveliness_subscriber_options_t"]
+        [::core::mem::align_of::<z_liveliness_subscriber_options_t>() - 1usize];
+    ["Offset of field: z_liveliness_subscriber_options_t::history"]
+        [::core::mem::offset_of!(z_liveliness_subscriber_options_t, history) - 0usize];
+};
+unsafe extern "C" {
+    #[doc = " Constucts default value for :c:type:`z_liveliness_subscriber_options_t`."]
+    pub fn z_liveliness_subscriber_options_default(
+        options: *mut z_liveliness_subscriber_options_t,
+    ) -> z_result_t;
+}
+unsafe extern "C" {
+    #[doc = " Declares a subscriber on liveliness tokens that intersect `keyexpr`.\n\n Parameters:\n   zs: The Zenoh session.\n   sub: An uninitialized memory location where subscriber will be constructed.\n   keyexpr: The key expression to subscribe to.\n   callback: The callback function that will be called each time a liveliness token status is changed.\n   options: The options to be passed to the liveliness subscriber declaration.\n\n Return:\n   ``0`` if put operation is successful, ``negative value`` otherwise."]
+    pub fn z_liveliness_declare_subscriber(
+        zs: *const z_loaned_session_t,
+        sub: *mut z_owned_subscriber_t,
+        keyexpr: *const z_loaned_keyexpr_t,
+        callback: *mut z_moved_closure_sample_t,
+        options: *mut z_liveliness_subscriber_options_t,
+    ) -> z_result_t;
+}
+unsafe extern "C" {
+    #[doc = " Declares a background subscriber on liveliness tokens that intersect `keyexpr`.\n Subscriber callback will be called to process the messages, until the corresponding session is closed or dropped.\n\n Parameters:\n   zs: The Zenoh session.\n   keyexpr: The key expression to subscribe to.\n   callback: The callback function that will be called each time a liveliness token status is changed.\n   options: The options to be passed to the liveliness subscriber declaration.\n\n Return:\n   ``0`` if declare is successful, ``negative value`` otherwise."]
+    pub fn z_liveliness_declare_background_subscriber(
+        zs: *const z_loaned_session_t,
+        keyexpr: *const z_loaned_keyexpr_t,
+        callback: *mut z_moved_closure_sample_t,
+        options: *mut z_liveliness_subscriber_options_t,
+    ) -> z_result_t;
+}
+#[doc = " The options for :c:func:`z_liveliness_get()`"]
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct z_liveliness_get_options_t {
+    pub timeout_ms: u64,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of z_liveliness_get_options_t"]
+        [::core::mem::size_of::<z_liveliness_get_options_t>() - 8usize];
+    ["Alignment of z_liveliness_get_options_t"]
+        [::core::mem::align_of::<z_liveliness_get_options_t>() - 8usize];
+    ["Offset of field: z_liveliness_get_options_t::timeout_ms"]
+        [::core::mem::offset_of!(z_liveliness_get_options_t, timeout_ms) - 0usize];
+};
+unsafe extern "C" {
+    #[doc = " Constructs default value :c:type:`z_liveliness_get_options_t`."]
+    pub fn z_liveliness_get_options_default(options: *mut z_liveliness_get_options_t)
+        -> z_result_t;
+}
+unsafe extern "C" {
+    #[doc = " Queries liveliness tokens currently on the network with a key expression intersecting with `keyexpr`.\n\n Parameters:\n   zs: The Zenoh session.\n   keyexpr: The key expression to query liveliness tokens for.\n   callback: The callback function that will be called for each received reply.\n   options: Additional options for the liveliness get operation.\n\n Return:\n   ``0`` if put operation is successful, ``negative value`` otherwise."]
+    pub fn z_liveliness_get(
+        zs: *const z_loaned_session_t,
+        keyexpr: *const z_loaned_keyexpr_t,
+        callback: *mut z_moved_closure_reply_t,
+        options: *mut z_liveliness_get_options_t,
+    ) -> z_result_t;
+}
 pub const idtype_t_P_ALL: idtype_t = 0;
 pub const idtype_t_P_PID: idtype_t = 1;
 pub const idtype_t_P_PGID: idtype_t = 2;
@@ -16618,7 +15139,7 @@ unsafe extern "C" {
 }
 unsafe extern "C" {
     pub fn getiopolicy_np(arg1: ::core::ffi::c_int, arg2: ::core::ffi::c_int)
-    -> ::core::ffi::c_int;
+        -> ::core::ffi::c_int;
 }
 unsafe extern "C" {
     pub fn getrlimit(arg1: ::core::ffi::c_int, arg2: *mut rlimit) -> ::core::ffi::c_int;
@@ -17849,7 +16370,7 @@ unsafe extern "C" {
 unsafe extern "C" {
     #[doc = " Serializes data into a :c:type:`z_owned_bytes_t`.\n\n Parameters:\n   bytes: An uninitialized :c:type:`z_owned_bytes_t` to contain the serialized data.\n   data: Pointer to the data to serialize.\n   len: Number of bytes to serialize.\n\n Return:\n   ``0`` if serialization is successful, ``negative value`` otherwise."]
     pub fn ze_serialize_buf(bytes: *mut z_owned_bytes_t, data: *const u8, len: usize)
-    -> z_result_t;
+        -> z_result_t;
 }
 unsafe extern "C" {
     #[doc = " Serializes a string into a :c:type:`z_owned_bytes_t`.\n\n The string should be a valid UTF-8.\n Parameters:\n   bytes: An uninitialized :c:type:`z_owned_bytes_t` to contain the serialized string.\n   s: Pointer to the string to serialize.\n\n Return:\n   ``0`` if serialization is successful, ``negative value`` otherwise."]
