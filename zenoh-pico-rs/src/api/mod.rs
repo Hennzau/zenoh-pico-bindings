@@ -3,6 +3,9 @@ extern crate alloc;
 pub(crate) mod info;
 pub use info::*;
 
+pub(crate) mod scouting;
+pub use scouting::*;
+
 use zenoh_protocol::core::CowStr;
 
 use crate::{

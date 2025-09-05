@@ -19,3 +19,7 @@ pub mod protocol {
 pub fn open(config: Config) -> ZResult<Session> {
     Session::open(config)
 }
+
+// pub fn scout(config: Config) -> ZResult<()> {
+//     api::scouting::start_scout(config)
+// }
