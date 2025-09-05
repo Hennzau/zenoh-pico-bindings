@@ -13,6 +13,8 @@ just bindgen
 
 # Examples
 
+Each example can be run with arguments to set endpoints and modes for the zenoh session. Use `--help` to see the available options.
+
 ```bash
 cargo run --example z_info
 ```
