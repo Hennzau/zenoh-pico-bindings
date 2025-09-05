@@ -13,7 +13,7 @@ make-pico:
 
 bindgen:
     bindgen pico/include/zenoh-pico.h \
-        -o src/bindings.rs \
+        -o zenoh-pico-rs/src/bindings.rs \
         --use-core -- \
         -I$(pwd)/pico/include \
         -DZENOH_MACOS \
@@ -28,9 +28,10 @@ bindgen:
 t:
     cargo run --example z_info
 
-w:
-    cargo run --example z_info_working
+tl:
+    cargo build --example z_info
+    leaks --atExit -- ./target/debug/examples/z_info
 
-lldb:
+l:
     cargo build --example z_info
     lldb -- ./target/debug/examples/z_info

@@ -1,8 +1,6 @@
-[package]
-name = "zenoh-pico-bindings"
-version = "0.1.0"
-edition = "2024"
+[workspace]
+members = ["examples", "zenoh-pico-rs"]
+resolver = "2"
 
-[dependencies]
-zenoh-protocol = { git = "https://github.com/Hennzau/zenoh", branch = "result_no_std", version = "1.5.0", default-features = false }
-zenoh-result = { git = "https://github.com/Hennzau/zenoh", branch = "result_no_std", version = "1.5.0", default-features = false }
+[workspace.dependencies]
+zenoh-pico-rs = { version = "0.1.0", path = "zenoh-pico-rs" }

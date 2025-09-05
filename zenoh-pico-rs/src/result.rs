@@ -1,7 +1,7 @@
 use crate::bindings::z_result_t;
 
 use zenoh_result::anyhow;
-pub use zenoh_result::{ZError, ZResult, to_zerror, zerror};
+pub use zenoh_result::{Error, ZError, ZResult, to_zerror, zerror};
 
 pub trait ToZResult {
     fn to_zerror(&self) -> ZResult<()>;
