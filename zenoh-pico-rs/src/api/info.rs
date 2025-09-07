@@ -26,35 +26,22 @@ impl<'a> SessionInfo<'a> {
     }
 
     pub fn routers_zid(&self) -> ZResult<alloc::vec::Vec<ZenohIdProto>> {
-        use alloc::{boxed::Box, vec::Vec};
+        use alloc::vec::Vec;
 
-        let vec = Box::new(Vec::new());
-        let raw_ptr: *mut Vec<ZenohIdProto> = Box::into_raw(vec);
+        let mut vec = Vec::new();
 
-        unsafe extern "C" fn router_zid_closure(zid: *const z_id_t, args: *mut core::ffi::c_void) {
-            if args.is_null() || zid.is_null() {
-                return;
+        let mut closure = |zid: *const z_id_t| {
+            if let Ok(zid) = ZenohIdProto::try_from(unsafe { (*zid).id }) {
+                vec.push(zid);
             }
+        };
 
-            let vec = args as *mut Vec<ZenohIdProto>;
-
-            unsafe {
-                if let Ok(id) = ZenohIdProto::try_from((*zid).id) {
-                    (*vec).push(id);
-                }
-            }
-        }
+        let (data, callback) = closure.to_ffi();
 
         let mut closure = core::mem::MaybeUninit::<z_owned_closure_zid_t>::uninit();
 
         let mut closure = unsafe {
-            z_closure_zid(
-                closure.as_mut_ptr(),
-                Some(router_zid_closure),
-                None,
-                raw_ptr as *mut _,
-            )
-            .to_zerror()?;
+            z_closure_zid(closure.as_mut_ptr(), Some(callback), None, data).to_zerror()?;
 
             closure.assume_init()
         };
@@ -63,39 +50,26 @@ impl<'a> SessionInfo<'a> {
             z_info_routers_zid(self.session.loan(), z_closure_zid_move(&mut closure)).to_zerror()?
         };
 
-        Ok(unsafe { *Box::from_raw(raw_ptr) })
+        Ok(vec)
     }
 
     pub fn peers_zid(&self) -> ZResult<alloc::vec::Vec<ZenohIdProto>> {
-        use alloc::{boxed::Box, vec::Vec};
+        use alloc::vec::Vec;
 
-        let vec = Box::new(Vec::new());
-        let raw_ptr: *mut Vec<ZenohIdProto> = Box::into_raw(vec);
+        let mut vec = Vec::new();
 
-        unsafe extern "C" fn peer_zid_closure(zid: *const z_id_t, args: *mut core::ffi::c_void) {
-            if args.is_null() || zid.is_null() {
-                return;
+        let mut closure = |zid: *const z_id_t| {
+            if let Ok(zid) = ZenohIdProto::try_from(unsafe { (*zid).id }) {
+                vec.push(zid);
             }
+        };
 
-            let vec = args as *mut Vec<ZenohIdProto>;
-
-            unsafe {
-                if let Ok(id) = ZenohIdProto::try_from((*zid).id) {
-                    (*vec).push(id);
-                }
-            }
-        }
+        let (data, callback) = closure.to_ffi();
 
         let mut closure = core::mem::MaybeUninit::<z_owned_closure_zid_t>::uninit();
 
         let mut closure = unsafe {
-            z_closure_zid(
-                closure.as_mut_ptr(),
-                Some(peer_zid_closure),
-                None,
-                raw_ptr as *mut _,
-            )
-            .to_zerror()?;
+            z_closure_zid(closure.as_mut_ptr(), Some(callback), None, data).to_zerror()?;
 
             closure.assume_init()
         };
@@ -104,6 +78,6 @@ impl<'a> SessionInfo<'a> {
             z_info_peers_zid(self.session.loan(), z_closure_zid_move(&mut closure)).to_zerror()?
         };
 
-        Ok(unsafe { *Box::from_raw(raw_ptr) })
+        Ok(vec)
     }
 }

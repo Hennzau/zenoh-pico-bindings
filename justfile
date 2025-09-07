@@ -9,7 +9,7 @@ clone-pico:
     cd pico && git switch release/1.5.0
 
 make-pico:
-    cd pico && BUILD_TYPE=Debug ZENOH_LOG=trace make
+    cd pico && BUILD_TYPE=Debug ZENOH_LOG=trace make -j8
 
 bindgen:
     bindgen pico/include/zenoh-pico.h \
@@ -24,14 +24,3 @@ bindgen:
         -DZ_FEATURE_UNICAST_TRANSPORT=1 -DZ_FEATURE_MULTICAST_TRANSPORT=1 \
         -DZ_FEATURE_RAWETH_TRANSPORT=0 -DZ_FEATURE_LOCAL_SUBSCRIBER=0 -DFRAG_MAX_SIZE=300000 -DBATCH_UNICAST_SIZE=65535 \
         -DBATCH_MULTICAST_SIZE=8192 -DZ_FEATURE_UNICAST_PEER=1
-
-t:
-    cargo run --example z_info
-
-tl:
-    cargo build --example z_info
-    leaks --atExit -- ./target/debug/examples/z_info
-
-l:
-    cargo build --example z_info
-    lldb -- ./target/debug/examples/z_info

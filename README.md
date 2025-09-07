@@ -17,4 +17,6 @@ Each example can be run with arguments to set endpoints and modes for the zenoh 
 
 ```bash
 cargo run --example z_info
+cargo run --example z_scout
+cargo run --example z_put
 ```
