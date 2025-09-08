@@ -70,13 +70,14 @@ impl TryFrom<Vec<u8>> for ZBytes {
                 let len = value.len();
                 let capacity = value.capacity();
 
-                if capacity < (1 << 32) && len < (1 << 32) {
+                if capacity < (1 << (usize::BITS / 2)) {
+                    let value = core::mem::ManuallyDrop::new(value);
                     let combined: usize = (capacity << 32) | len;
 
                     unsafe extern "C" fn deleter(data: *mut c_void, context: *mut c_void) {
                         let combined = context as usize;
-                        let len = combined & 0xFFFFFFFF;
-                        let capacity = combined >> 32;
+                        let len = combined & ((1 << (usize::BITS / 2)) - 1);
+                        let capacity = combined >> (usize::BITS / 2);
 
                         let vec = unsafe { Vec::from_raw_parts(data as *mut u8, len, capacity) };
                         drop(vec);
