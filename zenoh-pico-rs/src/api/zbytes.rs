@@ -30,15 +30,15 @@ impl TryFrom<alloc::boxed::Box<[u8]>> for ZBytes {
     type Error = Error;
 
     fn try_from(value: alloc::boxed::Box<[u8]>) -> ZResult<Self> {
-        let len = alloc::boxed::Box::new(value.len());
+        let len = value.len();
         let data = alloc::boxed::Box::into_raw(value);
 
         unsafe extern "C" fn deleter(
             data: *mut core::ffi::c_void,
             context: *mut core::ffi::c_void,
         ) {
-            let len = unsafe { alloc::boxed::Box::from_raw(context as *mut usize) };
-            let slice = unsafe { core::slice::from_raw_parts_mut(data as *mut u8, *len) };
+            let len = context as usize;
+            let slice = unsafe { core::slice::from_raw_parts_mut(data as *mut u8, len) };
 
             unsafe { drop(alloc::boxed::Box::from_raw(slice as *mut [u8])) };
         }
@@ -48,9 +48,9 @@ impl TryFrom<alloc::boxed::Box<[u8]>> for ZBytes {
             z_bytes_from_buf(
                 bytes.as_mut_ptr(),
                 data as *mut _,
-                *len,
+                len,
                 Some(deleter),
-                alloc::boxed::Box::into_raw(len) as *mut _,
+                len as *mut _,
             )
             .to_zerror()?;
             bytes.assume_init()
