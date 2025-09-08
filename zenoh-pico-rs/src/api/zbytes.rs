@@ -1,8 +1,5 @@
 use crate::{
-    bindings::{
-        z_bytes_drop, z_bytes_from_buf, z_bytes_loan, z_bytes_move, z_loaned_bytes_t,
-        z_moved_bytes_t, z_owned_bytes_t,
-    },
+    bindings::{z_bytes_drop, z_bytes_from_buf, z_bytes_move, z_moved_bytes_t, z_owned_bytes_t},
     *,
 };
 
@@ -19,11 +16,7 @@ impl ZBytes {
         }
     }
 
-    pub fn loan(&self) -> *const z_loaned_bytes_t {
-        unsafe { z_bytes_loan(&self.zp) }
-    }
-
-    pub fn take(&mut self) -> *mut z_moved_bytes_t {
+    pub(crate) fn take(&mut self) -> *mut z_moved_bytes_t {
         if self.moved {
             panic!("ZBytes has already been moved");
         }
