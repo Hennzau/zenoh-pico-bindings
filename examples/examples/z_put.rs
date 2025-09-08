@@ -10,7 +10,7 @@ fn main() -> ZResult<()> {
     let session = open(config)?;
 
     println!("Putting Data ('{key_expr}': '{payload}')...");
-    session.put(&key_expr, payload.into_bytes())?;
+    session.put(&key_expr, payload)?;
 
     Ok(())
 }

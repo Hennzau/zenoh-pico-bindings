@@ -7,4 +7,3 @@ edition = "2024"
 zenoh-protocol = { git = "https://github.com/Hennzau/zenoh", branch = "result_no_std", version = "1.5.0", default-features = false }
 zenoh-result = { git = "https://github.com/Hennzau/zenoh", branch = "result_no_std", version = "1.5.0", default-features = false }
 zenoh-keyexpr = { git = "https://github.com/Hennzau/zenoh", branch = "result_no_std", version = "1.5.0", default-features = false }
-zenoh-buffers = { git = "https://github.com/Hennzau/zenoh", branch = "result_no_std", version = "1.5.0", default-features = false }

@@ -9,6 +9,9 @@ pub use scouting::*;
 pub(crate) mod keyexpr;
 pub use keyexpr::*;
 
+pub(crate) mod zbytes;
+pub use zbytes::*;
+
 use zenoh_protocol::core::CowStr;
 
 use crate::{

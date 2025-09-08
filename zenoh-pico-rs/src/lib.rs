@@ -2,7 +2,7 @@
 extern crate alloc;
 
 #[allow(warnings)]
-pub(crate) mod bindings;
+pub mod bindings;
 
 pub(crate) mod result;
 pub use result::*;

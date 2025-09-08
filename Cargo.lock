@@ -457,7 +457,6 @@ dependencies = [
 name = "zenoh-pico-rs"
 version = "0.1.0"
 dependencies = [
- "zenoh-buffers",
  "zenoh-keyexpr",
  "zenoh-protocol",
  "zenoh-result",

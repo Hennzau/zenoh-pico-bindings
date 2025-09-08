@@ -8,10 +8,10 @@ use crate::{
 
 impl Session {
     pub fn declare_keyexpr<'a>(&'a self, keyexpr: &OwnedKeyExpr) -> ZResult<WiredKeyExpr<'a>> {
-        let ffi_keyexpr = alloc::ffi::CString::new(keyexpr.as_str())?;
-
         let mut zp = core::mem::MaybeUninit::<z_owned_keyexpr_t>::uninit();
         let zp = unsafe {
+            let ffi_keyexpr = alloc::ffi::CString::new(keyexpr.as_str())?;
+
             let mut vke = core::mem::MaybeUninit::<z_view_keyexpr_t>::uninit();
             let vke = {
                 z_view_keyexpr_from_str(vke.as_mut_ptr(), ffi_keyexpr.as_ptr()).to_zerror()?;
