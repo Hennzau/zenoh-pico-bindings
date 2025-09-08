@@ -3,6 +3,9 @@ use crate::{
     *,
 };
 
+use alloc::{boxed::Box, vec::Vec};
+use core::ffi::c_void;
+
 pub struct ZBytes {
     zp: z_owned_bytes_t,
     moved: bool,
@@ -26,21 +29,18 @@ impl ZBytes {
     }
 }
 
-impl TryFrom<alloc::boxed::Box<[u8]>> for ZBytes {
+impl TryFrom<Box<[u8]>> for ZBytes {
     type Error = Error;
 
-    fn try_from(value: alloc::boxed::Box<[u8]>) -> ZResult<Self> {
+    fn try_from(value: Box<[u8]>) -> ZResult<Self> {
         let len = value.len();
-        let data = alloc::boxed::Box::into_raw(value);
+        let data = Box::into_raw(value);
 
-        unsafe extern "C" fn deleter(
-            data: *mut core::ffi::c_void,
-            context: *mut core::ffi::c_void,
-        ) {
+        unsafe extern "C" fn deleter(data: *mut c_void, context: *mut c_void) {
             let len = context as usize;
             let slice = unsafe { core::slice::from_raw_parts_mut(data as *mut u8, len) };
 
-            unsafe { drop(alloc::boxed::Box::from_raw(slice as *mut [u8])) };
+            unsafe { drop(Box::from_raw(slice as *mut [u8])) };
         }
 
         let mut bytes = core::mem::MaybeUninit::<z_owned_bytes_t>::uninit();
@@ -60,41 +60,68 @@ impl TryFrom<alloc::boxed::Box<[u8]>> for ZBytes {
     }
 }
 
-impl TryFrom<alloc::vec::Vec<u8>> for ZBytes {
+impl TryFrom<Vec<u8>> for ZBytes {
     type Error = Error;
 
-    fn try_from(value: alloc::vec::Vec<u8>) -> ZResult<Self> {
+    fn try_from(value: Vec<u8>) -> ZResult<Self> {
         match value.capacity() == value.len() {
             true => Self::try_from(value.into_boxed_slice()),
             false => {
-                let boxed = alloc::boxed::Box::new(value);
-                let len = boxed.len();
-                let data = boxed.as_ptr();
+                let len = value.len();
+                let capacity = value.capacity();
 
-                let boxed_ptr = alloc::boxed::Box::into_raw(boxed);
+                if capacity < (1 << 32) && len < (1 << 32) {
+                    let combined: usize = (capacity << 32) | len;
 
-                unsafe extern "C" fn deleter(
-                    _data: *mut core::ffi::c_void,
-                    context: *mut core::ffi::c_void,
-                ) {
-                    let boxed_ptr = context as *mut alloc::vec::Vec<u8>;
-                    unsafe { drop(alloc::boxed::Box::from_raw(boxed_ptr)) };
+                    unsafe extern "C" fn deleter(data: *mut c_void, context: *mut c_void) {
+                        let combined = context as usize;
+                        let len = combined & 0xFFFFFFFF;
+                        let capacity = combined >> 32;
+
+                        let vec = unsafe { Vec::from_raw_parts(data as *mut u8, len, capacity) };
+                        drop(vec);
+                    }
+
+                    let mut bytes = core::mem::MaybeUninit::<z_owned_bytes_t>::uninit();
+                    let bytes = unsafe {
+                        z_bytes_from_buf(
+                            bytes.as_mut_ptr(),
+                            value.as_ptr() as *mut _,
+                            len,
+                            Some(deleter),
+                            combined as *mut _,
+                        )
+                        .to_zerror()?;
+                        bytes.assume_init()
+                    };
+
+                    Ok(Self::new(bytes))
+                } else {
+                    let boxed = Box::new(value);
+                    let data = boxed.as_ptr();
+
+                    let boxed_ptr = Box::into_raw(boxed);
+
+                    unsafe extern "C" fn deleter(_data: *mut c_void, context: *mut c_void) {
+                        let boxed_ptr = context as *mut Vec<u8>;
+                        unsafe { drop(Box::from_raw(boxed_ptr)) };
+                    }
+
+                    let mut bytes = core::mem::MaybeUninit::<z_owned_bytes_t>::uninit();
+                    let bytes = unsafe {
+                        z_bytes_from_buf(
+                            bytes.as_mut_ptr(),
+                            data as *mut _,
+                            len,
+                            Some(deleter),
+                            boxed_ptr as *mut _,
+                        )
+                        .to_zerror()?;
+                        bytes.assume_init()
+                    };
+
+                    Ok(Self::new(bytes))
                 }
-
-                let mut bytes = core::mem::MaybeUninit::<z_owned_bytes_t>::uninit();
-                let bytes = unsafe {
-                    z_bytes_from_buf(
-                        bytes.as_mut_ptr(),
-                        data as *mut _,
-                        len,
-                        Some(deleter),
-                        boxed_ptr as *mut _,
-                    )
-                    .to_zerror()?;
-                    bytes.assume_init()
-                };
-
-                Ok(Self::new(bytes))
             }
         }
     }
