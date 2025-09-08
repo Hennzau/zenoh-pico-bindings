@@ -6,6 +6,9 @@ pub use info::*;
 pub(crate) mod scouting;
 pub use scouting::*;
 
+pub(crate) mod keyexpr;
+pub use keyexpr::*;
+
 use zenoh_protocol::core::CowStr;
 
 use crate::{
@@ -85,6 +88,10 @@ impl Config {
     }
 
     pub(crate) fn take(&mut self) -> *mut z_moved_config_t {
+        if self.moved {
+            panic!("Config has already been moved");
+        }
+
         self.moved = true;
 
         unsafe { z_config_move(&mut self.zp) }

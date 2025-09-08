@@ -1,7 +1,4 @@
-use zenoh_pico_rs::{
-    protocol::{Locator, WhatAmI, ZenohIdProto},
-    *,
-};
+use zenoh_pico_rs::*;
 
 fn main() -> ZResult<()> {
     let config = Config::default()?;

@@ -1,4 +1,4 @@
-use zenoh_pico_rs::{protocol::*, *};
+use zenoh_pico_rs::*;
 
 #[derive(clap::Parser, Clone, PartialEq, Eq, Hash, Debug)]
 pub struct CommonArgs {

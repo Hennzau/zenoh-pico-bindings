@@ -16,12 +16,8 @@ pub use session::*;
 pub(crate) mod utils;
 pub(crate) use utils::*;
 
-use zenoh_protocol::core::{Locator, WhatAmI, WhatAmIMatcher, ZenohIdProto};
-
-pub mod protocol {
-    pub use zenoh_keyexpr::{OwnedKeyExpr, keyexpr};
-    pub use zenoh_protocol::core::{Locator, WhatAmI, ZenohIdProto};
-}
+pub use zenoh_keyexpr::OwnedKeyExpr;
+pub use zenoh_protocol::core::{Locator, WhatAmI, WhatAmIMatcher, ZenohIdProto};
 
 pub fn open(config: Config) -> ZResult<Session> {
     Session::open(config)

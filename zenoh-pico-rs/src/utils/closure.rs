@@ -1,15 +1,15 @@
 use core::ffi::c_void;
 
-pub(crate) trait IntoFFIClosure<Args, Ret> {
+pub(crate) trait ToFFIClosure<Args, Ret> {
     type Closure;
 
     fn to_ffi(&mut self) -> (*mut c_void, Self::Closure);
 }
 
-macro_rules! impl_into_ffi_closure {
+macro_rules! impl_to_ffi_closure {
     ($( $num:tt: ( $( $ty:ident ),* ) ),* $(,)?) => {
         $(
-            impl<Func, Ret, $( $ty ),*> IntoFFIClosure<($( $ty, )*), Ret> for Func
+            impl<Func, Ret, $( $ty ),*> ToFFIClosure<($( $ty, )*), Ret> for Func
             where
                 Func: FnMut($( $ty ),*) -> Ret,
             {
@@ -35,7 +35,7 @@ macro_rules! impl_into_ffi_closure {
     };
 }
 
-impl_into_ffi_closure!(
+impl_to_ffi_closure!(
     1: (A),
     2: (A, B),
     3: (A, B, C),

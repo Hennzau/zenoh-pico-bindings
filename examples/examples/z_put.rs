@@ -1,7 +1,7 @@
 use clap::Parser;
 use zenoh_pico_rs_examples::CommonArgs;
 
-use zenoh_pico_rs::{protocol::OwnedKeyExpr, *};
+use zenoh_pico_rs::*;
 
 fn main() -> ZResult<()> {
     let (config, key_expr, payload) = parse_args()?;
